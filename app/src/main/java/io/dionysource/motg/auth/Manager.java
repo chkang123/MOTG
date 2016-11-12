@@ -43,7 +43,7 @@ public class Manager extends Activity implements OnClickListener {
 
         loginCheckboard = new boolean[4];
 
-        //loginCheckboard[0] = naverMaster.isLogined();
+        loginCheckboard[0] = (new naverMaster(CXT)).isLogined();
         loginCheckboard[1] = facebookMaster.isLogined();
         loginCheckboard[2] = googleMaster.isLogined();
         loginCheckboard[3] = kakaoMaster.isLogined();
