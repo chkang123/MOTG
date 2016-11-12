@@ -1,7 +1,9 @@
 package io.dionysource.motg;
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 
 import io.dionysource.motg.auth.Manager;
 
@@ -9,37 +11,48 @@ import io.dionysource.motg.auth.Manager;
  * Created by nayak on 2016-10-16.
  */
 
-public class init extends Activity {
+final public class init extends Activity {
 
-    Manager loginer;
+    protected String TAG = "MOTGInit";
+
+    final Context THIS_CONTEXT = this;
+    final Activity THIS_ACTIVITY = this;
+
+    static Manager loginer;
 
     @Override
     public void onCreate(Bundle s) {
 
+        Log.i(TAG, "Init Activity Created.");
+
         super.onCreate(s);
 
-        loginer = new io.dionysource.motg.auth.Manager();
-
-        if(loginer.isLogined()) {
-
-            //When user logined.
-
-        } else
-            loginer.authScreenView(this);
+        loginer = new io.dionysource.motg.auth.Manager(this);
 
     }
 
     @Override
     public void onResume() {
 
+        Log.i(TAG, "Init Activity Resumed.");
+
+        super.onResume();
+
         if(loginer.isLogined()) {
 
             //When user succeeded to login.
 
-        } else
-            loginer.authScreenView(this);
+            Log.i(TAG, "User Login Confirmed.");
 
-        super.onResume();
+            //여기서 Main 화면이 호출된다.
+
+        } else {
+
+            Log.i(TAG, "User Login Needed.");
+
+            loginer.authScreenView(THIS_ACTIVITY, THIS_CONTEXT);
+
+        }
 
     }
 
@@ -47,6 +60,8 @@ public class init extends Activity {
     public void onDestroy() {
 
         //App Exit
+
+        Log.i(TAG, "Init Activity Destroyed.");
 
         super.onDestroy();
 

@@ -15,10 +15,15 @@
         android:theme="@style/AppTheme">
 
         <activity android:name="com.nhn.android.naverlogin.ui.OAuthLoginActivity"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
+            android:theme="@android:style/Theme.NoTitleBar"/>
         <activity android:name="com.nhn.android.naverlogin.ui.OAuthLoginInAppBrowserActivity"
             android:label="OAuth2.0 In-app"/>
         <activity android:name=".auth.naverLogin" />
+        <activity android:name=".auth.naverMaster" />
+        <activity android:name=".auth.Base" />
+        <activity android:name=".auth.facebookMaster" />
+        <activity android:name=".auth.googleMaster" />
+        <activity android:name=".auth.kakaoMaster" />
         <activity android:name=".init"
             android:label="@string/app_name">
             <intent-filter>
@@ -27,6 +32,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".auth.Manager" />
     </application>
 
 </manifest>

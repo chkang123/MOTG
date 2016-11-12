@@ -2,6 +2,7 @@ package io.dionysource.motg.auth;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.WindowManager;
 
 import com.nhn.android.naverlogin.OAuthLogin;
@@ -20,8 +21,24 @@ public class naverMaster extends io.dionysource.motg.auth.Base {
     private static String OAUTH_CLIENT_SECRET = "w8f1vj8t8a";
     private static String OAUTH_CLIENT_NAME = "MOTG - 맛지";
 
+    public naverMaster(Context CXT) {
+
+        Log.i(TAG + "_nv", "Naver Master Constructed with Context.");
+
+        this.authContext = CXT;
+
+    }
+
+    public naverMaster() {
+
+        Log.i(TAG + "_nv", "Naver Master Constructed.");
+
+    }
+
     @Override
     public void onCreate(Bundle savedBundleInstance) {
+
+        Log.i(TAG + "_nv", "Naver Master Started.");
 
         super.onCreate(savedBundleInstance);
 
@@ -34,23 +51,41 @@ public class naverMaster extends io.dionysource.motg.auth.Base {
     @Override
     public void onResume() {
 
+        Log.i(TAG + "_nv", "Naver Master Resumed.");
+
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
         super.onResume();
 
     }
 
-    protected void setAuthInformation() {
+    protected static void setAuthInformation() {
+
+        Log.i(TAG + "_nv", "Setting Auth Informations.");
 
         authInstance = OAuthLogin.getInstance();
+
+        Log.i(TAG + "_nv", "Get Auth Instance Succeeded.");
+
         authInstance.init(authContext, OAUTH_CLIENT_ID, OAUTH_CLIENT_SECRET, OAUTH_CLIENT_NAME);
 
     }
 
     public static boolean isLogined() {
 
-        return false;
+        Log.i(TAG + "_nv", "Starts to check if it is logined.");
 
-    };
+        //return false;
+
+        setAuthInformation();
+
+        Log.i(TAG + "_nv", "Setting Information Completed.");
+
+        if(authInstance.getState(authContext).toString() == "OK")
+            return true;
+        else
+            return false;
+
+    }
 
 }
