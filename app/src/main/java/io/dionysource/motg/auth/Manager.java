@@ -52,8 +52,9 @@ public class Manager extends Activity implements OnClickListener {
 
     public Manager() {}
 
-    public static final float dp2px(Context context, int dp) { float pixels = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 10, context.getResources().getDisplayMetrics()); return pixels * dp; }
-
+    public static final float dp2px(Context context, int dp) {
+        return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 10 * dp, context.getResources().getDisplayMetrics());
+    }
     public static final int getColor(Context context, int id) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             return android.support.v4.content.ContextCompat.getColor(context, id);
@@ -152,7 +153,7 @@ public class Manager extends Activity implements OnClickListener {
         authBox.setLayoutParams(new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
         authBox.setGravity(Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL);
         authBox.setBackgroundColor(getColor(A, R.color.semi_transparent_black));
-        authBox.setPadding(0, 0, 0, (int) dp2px(A, 6));
+        authBox.setPadding(0, 0, 0, 0 + ((android.os.Build.VERSION.SDK_INT > 20) ? (int) dp2px(A, 6) : 0));
 
         RelativeLayout logoBox = new RelativeLayout(A);
         logoBox.setId(View.generateViewId());
@@ -183,7 +184,7 @@ public class Manager extends Activity implements OnClickListener {
         version.setText(BuildConfig.VERSION_NAME);
         version.setTextColor(getColor(A, R.color.white));
         version.setTextSize(13);
-        version.setPadding(10, 10 + (int) dp2px(A, 2), 10, 10);
+        version.setPadding(10, 10 + ((android.os.Build.VERSION.SDK_INT > 20) ? (int) dp2px(A, 2) : 0), 10, 10);
 
         //Make Naver Login Button
 
