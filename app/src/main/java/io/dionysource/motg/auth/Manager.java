@@ -43,7 +43,7 @@ public class Manager extends Activity implements OnClickListener {
 
         loginCheckboard = new boolean[4];
 
-        //loginCheckboard[0] = naverMaster.isLogined();
+        loginCheckboard[0] = (new naverMaster(CXT)).isLogined();
         loginCheckboard[1] = facebookMaster.isLogined();
         loginCheckboard[2] = googleMaster.isLogined();
         loginCheckboard[3] = kakaoMaster.isLogined();
@@ -183,7 +183,7 @@ public class Manager extends Activity implements OnClickListener {
         version.setText(BuildConfig.VERSION_NAME);
         version.setTextColor(getColor(A, R.color.white));
         version.setTextSize(13);
-        version.setPadding(10, 5, 10, 5);
+        version.setPadding(10, 10 + (int) dp2px(A, 2), 10, 10);
 
         //Make Naver Login Button
 
