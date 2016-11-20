@@ -13,7 +13,15 @@ public class Food {
     int eval_points; // 평점
     Restaurant restaurant; // 이 음식을 판매하는 음식점
     Food next; // 음식의 다음 노드
-    public:
-
-
+    public Food(String idcode, String name, Flavor flavor, Food_Type food_type, int sale_cost, int eval_points, Restaurant restaurant)
+    {
+        this.idcode = idcode;
+        this.name = name;
+        this.flavor = flavor;
+        this.food_type = food_type;
+        this.sale_cost  = sale_cost;
+        this.eval_points = 0 ;
+        this.restaurant = restaurant;
+        next = null;
+    }
 }

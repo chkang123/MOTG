@@ -13,6 +13,14 @@ public class Evaluation {
     String eval_critic; // 평가
     //Evaluation next;
 
+    public Evaluation(int rstrnt_eval_point1, int food_eval_point1, Id_usr id_usr1, Restaurant restaurant1, Food food1)
+    {
+        rstrnt_eval_point = rstrnt_eval_point1;
+        food_eval_point = food_eval_point1;
+        id_usr = id_usr1;
+        restaurant = restaurant1;
+        food = food1;
+    }
 }
 
 
