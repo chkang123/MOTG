@@ -6,50 +6,31 @@ import java.util.ArrayList;
 
 public class Food_Type {
 
+    String type;
     ArrayList<Food_subtype> food_sub;
 
-    public Food_Type()
+    public Food_Type(String type)
     {
+        this.type = type;
         food_sub = null;
     }
-    void type_add(String subtype)
-    {
-
+    void subtype_add(String subtype) {
+        int size = food_sub.size();
+        Food_subtype sub = new Food_subtype(subtype);
+        food_sub.add(size, sub);
     }
 }
-
 class Food_subtype
-{
-    String type;
-    ArrayList<Food_subsubtype> sub_sub;
-
-    Food_subtype(String subtype){
-        this.type = subtype;
-        sub_sub = null;
-    }
-    void type_add(String subsubtype) {
-        int size = sub_sub.size();
-        Food_subsubtype food_subsubtype = new Food_subsubtype(subsubtype);
-        sub_sub.add(size, food_subsubtype);
-    }
-}
-
-class Food_subsubtype
 {
     String subtype;
     ArrayList<String> sub_sub;
 
-    Food_subsubtype(String subtype){
+    Food_subtype(String subtype){
         this.subtype = subtype;
         sub_sub = null;
     }
-    void type_add(String subsubtype) {
+    void subsubtype_add(String subsubtype) {
         int size = sub_sub.size();
         sub_sub.add(size, subsubtype);
-    }
-    void type_delete(String subsubtype){
-        if(sub_sub.contains(subsubtype)) {
-            sub_sub.remove(subsubtype);
-        }
     }
 }

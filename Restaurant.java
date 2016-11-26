@@ -15,4 +15,12 @@ public class Restaurant {
     ArrayList<Evaluation> eval_list; // 평가 리스트
     int eval_point; // 평점
 
+
+    public Restaurant(int num_togo, String address, String[] telephone, String introduce)
+    {
+        this.num_togo = num_togo;
+        this.address = address;
+        System.arraycopy(telephone, 0, this.telephone, 0, telephone.length);
+        this.introduce = introduce;
+    }
 }

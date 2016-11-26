@@ -26,8 +26,8 @@ public class Id_usr extends Users{
     ArrayList<Restaurant> Rstrnt_History;
 
     //즐겨찾기
-    ArrayList<Fav_Rstrnt> fav_rstrnts_list; //즐겨찾기 클래스 구현할 것
-    ArrayList<Fav_Food> fav_foods_list; //
+    ArrayList<Fav_Rstrnts> fav_rstrnts_list; //즐겨찾기 클래스 구현할 것
+    ArrayList<Fav_Foods> fav_foods_list; //
     ArrayList<Integer>  Achievement; // 업적의 id 를 저장하는 리스트
 
 
