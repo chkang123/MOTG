@@ -1,12 +1,12 @@
 package io.dionysource.motg.usrclss;
+import android.content.SharedPreferences;
 
-/**
- * Created by Admin on 2016. 11. 20..
- */
+import static android.content.Context.MODE_PRIVATE;
 
 
 public class Guest_usr extends Users {
-    Guest_usr(String id, String nickname) {
+
+    public Guest_usr(String id, String nickname){
         super(id, nickname);
     }
 }

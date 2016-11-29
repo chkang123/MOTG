@@ -19,4 +19,9 @@ public class Mood {
         int size = moodlist.size();
         moodlist.add(size, mood);
     }
+    public int get_mood(String mood)
+    {
+        int idx = moodlist.indexOf(mood);
+        return idx;
+    }
 }

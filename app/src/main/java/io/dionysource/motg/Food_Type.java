@@ -19,10 +19,33 @@ public class Food_Type {
         this.type = type;
         food_sub = null;
     }
-    void subtype_add(String subtype) {
+    public void add_subtype(String subtype) {
         int size = food_sub.size();
         Food_subtype sub = new Food_subtype(subtype);
         food_sub.add(size, sub);
+    }
+    public void add_subsubtype(String subtype, String subsubtype)
+    {
+        int idx = get_subtype(subtype);
+        food_sub.get(idx).add_subsubtype(subsubtype);
+
+    }
+    public String get_type()
+    {
+        return type;
+    }
+    public int get_subtype(String subtype)
+    {
+        int idx = 0;
+        for(int i = 0 ; i<food_sub.size(); i++)
+        {
+            if(food_sub.get(i).get_subtype() == subtype)
+            {
+                idx = i;
+                break;
+            }
+        }
+        return idx;
     }
 }
 class Food_subtype
@@ -40,8 +63,12 @@ class Food_subtype
         this.subtype = subtype;
         sub_sub = null;
     }
-    void subsubtype_add(String subsubtype) {
+    void add_subsubtype(String subsubtype) {
         int size = sub_sub.size();
         sub_sub.add(size, subsubtype);
+    }
+    public String get_subtype()
+    {
+        return subtype;
     }
 }

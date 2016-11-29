@@ -66,6 +66,10 @@ public class Restaurant {
         eval_list.add(size, eval);
         set_eval_point();
     }
+    public ArrayList<Evaluation> get_eval()
+    {
+        return eval_list;
+    }
 
     public void set_eval_point(){
         int size = eval_list.size();

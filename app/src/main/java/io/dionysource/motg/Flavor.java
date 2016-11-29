@@ -29,4 +29,9 @@ public class Flavor {
         flavorlist.add(size,flavor);
     }
 
+    public int get_flavor(String flavor)
+    {
+        int idx = flavorlist.indexOf(flavor);
+        return idx;
+    }
 }

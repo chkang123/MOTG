@@ -7,7 +7,7 @@ import java.util.ArrayList;
  */
 
 
-public class Id_usr extends Users{
+public class Id_usr extends Users {
     //개인정보
 
     //개인상태
@@ -27,31 +27,73 @@ public class Id_usr extends Users{
     //즐겨찾기
     ArrayList<Fav_Rstrnts> fav_rstrnts_list; //즐겨찾기 클래스 구현할 것
     ArrayList<Fav_Foods> fav_foods_list; //
-   // ArrayList<Integer>  Achievement; // 업적의 id 를 저장하는 리스트
+    // ArrayList<Integer>  Achievement; // 업적의 id 를 저장하는 리스트
 
 
-    public Id_usr(String id, String nickname)
-    {
+    public Id_usr(String id, String nickname) {
         super(id, nickname);
         next = null;
     }
 
-    public void add_flavor(Flavor flavor)
-    {
+    public void add_flavor(Flavor flavor) {
         int size = FavoriteFlavors.size();
         FavoriteFlavors.add(size, flavor);
     }
-    public void add_food_type(Food_Type food_type)
-    {
+
+    public ArrayList<Flavor> get_flavor() {
+        return (FavoriteFlavors);
+    }
+
+    public int get_flavor(String flavor) {
+        int idx = FavoriteFlavors.indexOf(flavor);
+        return idx;
+    }
+
+    public void add_food_type(Food_Type food_type) {
         int size = FavoriteFoodTypes.size();
         FavoriteFoodTypes.add(size, food_type);
 
     }
+
+    public ArrayList<Food_Type> get_food_type() {
+        return (FavoriteFoodTypes);
+    }
+
+    public int get_food_type(String food_type) {
+        int idx = 0;
+        for (int i = 0; i < FavoriteFoodTypes.size(); i++) {
+            if (FavoriteFoodTypes.get(i).get_type() == food_type) {
+                idx = i;
+                break;
+            }
+        }
+        return idx;
+    }
+
     public void add_eval(Evaluation eval) {
 
         int size = eval_list.size();
         eval_list.add(size, eval);
+    }
 
+    public ArrayList<Food> get_foods_history()
+    {
+        return Foods_History;
+    }
+
+    public ArrayList<Restaurant> get_rstrnt_history() {
+
+
+    return Rstrnt_History;
+
+    }
+    public ArrayList<Fav_Rstrnts> get_fav_rstrnts()
+    {
+        return fav_rstrnts_list;
+    }//즐겨찾기 클래스 구현할 것
+    public ArrayList<Fav_Foods> get_fav_foods()
+    {
+        return fav_foods_list;
     }
 
 }
