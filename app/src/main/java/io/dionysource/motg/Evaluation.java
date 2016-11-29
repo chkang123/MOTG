@@ -1,10 +1,13 @@
 package io.dionysource.motg.usrclss;
 
+import org.json.JSONObject;
+
 /**
  * Created by Admin on 2016. 11. 19..
  */
 
 public class Evaluation {
+    String idcode;
     double rstrnt_eval_point; // 레스토랑 평점
     double food_eval_point; // 음식 평점
     Id_usr id_usr; // 평가 작성한 유저
@@ -12,7 +15,8 @@ public class Evaluation {
     Food food; // 음식
     String eval_critic; // 평가
 
-    public Evaluation(int rstrnt_eval_point1, int food_eval_point1, Id_usr id_usr1, Restaurant restaurant1, Food food1, String eval_critic1) {
+    public Evaluation(String idcode, int rstrnt_eval_point1, int food_eval_point1, Id_usr id_usr1, Restaurant restaurant1, Food food1, String eval_critic1) {
+        this.idcode = idcode;
         rstrnt_eval_point = rstrnt_eval_point1;
         food_eval_point = food_eval_point1;
         id_usr = id_usr1;
@@ -52,6 +56,7 @@ public class Evaluation {
     {
         return eval_critic;
     }// 평가
+
 }
 
 

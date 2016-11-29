@@ -9,7 +9,6 @@ import java.util.ArrayList;
 
 public class Id_usr extends Users {
     //개인정보
-
     //개인상태
 
     //개인 취향

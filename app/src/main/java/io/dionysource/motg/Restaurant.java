@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 
 public class Restaurant {
+    String idcode  = idcode;
     ArrayList<Food> food_list;
     int num_togo; // 적정 인원
     String address; // 가게의 주소
@@ -16,8 +17,9 @@ public class Restaurant {
     double eval_point; // 평점
 
 
-    public Restaurant(int num_togo, String address, String[] telephone, String introduce)
+    public Restaurant(String idcode, int num_togo, String address, String[] telephone, String introduce)
     {
+        this.idcode = idcode;
         this.num_togo = num_togo;
         this.address = address;
         System.arraycopy(telephone, 0, this.telephone, 0, telephone.length);
@@ -80,7 +82,8 @@ public class Restaurant {
         }
         eval_point = eval_sum/size;
     }
-    public double get_eval_point(){
-            return eval_point;
+    public double get_eval_point() {
+        return eval_point;
     }
+
 }
