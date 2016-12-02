@@ -2,6 +2,7 @@ package io.dionysource.motg.usrclss;
 
 import java.util.ArrayList;
 
+
 /**
  * Created by Admin on 2016. 11. 20..
  */
@@ -15,13 +16,19 @@ public class Id_usr extends Users {
     ArrayList<Flavor> FavoriteFlavors;
     ArrayList<Food_Type> FavoriteFoodTypes;//음식 종류에 대한 취향
     ArrayList<Evaluation> eval_list;
+    int num_togo; // 같이 가는 사람
     double distance; // 선호하는 거리
     double money; // 보유하고 있는 / 사용 가능한 돈(여유)
     ArrayList<Mood> mood_list;//선호하는 분위기
 
+    //개인 취향 weight 저장 행렬
+    Preference[] weight;
+
     //방문기록
-    ArrayList<Food> Foods_History;
-    ArrayList<Restaurant> Rstrnt_History;
+/*
+ *   ArrayList<Food> Foods_History;
+ *   ArrayList<Restaurant> Rstrnt_History;
+ */
 
     //즐겨찾기
     ArrayList<Fav_Rstrnts> fav_rstrnts_list; //즐겨찾기 클래스 구현할 것
@@ -74,11 +81,11 @@ public class Id_usr extends Users {
         int size = eval_list.size();
         eval_list.add(size, eval);
     }
-
-    public ArrayList<Food> get_foods_history()
-    {
-        return Foods_History;
-    }
+/*
+ *   public ArrayList<Food> get_foods_history()
+ *   {
+ *       return Foods_History;
+ *   }
 
     public ArrayList<Restaurant> get_rstrnt_history() {
 
@@ -86,6 +93,7 @@ public class Id_usr extends Users {
     return Rstrnt_History;
 
     }
+ */
     public ArrayList<Fav_Rstrnts> get_fav_rstrnts()
     {
         return fav_rstrnts_list;

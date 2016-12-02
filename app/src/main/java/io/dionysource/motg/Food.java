@@ -11,6 +11,7 @@ public class Food {
     int sale_cost; // 가격
     double eval_point; // 평점
     Restaurant restaurant; // 이 음식을 판매하는 음식점
+
     public Food(String idcode, String name, Flavor flavor, Food_Type food_type, int sale_cost, int eval_points, Restaurant restaurant)
     {
         this.idcode = idcode;

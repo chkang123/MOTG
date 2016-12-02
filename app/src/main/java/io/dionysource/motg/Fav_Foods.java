@@ -6,9 +6,9 @@ package io.dionysource.motg.usrclss;
 
 public class Fav_Foods extends Favorites{
 
-    Food food;
+    String food;
 
-    public Fav_Foods(Food food, String note)
+    public Fav_Foods(String food, String note)
     {
         super(note);
         this.food = food;
