@@ -8,14 +8,18 @@ import java.util.ArrayList;
 
 public class Restaurant {
     String idcode;
-    ArrayList<Food> food_list;
+    ArrayList<String> food_list;
     int num_togo; // 적정 인원
     String address; // 가게의 주소
     String telephone;
     String introduce; // 가게 소개
-    ArrayList<Evaluation> eval_list; // 평가 리스트
+    ArrayList<String> eval_list; // 평가 리스트
     double eval_point; // 평점
 
+    public Restaurant()
+    {
+
+    }
 
     public Restaurant(String idcode, int num_togo, String address, String[] telephone)
     {
@@ -35,16 +39,8 @@ public class Restaurant {
         this.introduce = introduce;
     }
 
-    public Restaurant(String idcode, int num_togo, String address, String[] telephone, String introduce, String Open )
-    {
-        this.idcode = idcode;
-        this.num_togo = num_togo;
-        this.address = address;
-        System.arraycopy(telephone, 0, this.telephone, 0, telephone.length);
-        this.introduce = introduce;
-    }
-
-    public void add_food(Food food)
+    public String get_idcode() {return idcode;}
+    public void add_food(String food)
     {
         food_list.add(food);
     }
@@ -83,23 +79,13 @@ public class Restaurant {
     public void add_eval(Evaluation eval) {
 
         int size = eval_list.size();
-        eval_list.add(size, eval);
-        set_eval_point();
+        eval_list.add(size, eval.get_idcode());
     }
-    public ArrayList<Evaluation> get_eval()
+    public ArrayList<String> get_eval()
     {
         return eval_list;
     }
 
-    public void set_eval_point(){
-        int size = eval_list.size();
-        double eval_sum = 0;
-        for(int i=0; i<size; i++)
-        {
-            eval_sum += eval_list.get(i).get_rstrnt_eval_point();
-        }
-        eval_point = eval_sum/size;
-    }
     public double get_eval_point() {
         return eval_point;
     }

@@ -1,15 +1,9 @@
 package io.dionysource.motg.usrclss;
 
 
-import java.io.FileWriter;
-import java.io.IOException;
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.util.Iterator;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
+import com.fasterxml.jackson.core.*;
+import com.fasterxml.jackson.annotation.*;
+import com.fasterxml.jackson.databind.*;
 
 /**
  * Created by Admin on 2016. 11. 19..
@@ -30,8 +24,11 @@ public class Evaluation {
     int month;
     int day;
     int hour;
-    int time_interval;
 
+    public Evaluation()
+    {
+
+    }
     public Evaluation(String idcode, int rstrnt_eval_point1, int food_eval_point1, String id_usr1, String restaurant1, String food1, String eval_critic1, int year, int month, int day, int hour) {
         this.idcode = idcode;
         rstrnt_eval_point = rstrnt_eval_point1;
@@ -44,8 +41,9 @@ public class Evaluation {
         this.month=month;
         this.day=day;
         this.hour=hour;
-        time_interval = 0;
     }
+
+    public String get_idcode() { return idcode; }
     public void set_rstrnt_eval_point(double eval_point)
     {
         rstrnt_eval_point = eval_point;
@@ -62,6 +60,7 @@ public class Evaluation {
     {
         return food_eval_point;
     }
+
     public String get_id_usr()
     {
         return id_usr;

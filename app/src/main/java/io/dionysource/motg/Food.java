@@ -10,9 +10,13 @@ public class Food {
     Food_Type food_type; // 음식의 종류
     int sale_cost; // 가격
     double eval_point; // 평점
-    Restaurant restaurant; // 이 음식을 판매하는 음식점
+    String restaurant; // 이 음식을 판매하는 음식점
 
-    public Food(String idcode, String name, Flavor flavor, Food_Type food_type, int sale_cost, int eval_points, Restaurant restaurant)
+    public Food()
+    {
+
+    }
+    public Food(String idcode, String name, Flavor flavor, Food_Type food_type, int sale_cost, String restaurant)
     {
         this.idcode = idcode;
         this.name = name;
@@ -22,7 +26,7 @@ public class Food {
         this.eval_point = 0 ;
         this.restaurant = restaurant;
     }
-
+    public String get_idcode() {return idcode;}
     public void set_flavor(Flavor flavor)
     {
         this.flavor = flavor;
@@ -51,10 +55,10 @@ public class Food {
     public double get_eval_points(){
         return eval_point;
     }
-    public void set_rstrnt(Restaurant rstrnt){
+    public void set_rstrnt(String rstrnt){
         restaurant = rstrnt;
     }
-    public Restaurant get_rstrnt(){
+    public String get_rstrnt(){
         return restaurant;
     }
 }
