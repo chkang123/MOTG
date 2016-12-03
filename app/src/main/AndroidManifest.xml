@@ -3,6 +3,7 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <uses-sdk android:minSdkVersion="19" android:targetSdkVersion="21" />
 
@@ -31,6 +32,42 @@
         <activity android:name=".Authentication.Base" />
         <activity android:name=".Authentication.TypeDummy" />
         <activity android:name=".Authentication.TypeNaver" />
+
+        <activity
+            android:name=".Display.MainActivity"
+            android:label="MOTG"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+        <activity
+            android:name=".Display.KorActivity"
+            android:label="@string/title_activity_kor"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Display.JapActivity"
+            android:label="@string/title_activity_jap"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Display.ChnActivity"
+            android:label="@string/title_activity_chn"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Display.WesActivity"
+            android:label="@string/title_activity_wes"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Display.ResInfoActivity"
+            android:label="식당정보"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".Display.MapActivity" />
+
+        <activity
+            android:name=".Display.RateActivity"
+            android:theme="@style/Theme.AppCompat.Light.Dialog" />
+        <activity android:name=".Display.ReslistActivity" />
+        <activity android:name=".Display.SearchRlistActivity" />
+        <activity android:name=".Display.LocalRlistActivity" />
+        <activity android:name=".Display.HistoryActivity" />
+        <activity android:name=".Display.SettingActivity"></activity>
 
     </application>
 

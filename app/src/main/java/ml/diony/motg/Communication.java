@@ -2,6 +2,7 @@ package ml.diony.motg;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.Base64;
@@ -386,6 +387,10 @@ public class Communication extends Activity {
 					//GO TO REAL MAIN!!!!
 
 					Toast.makeText(CONTEXT, "Welcome to MOTG", Toast.LENGTH_SHORT).show();
+
+					Intent I = new Intent(CONTEXT, ml.diony.motg.Display.MainActivity.class);
+
+					CONTEXT.startActivity(I);
 
 				}
 
