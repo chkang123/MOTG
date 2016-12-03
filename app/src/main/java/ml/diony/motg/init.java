@@ -48,7 +48,7 @@ final public class init extends Activity {
         super.onCreate(s);
 
         S = new ml.diony.motg.Authentication.Screen(this);
-        C = new ml.diony.motg.Communication();
+        C = new ml.diony.motg.Communication(getFilesDir(), CONTEXT, ACTIVITY);
 
     }
 
@@ -108,6 +108,8 @@ final public class init extends Activity {
             Log.i(TAG, "This application needs to UPDATE.");
 
             C.versionCheck();
+
+            //C.accountSync();
 
         }
 

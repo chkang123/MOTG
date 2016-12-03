@@ -231,7 +231,7 @@ public class Screen extends Activity implements View.OnClickListener {
 
         TextView version = new TextView(A);
         version.setLayoutParams(new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-        version.setText(BuildConfig.VERSION_NAME);
+        version.setText("Euphoria " + BuildConfig.VERSION_NAME);
         version.setTextColor(getColor(A, R.color.white));
         version.setTextSize(13);
         version.setPadding(10, 10 + ((android.os.Build.VERSION.SDK_INT > 20) ? (int) dp2px(A, 2) : 0), 10, 10);
