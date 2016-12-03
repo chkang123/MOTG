@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="transparent">#00ffffff</color>
+    <color name="naver_back">#1ec800</color>
+    <color name="facebook_back">#3b5998</color>
+    <color name="kakao_back">#fae100</color>
+    <color name="google_back">#ffffff</color>
+    <color name="white">#fff</color>
+    <color name="google_text">#393939</color>
+    <color name="kakao_text">#3c1e1e</color>
+    <color name="dummy_text">#444</color>
+    <color name="black">#000</color>
+    <color name="semi_transparent_white">#8fff</color>
+    <color name="semi_transparent_black">#8000</color>
+</resources>
