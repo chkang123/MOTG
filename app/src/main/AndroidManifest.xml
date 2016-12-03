@@ -17,13 +17,12 @@
         <activity android:name="com.nhn.android.naverlogin.ui.OAuthLoginActivity"
             android:theme="@android:style/Theme.NoTitleBar"/>
         <activity android:name="com.nhn.android.naverlogin.ui.OAuthLoginInAppBrowserActivity"
-            android:label="OAuth2.0 In-app"/>
+            android:label="OAuth2.0 In-app"
+            android:theme="@android:style/Theme.NoTitleBar"/>
         <activity android:name=".auth.naverLogin" />
         <activity android:name=".auth.naverMaster" />
         <activity android:name=".auth.Base" />
         <activity android:name=".auth.facebookMaster" />
-        <activity android:name=".auth.googleMaster" />
-        <activity android:name=".auth.kakaoMaster" />
         <activity android:name=".init"
             android:label="@string/app_name">
             <intent-filter>

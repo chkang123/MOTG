@@ -4,4 +4,5 @@
     <string name="facebook_login">Sign in with Facebook</string>
     <string name="google_login">Sign in with Google</string>
     <string name="kakao_login">Sign in with Kakao</string>
+    <string name="dummy_login">Continue without any authentication</string>
 </resources>

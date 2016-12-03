@@ -15,7 +15,16 @@ buildscript {
 allprojects {
     repositories {
         jcenter()
+        flatDir {
+            dirs 'libs'
+        }
     }
+}
+
+dependencies {
+
+    //compile 'com.facebook.android:account-kit-sdk:4.+'
+
 }
 
 subprojects {

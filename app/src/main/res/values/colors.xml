@@ -11,6 +11,7 @@
     <color name="white">#fff</color>
     <color name="google_text">#393939</color>
     <color name="kakao_text">#3c1e1e</color>
+    <color name="dummy_text">#444</color>
     <color name="semi_transparent_white">#8fff</color>
     <color name="semi_transparent_black">#8000</color>
 </resources>

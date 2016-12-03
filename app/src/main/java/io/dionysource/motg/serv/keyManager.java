@@ -10,7 +10,7 @@ public class keyManager {
 
     public String getMOTGID(final String key, final byte loginType) {
 
-        MOTG_ID = "";
+        MOTG_ID = "For_QUEEN_YoonEunYeong";
 
         return MOTG_ID;
 
