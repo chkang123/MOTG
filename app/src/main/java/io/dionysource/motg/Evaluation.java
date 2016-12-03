@@ -1,9 +1,6 @@
 package io.dionysource.motg.usrclss;
 
 
-import com.fasterxml.jackson.core.*;
-import com.fasterxml.jackson.annotation.*;
-import com.fasterxml.jackson.databind.*;
 
 /**
  * Created by Admin on 2016. 11. 19..
@@ -78,5 +75,17 @@ public class Evaluation {
         return eval_critic;
     }// 평가
 
+
+    /*
+    public String toString(){
+        return "id: "+idcode
+                +"\trstrnt_eval_point: " +rstrnt_eval_point
+        +"\tfood_eval_point: " + food_eval_point
+        +"\tusr_id: "+id_usr
+        +"\trstrnt_id: "+restaurant
+        +"\tfood_id" + food
+        +"\teval_critic" + eval_critic;
+    }
+    */
 }
 

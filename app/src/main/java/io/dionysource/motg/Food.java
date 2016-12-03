@@ -1,7 +1,7 @@
 package io.dionysource.motg.usrclss;
-/**
- * Created by Admin on 2016. 11. 19..
- */
+
+import java.util.ArrayList;
+
 
 public class Food {
     String idcode; // 식별자코드
@@ -11,6 +11,7 @@ public class Food {
     int sale_cost; // 가격
     double eval_point; // 평점
     String restaurant; // 이 음식을 판매하는 음식점
+    ArrayList<String> eval_list; //
 
     public Food()
     {
@@ -25,6 +26,7 @@ public class Food {
         this.sale_cost  = sale_cost;
         this.eval_point = 0 ;
         this.restaurant = restaurant;
+        eval_list = null;
     }
     public String get_idcode() {return idcode;}
     public void set_flavor(Flavor flavor)
@@ -51,6 +53,12 @@ public class Food {
     public void set_eval_points(double eval_point){
 
         this.eval_point = eval_point;
+    }
+
+    public void add_eval(Evaluation eval) {
+
+        int size = eval_list.size();
+        eval_list.add(size, eval.get_idcode());
     }
     public double get_eval_points(){
         return eval_point;

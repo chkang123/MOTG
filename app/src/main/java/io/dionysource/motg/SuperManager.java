@@ -1,26 +1,59 @@
 package io.dionysource.motg.usrclss;
 
+import java.text.ParseException;
 import java.util.ArrayList;
+import com.google.gson.*;
+import com.google.gson.stream.JsonReader;
 
-/**
- * Created by Admin on 2016. 12. 2..
- */
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.Iterator;
 
 public class SuperManager {
 
-    ArrayList<Evaluation> eval_list;
+    public class EvaluationPacket {
+        int eval_version;
+        ArrayList<Evaluation> eval_list;
+        public EvaluationPacket()
+        {
+        }
+        public void add_version()
+        {
+            eval_version++;
+        }
+        public void set_version(int version)
+        {
+            eval_version=version;
+        }
+        public int size()
+        {
+            return eval_list.size();
+        }
+        public void add(Evaluation evaluation)
+        {
+            eval_list.add(evaluation);
+        }
+        public Evaluation get(int i)
+        {
+            return eval_list.get(i);
+        }
+    }
+    EvaluationPacket eval_list;
     ArrayList<Restaurant> rstrnt_list;
     ArrayList<Food> food_list;
     Users usr;
-    Flavor flavor;
-    ArrayList<Food_Type> food_type;
+    Gson gson;
 
     public SuperManager()
     {
-        eval_list = null;
+        eval_list = new EvaluationPacket();
         rstrnt_list = null;
         food_list = null;
         usr = null;
+        gson = new GsonBuilder().create();
     }
 
     public void add_eval(Evaluation evaluation){
@@ -28,7 +61,11 @@ public class SuperManager {
         eval_list.add(evaluation);
         usr.add_eval(evaluation);
         Restaurant temp = find_restaurant(evaluation.get_restaurant());
+        Food ft = find_food(evaluation.get_food());
         temp.add_eval(evaluation);
+        ft.add_eval(evaluation);
+        eval_list.add_version();
+
     }
 
     public void add_food(Food food){
@@ -113,8 +150,36 @@ public class SuperManager {
         {
             return null;
         }
-
-
     }
+
+    public void evaltoJSON()
+    {
+        String json = gson.toJson(eval_list);
+        try{
+            FileWriter file = new FileWriter("./EvalList.json")
+            file.write(json);
+            file.flush();
+            file.close();
+
+        }catch(IOException e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    public void Jsontoeval()
+    {
+        try {
+            JsonReader reader = new JsonReader(new FileReader("./EvalList.json"));
+            eval_list = gson.fromJson(reader, EvaluationPacket.class);
+        }
+        catch(FileNotFoundException e)
+        {
+            e.printStackTrace();
+        }
+        catch(IOException e)
+        {
+            e.printStackTrace();
+        }
 
 }

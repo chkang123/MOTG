@@ -1,6 +1,5 @@
 package io.dionysource.motg.usrclss;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.util.ArrayList;
 
@@ -11,17 +10,17 @@ import java.util.ArrayList;
 
 
 public class Users {
-    //개인정보
-    //개인상태
+
+    String id; // 고유 식별자
+    String nickname; // 닉네임
+    boolean identified; // 식별되었는가
 
     //개인 취향
     ArrayList<String> FavoriteFlavors;
     ArrayList<Food_Type> FavoriteFoodTypes;//음식 종류에 대한 취향
     ArrayList<String> eval_list;
-   @JsonIgnore
     int num_togo; // 같이 가는 사람
     double distance; // 선호하는 거리
-    @JsonIgnore
     double money; // 보유하고 있는 / 사용 가능한 돈(여유)
 
 
@@ -40,9 +39,7 @@ public class Users {
     // ArrayList<Integer>  Achievement; // 업적의 id 를 저장하는 리스트
 
 
-    String id; // 고유 식별자
-    String nickname; // 닉네임
-    boolean identified; // 식별되었는가
+
 
     public Users(String id, String nickname) {
 

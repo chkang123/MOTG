@@ -9,8 +9,10 @@ import java.util.ArrayList;
 public class Restaurant {
     String idcode;
     ArrayList<String> food_list;
+    Food_Type type;
     int num_togo; // 적정 인원
     String address; // 가게의 주소
+    String region;
     String telephone;
     String introduce; // 가게 소개
     ArrayList<String> eval_list; // 평가 리스트
