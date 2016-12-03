@@ -59,7 +59,8 @@
             android:label="식당정보"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
 
-        <activity android:name=".Display.MapActivity" />
+        <activity android:name=".Display.MapActivity"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
 
         <activity
             android:name=".Display.RateActivity"
