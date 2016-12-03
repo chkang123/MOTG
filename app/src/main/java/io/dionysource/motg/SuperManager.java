@@ -156,7 +156,7 @@ public class SuperManager {
     {
         String json = gson.toJson(eval_list);
         try{
-            FileWriter file = new FileWriter("./EvalList.json")
+            FileWriter file = new FileWriter("./EvalList.json");
             file.write(json);
             file.flush();
             file.close();
@@ -167,19 +167,27 @@ public class SuperManager {
         }
     }
 
-    public void Jsontoeval()
-    {
+    public void Jsontoeval() {
         try {
             JsonReader reader = new JsonReader(new FileReader("./EvalList.json"));
             eval_list = gson.fromJson(reader, EvaluationPacket.class);
-        }
-        catch(FileNotFoundException e)
-        {
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
             e.printStackTrace();
         }
-        catch(IOException e)
-        {
-            e.printStackTrace();
-        }
+    }
 
+    public void WRITEJSON(){
+
+        usr.evaltoJSON();
+        usr.favfoodtoJSON();
+        usr.favrstrnttoJSON();
+    }
+
+    public void READJSON(){
+        usr.Jsontoeval();
+        usr.Jsontofavfood();
+        usr.Jsontofavrstrnt();
+    }
 }

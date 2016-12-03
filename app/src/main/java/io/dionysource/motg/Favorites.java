@@ -8,7 +8,6 @@ class Favorites {
     int year;
     int month;
     int day;
-    int hour;
     String note; // 간단한 메모 같은 거.
 
     public Favorites(String note)
@@ -16,12 +15,11 @@ class Favorites {
         this.note = note;
     }
 
-    public void setdate(int year, int month, int day, int hour)
+    public void setdate(int year, int month, int day)
     {
         this.year = year;
         this.month = month;
         this.day = day;
-        this.hour = hour;
     }
 }
 
