@@ -7,10 +7,9 @@ import java.util.ArrayList;
  */
 
 public enum Preference {
+    Taste,
     Distance,
-    Num_togo,
-    Flavor,
-    Mood,
-    FoodType,
-    Money
+    Cost,
+    Valuation,
+    Service
 }
