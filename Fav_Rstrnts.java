@@ -6,9 +6,9 @@ package io.dionysource.motg.usrclss;
 
 public class Fav_Rstrnts extends Favorites {
 
-    Restaurant restaurant;
+    String restaurant;
 
-    public Fav_Rstrnts(Restaurant restaurant, String note)
+    public Fav_Rstrnts(String restaurant, String note)
     {
         super(note);
         this.restaurant = restaurant;
