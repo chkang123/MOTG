@@ -21,6 +21,29 @@ public class LocalRlistActivity extends AppCompatActivity {
         String location = intent.getExtras().getString("location");
 
         Rlist = new ArrayList<ResList>();
+
+        ResList rlist1 = new ResList("asd");
+        rlist1.ResName = "화통삼이동점";
+        rlist1.code = "A001";
+        Rlist.add(rlist1);
+        ResList rlist2 = new ResList("asd");
+        rlist2.ResName = "등촌샤브칼국수";
+        rlist2.code = "A000";
+        Rlist.add(rlist2);
+        ResList rlist3 = new ResList("asd");
+        rlist3.ResName = "육풍";
+        rlist3.code = "A003";
+        Rlist.add(rlist3);
+        ResList rlist4 = new ResList("asd");
+        rlist4.ResName = "진갈매기";
+        rlist4.code = "A002";
+        Rlist.add(rlist4);
+        ResList rlist5 = new ResList("asd");
+        rlist5.ResName = "바보형제쭈꾸미";
+        rlist5.code = "A004";
+        Rlist.add(rlist5);
+
+
 /*
         ResList rlist;
         //반복문으로 keyword와 유사한 이름 식당 불러옴
