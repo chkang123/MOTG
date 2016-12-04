@@ -15,4 +15,5 @@
     <color name="black">#000</color>
     <color name="semi_transparent_white">#8fff</color>
     <color name="semi_transparent_black">#8000</color>
+    <color name="motg_back">#FFDCDCDC</color>
 </resources>
