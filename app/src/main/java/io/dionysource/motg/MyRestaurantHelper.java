@@ -68,13 +68,13 @@ public class MyRestaurantHelper extends SQLiteOpenHelper {
         //데이터베이스가 없으면 asset폴더에서 복사해온다.
 
         boolean mDataBaseExist = checkDataBase();
-        if(!mDataBaseExist)
-        {
-            this.getReadableDatabase();
-            this.close();
-            try
-            {
-                //Copy the database from assests
+                if(!mDataBaseExist)
+                {
+                    this.getReadableDatabase();
+                    this.close();
+                    try
+                    {
+                        //Copy the database from assests
                 copyDataBase();
                 Log.e(TAG, "createDatabase database created");
             }
