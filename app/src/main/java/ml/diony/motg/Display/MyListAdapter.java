@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.TextView;
@@ -66,3 +67,19 @@ public class MyListAdapter extends BaseAdapter {
         return convertView;
     }
 }
+/*
+public class MyListAdapter extends ArrayAdapter<String> {
+    private ArrayList<String> items;
+
+    public MyListAdapter(Context context, int textViewResourceId, ArrayList<String> objects) {
+        super(context, textViewResourceId, objects);
+        this.items = objects;
+    }
+
+    public View getView(int position, View convertView, ViewGroup parent) {
+        View v = convertView;
+        if(v == null) {
+            LayoutInflater vi = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        }
+    }
+}*/
