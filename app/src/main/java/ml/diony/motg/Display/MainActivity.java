@@ -147,7 +147,7 @@ public class MainActivity extends AppCompatActivity {
                 btn_kor.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Intent intent1=new Intent(getContext(), ml.diony.motg.Display.KorActivity.class);
+                        Intent intent1=new Intent(getContext(), ml.diony.motg.Display.ReslistActivity.class);
                         intent1.putExtra("rtype","한식");
                         startActivity(intent1);
                     }
@@ -261,7 +261,6 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View view) {
                         Intent intent=new Intent(getContext(),TodaymenuActivity.class);
-                        intent.putExtra("location","영일대");
                         startActivity(intent);
                     }
                 });
