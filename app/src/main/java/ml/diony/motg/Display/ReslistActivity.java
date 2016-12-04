@@ -34,21 +34,25 @@ public class ReslistActivity extends AppCompatActivity {
 */
 
         ResList rlist1 = new ResList("asd");
-        rlist1.ResName = "라이스스토리 포항유강점";
+        rlist1.ResName = "라이스스토리";
         rlist1.code = "A001";
         Rlist.add(rlist1);
         ResList rlist2 = new ResList("asd");
-        rlist2.ResName = "샤브향 포항유강점";
+        rlist2.ResName = "샤브향";
         rlist2.code = "A000";
         Rlist.add(rlist2);
         ResList rlist3 = new ResList("asd");
-        rlist3.ResName = "나인로드피제리아 포항영일대점";
+        rlist3.ResName = "나인로드피제리아";
         rlist3.code = "A003";
         Rlist.add(rlist3);
         ResList rlist4 = new ResList("asd");
         rlist4.ResName = "다낭";
         rlist4.code = "A002";
         Rlist.add(rlist4);
+        ResList rlist5 = new ResList("asd");
+        rlist5.ResName = "등촌샤브칼국수";
+        rlist5.code = "A004";
+        Rlist.add(rlist5);
 
         ml.diony.motg.Display.MyListAdapter myAdapter = new ml.diony.motg.Display.MyListAdapter(this, R.layout.res_row, Rlist);
 

@@ -30,14 +30,38 @@ public class ResInfoActivity extends Activity {
 
         ArrayList<ml.diony.motg.Display.MenuGroup> DataList = new ArrayList<ml.diony.motg.Display.MenuGroup>();
         ExpandableListView listView = (ExpandableListView) findViewById(R.id.mylist);
-        ml.diony.motg.Display.MenuGroup temp = new ml.diony.motg.Display.MenuGroup("된장찌개");
-        temp.child.add("가격: 5000원");
+        ml.diony.motg.Display.MenuGroup temp = new ml.diony.motg.Display.MenuGroup("등촌샤브샤브");
+        temp.child.add("가격: 11000원");
         DataList.add(temp);
-        temp = new ml.diony.motg.Display.MenuGroup("순두부찌개");
-        temp.child.add("가격: 60000원");
+        temp = new ml.diony.motg.Display.MenuGroup(" [+]소고기샤브샤브");
+        temp.child.add("  가격: 5000원");
         DataList.add(temp);
-        temp = new ml.diony.motg.Display.MenuGroup("김치찌개");
-        temp.child.add("가격: 5000원");
+        temp = new ml.diony.motg.Display.MenuGroup(" [+]뽁음밥");
+        temp.child.add("  가격: 1000원");
+        DataList.add(temp);
+        temp = new ml.diony.motg.Display.MenuGroup(" [+]면사리");
+        temp.child.add("  가격: 1000원");
+        DataList.add(temp);
+        temp = new ml.diony.motg.Display.MenuGroup(" [+]야채사리");
+        temp.child.add("  가격: 1000원");
+        DataList.add(temp);
+        temp = new ml.diony.motg.Display.MenuGroup("석쇠불고기(떡갈비)");
+        temp.child.add("가격: 6000원");
+        DataList.add(temp);
+        temp = new ml.diony.motg.Display.MenuGroup("물만두");
+        temp.child.add("가격: 4000원");
+        DataList.add(temp);
+        temp = new ml.diony.motg.Display.MenuGroup("공기밥");
+        temp.child.add("가격: 1000원");
+        DataList.add(temp);
+        temp = new ml.diony.motg.Display.MenuGroup("소주");
+        temp.child.add("가격: 4000원");
+        DataList.add(temp);
+        temp = new ml.diony.motg.Display.MenuGroup("맥주");
+        temp.child.add("가격: 4000원");
+        DataList.add(temp);
+        temp = new ml.diony.motg.Display.MenuGroup("백세주");
+        temp.child.add("가격: 6000원");
         DataList.add(temp);
 
         ml.diony.motg.Display.ExpandAdapter adapter = new ml.diony.motg.Display.ExpandAdapter(getApplicationContext(), R.layout.menu_row, R.layout.detail_row, DataList);
@@ -51,7 +75,7 @@ public class ResInfoActivity extends Activity {
         bt1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent("android.intent.action.DIAL", Uri.parse("tel:010-4113-5492")));
+                startActivity(new Intent("android.intent.action.DIAL", Uri.parse("tel:054-272-9345")));
             }
         });
         bt2.setOnClickListener(new View.OnClickListener() {

@@ -32,19 +32,19 @@ public class TodaymenuActivity extends AppCompatActivity {
         }
 */
         ResList rlist1 = new ResList("asd");
-        rlist1.ResName = "베트남쌀국수-라이스스토리";
+        rlist1.ResName = "분짜-다낭";
         rlist1.code = "A001";
         Rlist.add(rlist1);
         ResList rlist2 = new ResList("asd");
-        rlist2.ResName = "해물샤브-샤브향";
+        rlist2.ResName = "뉴욕스톤스테이크-애슐리";
         rlist2.code = "A000";
         Rlist.add(rlist2);
         ResList rlist3 = new ResList("asd");
-        rlist3.ResName = "파스타-나인로드피제리아";
+        rlist3.ResName = "치킨필라프-서가앤쿡";
         rlist3.code = "A003";
         Rlist.add(rlist3);
         ResList rlist4 = new ResList("asd");
-        rlist4.ResName = "분짜-다낭";
+        rlist4.ResName = "베트남칼국수-라이스스토리";
         rlist4.code = "A002";
         Rlist.add(rlist4);
 
