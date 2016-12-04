@@ -13,8 +13,9 @@
     tools:context="ml.diony.motg.Display.ResInfoActivity"
     tools:showIn="@layout/activity_res_info"
     android:layout_marginStart="0dp"
-    android:layout_marginTop="0dp">
-
+    android:layout_marginTop="0dp"
+    android:background="@color/motg_back"
+>
     <Button
         android:text="전화하기"
         android:layout_height="80dp"
@@ -56,6 +57,9 @@
         android:layout_height="match_parent"
         android:layout_below="@+id/tv1"
         android:layout_alignParentStart="true"
+        android:divider="@color/black"
+        android:dividerHeight="0.5dp"
+        android:childDivider="@color/black"
         android:id="@+id/mylist" />
 
     <TextView
@@ -65,5 +69,6 @@
         android:layout_marginTop="22dp"
         android:id="@+id/textView2"
         android:layout_below="@+id/button"
+        android:textColor="@color/black"
         android:layout_centerHorizontal="true" />
 </RelativeLayout>
