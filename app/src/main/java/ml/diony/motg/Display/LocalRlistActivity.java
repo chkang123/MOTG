@@ -34,7 +34,7 @@ public class LocalRlistActivity extends AppCompatActivity {
         MyListAdapter myAdapter = new MyListAdapter(this, R.layout.res_row, Rlist);
 
         ListView myList;
-        myList = (ListView) findViewById(R.id.list);
+        myList = (ListView) findViewById(R.id.local_list);
         myList.setAdapter(myAdapter);
     }
 }

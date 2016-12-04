@@ -1,6 +1,7 @@
 package ml.diony.motg.Display;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -63,6 +64,9 @@ public class MainActivity extends AppCompatActivity {
         MenuItem searchItem = menu.findItem(R.id.action_search);
         SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
         searchView.setQueryHint("식당명으로 검색..");
+        SearchView.SearchAutoComplete searchAutoComplete = (SearchView.SearchAutoComplete)searchView.findViewById(android.support.v7.appcompat.R.id.search_src_text);
+        searchAutoComplete.setHintTextColor(Color.WHITE);
+        searchAutoComplete.setTextColor(Color.WHITE);
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String s) {
@@ -171,7 +175,7 @@ public class MainActivity extends AppCompatActivity {
                 btn_yukang.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Intent intent=new Intent(getContext(),ReslistActivity.class);
+                        Intent intent=new Intent(getContext(),LocalRlistActivity.class);
                         intent.putExtra("location","유강");
                         startActivity(intent);
                     }
@@ -181,7 +185,7 @@ public class MainActivity extends AppCompatActivity {
                 btn_hyoja.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Intent intent=new Intent(getContext(),ReslistActivity.class);
+                        Intent intent=new Intent(getContext(),LocalRlistActivity.class);
                         intent.putExtra("location","효자");
                         startActivity(intent);
                     }
@@ -191,7 +195,7 @@ public class MainActivity extends AppCompatActivity {
                 btn_hyosung.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Intent intent=new Intent(getContext(),ReslistActivity.class);
+                        Intent intent=new Intent(getContext(),LocalRlistActivity.class);
                         intent.putExtra("location","효성로");
                         startActivity(intent);
                     }
@@ -201,7 +205,7 @@ public class MainActivity extends AppCompatActivity {
                 btn_edong.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Intent intent=new Intent(getContext(),ReslistActivity.class);
+                        Intent intent=new Intent(getContext(),LocalRlistActivity.class);
                         intent.putExtra("location","이동");
                         startActivity(intent);
                     }
@@ -211,7 +215,7 @@ public class MainActivity extends AppCompatActivity {
                 btn_ssangsa.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Intent intent=new Intent(getContext(),ReslistActivity.class);
+                        Intent intent=new Intent(getContext(),LocalRlistActivity.class);
                         intent.putExtra("location","쌍사");
                         startActivity(intent);
                     }
@@ -221,7 +225,7 @@ public class MainActivity extends AppCompatActivity {
                 btn_6st.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Intent intent=new Intent(getContext(),ReslistActivity.class);
+                        Intent intent=new Intent(getContext(),LocalRlistActivity.class);
                         intent.putExtra("location","육거리");
                         startActivity(intent);
                     }
@@ -231,7 +235,7 @@ public class MainActivity extends AppCompatActivity {
                 btn_yeongill.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Intent intent=new Intent(getContext(),ReslistActivity.class);
+                        Intent intent=new Intent(getContext(),LocalRlistActivity.class);
                         intent.putExtra("location","영일대");
                         startActivity(intent);
                     }

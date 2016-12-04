@@ -66,11 +66,16 @@
             android:name=".Display.RateActivity"
             android:theme="@style/Theme.AppCompat.Light.Dialog" />
 
-        <activity android:name=".Display.ReslistActivity" />
-        <activity android:name=".Display.SearchRlistActivity" />
-        <activity android:name=".Display.LocalRlistActivity" />
-        <activity android:name=".Display.HistoryActivity" />
-        <activity android:name=".Display.SettingActivity"></activity>
+        <activity android:name=".Display.ReslistActivity"
+            android:theme="@style/Theme.AppCompat.NoActionBar"/>
+        <activity android:name=".Display.SearchRlistActivity"
+            android:theme="@style/Theme.AppCompat.NoActionBar"/>
+        <activity android:name=".Display.LocalRlistActivity"
+            android:theme="@style/Theme.AppCompat.NoActionBar"/>
+        <activity android:name=".Display.HistoryActivity"
+            android:theme="@style/Theme.AppCompat.NoActionBar"/>
+        <activity android:name=".Display.SettingActivity"
+            android:theme="@style/Theme.AppCompat.NoActionBar"></activity>
 
     </application>
 

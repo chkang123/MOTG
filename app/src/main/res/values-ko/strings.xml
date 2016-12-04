@@ -10,5 +10,5 @@
     <string name="title_activity_jap">일식</string>
     <string name="title_activity_chn">중식</string>
     <string name="title_activity_wes">양식</string>
-    <string name="search_hint">식당명으로 검색</string>
+    <string name="search_hint">식당명으로 검색..</string>
 </resources>
