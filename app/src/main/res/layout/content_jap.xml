@@ -5,37 +5,37 @@
     android:id="@+id/content_activity_jap"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/motg_back"
+    android:orientation="vertical"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:background="@color/motg_back"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="ml.diony.motg.Display.JapActivity"
-    tools:showIn="@layout/activity_jap"
-    android:orientation="vertical">
+    tools:showIn="@layout/activity_jap">
 
     <Button
-        android:text="일식당1"
+        android:id="@+id/jap_res1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/jap_res1" />
+        android:text="일식당1" />
 
     <Button
-        android:text="일식당2"
+        android:id="@+id/jap_res2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/jap_res2" />
+        android:text="일식당2" />
 
     <Button
-        android:text="일식당3"
+        android:id="@+id/jap_res3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/jap_res3" />
+        android:text="일식당3" />
 
     <Button
-        android:text="일식당4"
+        android:id="@+id/jap_res4"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/jap_res4" />
+        android:text="일식당4" />
 </LinearLayout>

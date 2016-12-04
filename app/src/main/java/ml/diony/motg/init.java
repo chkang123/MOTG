@@ -39,7 +39,6 @@ final public class init extends Activity {
         //Plz process cLogin, cUTD
 
 
-
     }
 
     @Override
@@ -61,7 +60,7 @@ final public class init extends Activity {
 
         super.onResume();
 
-        if(cLogin || S.isLogined()) {
+        if (cLogin || S.isLogined()) {
 
             Log.i(TAG, "User Login Confirmed.");
 
@@ -97,13 +96,13 @@ final public class init extends Activity {
 
         Log.i(TAG, "Starts to check is this application UP-TO-DATE.");
 
-        if(cUTD) {
+        if (cUTD) {
 
             //Version Check Is Not Needed. Directly Goes to main screen.
 
             Log.i(TAG, "This application is UP-TO-DATE.");
 
-            if(cInit) {
+            if (cInit) {
 
                 this.finishAffinity();
 

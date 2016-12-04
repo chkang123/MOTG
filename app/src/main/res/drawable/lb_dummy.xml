@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <shape xmlns:android="http://schemas.android.com/apk/res/android">
     <solid android:color="@color/google_back" />
-    <stroke android:width="1px" android:color="@color/google_back" />
-    <padding android:top="2dp" android:left="4dp" android:bottom="2dp" android:right="4dp" />
+    <stroke
+        android:width="1px"
+        android:color="@color/google_back" />
+    <padding
+        android:bottom="2dp"
+        android:left="4dp"
+        android:right="4dp"
+        android:top="2dp" />
     <corners android:radius="6dp" />
 </shape>

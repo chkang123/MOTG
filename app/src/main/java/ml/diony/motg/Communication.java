@@ -45,394 +45,598 @@ import java.util.ArrayList;
 
 public class Communication extends Activity {
 
-	protected static String TAG = "MOTGComm";
+    protected static String TAG = "MOTGComm";
 
-	protected static String SRVU = "http://dn-mt-svc.yuoa.ml/MOTG";
+    protected static String SRVU = "http://dn-mt-svc.yuoa.ml/MOTG";
 
-	protected String DB_VERSION = "0.0", KR_VERSION = "0.0", JP_VERSION = "0.0", WE_VERSION = "0.0", CN_VERSION = "0.0";
+    protected String DB_VERSION = "0.0", KR_VERSION = "0.0", JP_VERSION = "0.0", WE_VERSION = "0.0", CN_VERSION = "0.0";
 
-	protected Context CONTEXT = this;
+    protected Context CONTEXT = this;
 
-	protected Activity ACTIVITY = this;
+    protected boolean cCK = false;
 
-	final protected File FP;
+    protected Activity ACTIVITY = this;
 
-	public Communication(File FP, Context CONTEXT, Activity ACTIVITY) {
+    final protected File FP;
 
-		this.FP = FP;
+    public Communication(File FP, Context CONTEXT, Activity ACTIVITY) {
 
-		this.CONTEXT = CONTEXT;
-		this.ACTIVITY = ACTIVITY;
+        this.FP = FP;
 
-		//Update Versions from Local Data!!
+        this.CONTEXT = CONTEXT;
+        this.ACTIVITY = ACTIVITY;
 
-	}
+        //Update Versions from Local Data!!
 
-	public Communication() {
+    }
 
-		this.FP = null;
+    public Communication() {
 
-	}
+        this.FP = null;
 
-	private boolean isFile(File file){
-		boolean result;
-		if(file!=null&&file.exists()&&file.isFile()){
-			result=true;
-		}else{
-			result=false;
-		}
-		return result;
-	}
+    }
 
-	@Override
-	public void onCreate(Bundle s) {
+    private boolean isFile(File file) {
+        boolean result;
+        if (file != null && file.exists() && file.isFile()) {
+            result = true;
+        } else {
+            result = false;
+        }
+        return result;
+    }
 
-		super.onCreate(s);
+    @Override
+    public void onCreate(Bundle s) {
 
-		this.setContentView(R.layout.loading);
+        super.onCreate(s);
 
-		// 에니메이션 : 프레임, 트윈 (알파, 회전, 크기, 위치)
-		// 트윈 (알파 - 투명도 변하는 에니메이션)
+        this.setContentView(R.layout.loading);
 
-		final RelativeLayout RL = (RelativeLayout) findViewById(R.id.ld);
+        final RelativeLayout RL = (RelativeLayout) findViewById(R.id.ld);
 
-		Animation AN = AnimationUtils.loadAnimation(this, R.anim.fade_in);
+        Animation AN = AnimationUtils.loadAnimation(this, R.anim.fade_in);
 
-		RL.startAnimation(AN);
+        RL.startAnimation(AN);
 
-		versionCheck();
+        versionCheck();
 
-	}
+    }
 
-	public void versionCheck() {
+    @Override
+    public void onResume() {
 
-		final String SURL = SRVU + "VersionCheck";
+        super.onResume();
 
-		Log.i(TAG, "Version Check Starts.");
+        if (cCK) {
 
-		final TextView TXV = (TextView) ACTIVITY.findViewById(R.id.ldT);
+            this.finishAffinity();
 
-		//TXV.setText("Checking version...");
+        } else {
 
-		new Thread() {
+            cCK = true;
 
-			public void run() {
+        }
 
-				HttpClient C = new DefaultHttpClient();
+    }
 
-				HttpPost P = new HttpPost(SURL);
+    public void versionCheck() {
 
-				P.addHeader("X-Dionysource", "MOTG_AP");
-				P.setHeader("Content-Type", "application/json");
+        final String SURL = SRVU + "VersionCheck";
 
-				JSONObject VX = new JSONObject();
-				JSONObject INDX = new JSONObject();
+        Log.i(TAG, "Version Check Starts.");
 
-				try {
+        final TextView TXV = (TextView) ACTIVITY.findViewById(R.id.ldT);
 
-					VX.put("APV", BuildConfig.VERSION_NAME);
-					VX.put("INDXV", DB_VERSION);
+        //TXV.setText("Checking version...");
 
-					INDX.put("KR", KR_VERSION);
-					INDX.put("JP", JP_VERSION);
-					INDX.put("CN", CN_VERSION);
-					INDX.put("WE", WE_VERSION);
+        new Thread() {
 
-				} catch (JSONException E) {}
+            public void run() {
 
-				ArrayList<NameValuePair> D = new ArrayList<NameValuePair>();
-				D.add(new BasicNameValuePair("VX", Base64.encodeToString(VX.toString().getBytes(), 0)));
-				D.add(new BasicNameValuePair("INDX", Base64.encodeToString(INDX.toString().getBytes(), 0)));
+                HttpClient C = new DefaultHttpClient();
 
-				InputStream IS = null;
-				String RS = null;
+                HttpPost P = new HttpPost(SURL);
 
-				try {
+                P.addHeader("X-Dionysource", "MOTG_AP");
+                P.setHeader("Content-Type", "application/json");
 
-					UrlEncodedFormEntity EN = new UrlEncodedFormEntity(D, HTTP.UTF_8);
+                JSONObject VX = new JSONObject();
+                JSONObject INDX = new JSONObject();
 
-					P.setEntity(EN);
-					HttpResponse PO = C.execute(P);
+                try {
 
-					HttpEntity RE = PO.getEntity();
+                    VX.put("APV", BuildConfig.VERSION_NAME);
+                    VX.put("INDXV", DB_VERSION);
 
-					if(RE != null) {
+                    INDX.put("KR", KR_VERSION);
+                    INDX.put("JP", JP_VERSION);
+                    INDX.put("CN", CN_VERSION);
+                    INDX.put("WE", WE_VERSION);
 
-						//Log.i(TAG, EntityUtils.toString(RE));
+                } catch (JSONException E) {
+                }
 
-						//DATA Received.
+                ArrayList<NameValuePair> D = new ArrayList<NameValuePair>();
+                D.add(new BasicNameValuePair("VX", Base64.encodeToString(VX.toString().getBytes(), 0)));
+                D.add(new BasicNameValuePair("INDX", Base64.encodeToString(INDX.toString().getBytes(), 0)));
 
-						IS = RE.getContent();
-						BufferedReader RD = new BufferedReader(new InputStreamReader(IS, "UTF-8"));
-						StringBuilder SB = new StringBuilder();
+                InputStream IS = null;
+                String RS = null;
 
-						String LN = null;
+                try {
 
-						while((LN = RD.readLine()) != null) {
+                    UrlEncodedFormEntity EN = new UrlEncodedFormEntity(D, HTTP.UTF_8);
 
-							SB.append(LN + "\n");
+                    P.setEntity(EN);
+                    HttpResponse PO = C.execute(P);
 
-						}
+                    HttpEntity RE = PO.getEntity();
 
-						RS = SB.toString();
+                    if (RE != null) {
 
-						Log.i(TAG, RS);
+                        //Log.i(TAG, EntityUtils.toString(RE));
 
-						JSONObject RX = new JSONObject(RS);
+                        //DATA Received.
 
-						//JSON parsing Completed!
+                        IS = RE.getContent();
+                        BufferedReader RD = new BufferedReader(new InputStreamReader(IS, "UTF-8"));
+                        StringBuilder SB = new StringBuilder();
 
-						if(RX.isNull("error")) {
+                        String LN = null;
 
-							//No error
+                        while ((LN = RD.readLine()) != null) {
 
-							if(!RX.isNull("command")) {
+                            SB.append(LN + "\n");
 
-								//There is some commands from server.
+                        }
 
-								Log.i(TAG, "There is some commands!");
+                        RS = SB.toString();
 
-								//{"command":[["DO_DB_UPDATE","DB.161203.0"],["DO_DB_UPDATE","KR.161202.0"],["DO_DB_UPDATE","CN.161201.0"],["DO_DB_UPDATE","JP.161204.1"],["DO_DB_UPDATE","WE.161201.0"]]}
-								//{"command":[["DO_APP_UPDATE","1.1.0"]]}
+                        Log.i(TAG, RS);
 
-								JSONArray RA = RX.getJSONArray("command");
+                        JSONObject RX = new JSONObject(RS);
 
-								Log.i(TAG, RA.toString());
+                        //JSON parsing Completed!
 
-								for(int i = 0; i < RA.length(); i++) {
+                        if (RX.isNull("error")) {
 
-									JSONArray RTEMP = (JSONArray) RA.get(i);
+                            //No error
 
-									if(RTEMP.get(0).toString().equals("DO_APP_UPDATE")) {
+                            if (!RX.isNull("command")) {
 
-										//EMPTY CODE
+                                //There is some commands from server.
 
-									} else if(RTEMP.get(0).toString().equals("DO_DB_UPDATE")) {
+                                Log.i(TAG, "There is some commands!");
 
-										String DLEMA = "http://dn-mt-fs.yuoa.ml/" + (String) RTEMP.get(1).toString() + ".db";
+                                //{"command":[["DO_DB_UPDATE","DB.161203.0"],["DO_DB_UPDATE","KR.161202.0"],["DO_DB_UPDATE","CN.161201.0"],["DO_DB_UPDATE","JP.161204.1"],["DO_DB_UPDATE","WE.161201.0"]]}
+                                //{"command":[["DO_APP_UPDATE","1.1.0"]]}
 
-										Log.i(TAG, "Download START: " + DLEMA);
+                                JSONArray RA = RX.getJSONArray("command");
 
-										SyncHttpClient HCL = new SyncHttpClient();
+                                Log.i(TAG, RA.toString());
 
-										final String PATH = RTEMP.get(1).toString();
+                                for (int i = 0; i < RA.length(); i++) {
 
-										String[] ACT = new String[] { "application/x-sqlite3", "application/octet-stream" };
+                                    JSONArray RTEMP = (JSONArray) RA.get(i);
 
-										HCL.get(DLEMA, new BinaryHttpResponseHandler(ACT) {
-											@Override
-											public void onSuccess(int i, cz.msebera.android.httpclient.Header[] headers, byte[] bytes) {
+                                    if (RTEMP.get(0).toString().equals("DO_APP_UPDATE")) {
 
-												Log.i(TAG, "SUCCESS!!!");
+                                        //EMPTY CODE
 
-												FileOutputStream FOS;
-												DataOutputStream DOS;
+                                    } else if (RTEMP.get(0).toString().equals("DO_DB_UPDATE")) {
 
-												try {
+                                        String DLEMA = "http://dn-mt-fs.yuoa.ml/" + (String) RTEMP.get(1).toString() + ".db";
 
-													File FI = new File(FP.getCanonicalPath() + "/" + PATH + ".db");
+                                        Log.i(TAG, "Download START: " + DLEMA);
 
-													Log.i(TAG + "_" + String.valueOf(i) + ": ", FI.toString());
+                                        SyncHttpClient HCL = new SyncHttpClient();
 
-													FI.createNewFile();
+                                        final String PATH = RTEMP.get(2).toString();
 
-													FOS = new FileOutputStream(FI);
-													DOS = new DataOutputStream(FOS);
+                                        String[] ACT = new String[]{"application/x-sqlite3", "application/octet-stream"};
 
-													DOS.write(bytes);
+                                        HCL.get(DLEMA, new BinaryHttpResponseHandler(ACT) {
+                                            @Override
+                                            public void onSuccess(int i, cz.msebera.android.httpclient.Header[] headers, byte[] bytes) {
 
-													DOS.close();
-													FOS.close();
+                                                Log.i(TAG, "SUCCESS!!!");
 
-													Log.i(TAG, String.valueOf(isFile(FI)));
+                                                FileOutputStream FOS;
+                                                DataOutputStream DOS;
 
-												} catch (IOException I) {}
+                                                try {
 
-											}
+                                                    File FI = new File(getFilesDir().getCanonicalPath() + "/" + PATH + ".db");
 
-											@Override
-											public void onFailure(int i, cz.msebera.android.httpclient.Header[] headers, byte[] bytes, Throwable throwable) {
+                                                    Log.i(TAG + "_" + String.valueOf(i) + ": ", FI.toString());
 
-												Log.i(TAG, "FAIL... TT");
+                                                    FI.createNewFile();
 
-											}
-										});
+                                                    FOS = new FileOutputStream(FI);
+                                                    DOS = new DataOutputStream(FOS);
 
-									}
+                                                    DOS.write(bytes);
 
-								}
+                                                    DOS.close();
+                                                    FOS.close();
 
-							}
+                                                    Log.i(TAG, String.valueOf(isFile(FI)));
 
-						} else {
+                                                } catch (IOException I) {
+                                                }
 
-							//Error detected.
+                                            }
 
-							Log.i(TAG, "ERROR DETECTED.");
+                                            @Override
+                                            public void onFailure(int i, cz.msebera.android.httpclient.Header[] headers, byte[] bytes, Throwable throwable) {
 
-							final String ERS = RX.getString("error");
+                                                Log.i(TAG, "FAIL... TT");
 
-							Log.i(TAG, "ERROR: " + ERS);
+                                            }
+                                        });
 
-						}
+                                    }
 
-					}
+                                }
 
-				} catch (Exception E) {
+                            }
 
-					E.printStackTrace();
+                        } else {
 
-				} finally {
+                            //Error detected.
 
-					accountSync(true);
+                            Log.i(TAG, "ERROR DETECTED.");
 
-				}
+                            final String ERS = RX.getString("error");
 
-			}
+                            Log.i(TAG, "ERROR: " + ERS);
 
-		}.start();
+                        }
 
+                    }
 
+                } catch (Exception E) {
 
-	}
+                    E.printStackTrace();
 
-	public void accountSync(boolean isInit) {
+                } finally {
 
-		/*final String SURL = SRVU + "AccountCheck";
+                    File DBI = new File(CONTEXT.getFilesDir() + "/DB.db");
 
-		Log.i(TAG, "Account Check Starts.");
+                    if (DBI.exists()) {
 
-		new Thread() {
+                        Log.i(TAG, "File Exists!");
 
-			public void run() {
+                    } else {
 
-				HttpClient C = new DefaultHttpClient();
+                        Log.i(TAG, "File is not exists!");
 
-				HttpPost P = new HttpPost(SURL);
+                    }
 
-				P.addHeader("X-Dionysource", "MOTG_AP");
-				P.setHeader("Content-Type", "application/json");
+                    accountSync(true);
 
-				JSONObject AX = new JSONObject();
+                }
 
-				try {
+            }
 
-					AX.put("ID", "somestuffs");
-					AX.put("TYPE", "somestuffs");
+        }.start();
 
-				} catch (JSONException E) {}
 
-				ArrayList<NameValuePair> D = new ArrayList<NameValuePair>();
-				D.add(new BasicNameValuePair("AX", Base64.encodeToString(AX.toString().getBytes(), 0)));
-				D.add(new BasicNameValuePair("APV", BuildConfig.VERSION_NAME));
+    }
 
-				InputStream IS = null;
-				String RS = null;
+    public void accountSync(final boolean isInit) {
 
-				try {
+        final String SURL = SRVU + "AccountCheck";
 
-					UrlEncodedFormEntity EN = new UrlEncodedFormEntity(D, HTTP.UTF_8);
+        Log.i(TAG, "Account Check Starts.");
 
-					P.setEntity(EN);
-					HttpResponse PO = C.execute(P);
+        new Thread() {
 
-					HttpEntity RE = PO.getEntity();
+            public void run() {
 
-					if(RE != null) {
+                HttpClient C = new DefaultHttpClient();
 
-						//Log.i(TAG, EntityUtils.toString(RE));
+                HttpPost P = new HttpPost(SURL);
 
-						//DATA Received.
+                P.addHeader("X-Dionysource", "MOTG_AP");
+                P.setHeader("Content-Type", "application/json");
 
-						IS = RE.getContent();
-						BufferedReader RD = new BufferedReader(new InputStreamReader(IS, "UTF-8"));
-						StringBuilder SB = new StringBuilder();
+                JSONObject AX = new JSONObject();
 
-						String LN = null;
+                try {
 
-						while((LN = RD.readLine()) != null) {
+                    AX.put("ID", "somestuffs");
+                    AX.put("TYPE", "somestuffs");
 
-							SB.append(LN + "\n");
+                } catch (JSONException E) {
+                }
 
-						}
+                ArrayList<NameValuePair> D = new ArrayList<NameValuePair>();
+                D.add(new BasicNameValuePair("AX", Base64.encodeToString(AX.toString().getBytes(), 0)));
+                D.add(new BasicNameValuePair("APV", BuildConfig.VERSION_NAME));
 
-						RS = SB.toString();
+                InputStream IS = null;
+                String RS = null;
 
-						Log.i(TAG, RS);
+                try {
 
-						JSONObject RX = new JSONObject(RS);
+                    UrlEncodedFormEntity EN = new UrlEncodedFormEntity(D, HTTP.UTF_8);
 
-						//JSON parsing Completed!
+                    P.setEntity(EN);
+                    HttpResponse PO = C.execute(P);
 
-						if(RX.isNull("error")) {
+                    HttpEntity RE = PO.getEntity();
 
-							//No error
+                    if (RE != null) {
 
-							if(!RX.isNull("command")) {
+                        //Log.i(TAG, EntityUtils.toString(RE));
 
-								//There is some commands from server.
+                        //DATA Received.
 
-								Log.i(TAG, "There is some commands!");
+                        IS = RE.getContent();
+                        BufferedReader RD = new BufferedReader(new InputStreamReader(IS, "UTF-8"));
+                        StringBuilder SB = new StringBuilder();
 
-								//{"command":[["DO_DB_UPDATE","DB.161203.0"],["DO_DB_UPDATE","KR.161202.0"],["DO_DB_UPDATE","CN.161201.0"],["DO_DB_UPDATE","JP.161204.1"],["DO_DB_UPDATE","WE.161201.0"]]}
-								//{"command":[["DO_APP_UPDATE","1.1.0"]]}
+                        String LN = null;
 
-								JSONArray RA = RX.getJSONArray("command");
+                        while ((LN = RD.readLine()) != null) {
 
-								Log.i(TAG, RA.toString());
+                            SB.append(LN + "\n");
 
+                        }
 
+                        RS = SB.toString();
 
-							}
+                        Log.i(TAG, RS);
 
-						} else {
+                        JSONObject RX = new JSONObject(RS);
 
-							//Error detected.
+                        //JSON parsing Completed!
 
-							Log.i(TAG, "ERROR DETECTED.");
+                        if (RX.isNull("error")) {
 
-							final String ERS = RX.getString("error");
+                            //No error
 
-							Log.i(TAG, "ERROR: " + ERS);
+                            Log.i(TAG, "There is some chunks!");
 
-						}
+                            Log.i(TAG, RX.getString("chunk"));
 
-					}
+                            Log.i(TAG, new String(Base64.decode(RX.getString("chunk"), 0)));
 
-				} catch (Exception E) {
+                            JSONObject CNK = new JSONObject(new String(Base64.decode(RX.getString("chunk"), 0)));
 
-					E.printStackTrace();
+                            Log.i(TAG, CNK.toString());
 
-				}
+                            if (CNK.getInt("HISTORY_REV") != 1) {
 
-			}
+                                //Sync is needed.
 
-		}.start();*/
+                                dataSync(isInit);
 
-		if(isInit) {
+                            } else {
 
-			Handler MH = new Handler(Looper.getMainLooper());
+                                if (isInit) {
 
-			MH.postDelayed(new Runnable() {
+                                    Handler MH = new Handler(Looper.getMainLooper());
 
-				@Override
+                                    MH.postDelayed(new Runnable() {
 
-				public void run() {
+                                        @Override
 
-					//GO TO REAL MAIN!!!!
+                                        public void run() {
 
-					Toast.makeText(CONTEXT, "Welcome to MOTG", Toast.LENGTH_LONG).show();
+                                            //GO TO REAL MAIN!!!!
 
-					Intent I = new Intent(CONTEXT, ml.diony.motg.Display.MainActivity.class);
+                                            Log.i(TAG, "Go to main screen");
 
-					CONTEXT.startActivity(I);
+                                            Toast.makeText(CONTEXT, "Welcome to MOTG", Toast.LENGTH_LONG).show();
 
-				}
+                                            Intent I = new Intent(CONTEXT, ml.diony.motg.Display.MainActivity.class);
 
-			}, 0);
+                                            CONTEXT.startActivity(I);
 
-		}
+                                        }
 
-	}
+                                    }, 0);
+
+                                }
+
+                            }
+
+                        } else {
+
+                            //Error detected.
+
+                            Log.i(TAG, "ERROR DETECTED.");
+
+                            final String ERS = RX.getString("error");
+
+                            Log.i(TAG, "ERROR: " + ERS);
+
+                        }
+
+                    }
+
+                } catch (Exception E) {
+
+                    E.printStackTrace();
+
+                }
+
+            }
+
+        }.start();
+
+    }
+
+    public void dataSync(final boolean isInit) {
+
+        final String SURL = SRVU + "AccountCheck";
+
+        Log.i(TAG, "Account Check Starts.");
+
+        new Thread() {
+
+            public void run() {
+
+                HttpClient C = new DefaultHttpClient();
+
+                HttpPost P = new HttpPost(SURL);
+
+                P.addHeader("X-Dionysource", "MOTG_AP");
+                P.setHeader("Content-Type", "application/json");
+
+                JSONObject AX = new JSONObject();
+
+                try {
+
+                    AX.put("ID", "somestuffs");
+                    AX.put("TYPE", "somestuffs");
+
+                } catch (JSONException E) {
+                }
+
+                ArrayList<NameValuePair> D = new ArrayList<NameValuePair>();
+                D.add(new BasicNameValuePair("AX", Base64.encodeToString(AX.toString().getBytes(), 0)));
+                D.add(new BasicNameValuePair("APV", BuildConfig.VERSION_NAME));
+
+                InputStream IS = null;
+                String RS = null;
+
+                try {
+
+                    UrlEncodedFormEntity EN = new UrlEncodedFormEntity(D, HTTP.UTF_8);
+
+                    P.setEntity(EN);
+                    HttpResponse PO = C.execute(P);
+
+                    HttpEntity RE = PO.getEntity();
+
+                    if (RE != null) {
+
+                        //Log.i(TAG, EntityUtils.toString(RE));
+
+                        //DATA Received.
+
+                        IS = RE.getContent();
+                        BufferedReader RD = new BufferedReader(new InputStreamReader(IS, "UTF-8"));
+                        StringBuilder SB = new StringBuilder();
+
+                        String LN = null;
+
+                        while ((LN = RD.readLine()) != null) {
+
+                            SB.append(LN + "\n");
+
+                        }
+
+                        RS = SB.toString();
+
+                        Log.i(TAG, RS);
+
+                        JSONObject RX = new JSONObject(RS);
+
+                        //JSON parsing Completed!
+
+                        if (RX.isNull("error")) {
+
+                            //No error
+
+                            Log.i(TAG, "There is some chunks!");
+
+                            Log.i(TAG, RX.getString("chunk"));
+
+                            Log.i(TAG, new String(Base64.decode(RX.getString("chunk"), 0)));
+
+                            JSONObject CNK = new JSONObject(new String(Base64.decode(RX.getString("chunk"), 0)));
+
+                            Log.i(TAG, CNK.toString());
+
+                            if (CNK.getInt("HISTORY_REV") != 1) {
+
+                                //Sync is needed.
+
+                                dataSync(isInit);
+
+                            } else {
+
+                                if (isInit) {
+
+                                    Handler MH = new Handler(Looper.getMainLooper());
+
+                                    MH.postDelayed(new Runnable() {
+
+                                        @Override
+
+                                        public void run() {
+
+                                            //GO TO REAL MAIN!!!!
+
+                                            Log.i(TAG, "Go to main screen");
+
+                                            Toast.makeText(CONTEXT, "Welcome to MOTG", Toast.LENGTH_LONG).show();
+
+                                            Intent I = new Intent(CONTEXT, ml.diony.motg.Display.MainActivity.class);
+
+                                            CONTEXT.startActivity(I);
+
+                                        }
+
+                                    }, 0);
+
+                                }
+
+                            }
+
+                        } else {
+
+                            //Error detected.
+
+                            Log.i(TAG, "ERROR DETECTED.");
+
+                            final String ERS = RX.getString("error");
+
+                            Log.i(TAG, "ERROR: " + ERS);
+
+                        }
+
+                    }
+
+                } catch (Exception E) {
+
+                    E.printStackTrace();
+
+                }
+
+            }
+
+        }.start();
+
+        if (isInit) {
+
+            Handler MH = new Handler(Looper.getMainLooper());
+
+            MH.postDelayed(new Runnable() {
+
+                @Override
+
+                public void run() {
+
+                    //GO TO REAL MAIN!!!!
+
+                    Toast.makeText(CONTEXT, "Welcome to MOTG", Toast.LENGTH_LONG).show();
+
+                    Intent I = new Intent(CONTEXT, ml.diony.motg.Display.MainActivity.class);
+
+                    CONTEXT.startActivity(I);
+
+                }
+
+            }, 0);
+
+        }
+
+    }
 
 }

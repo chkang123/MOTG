@@ -9,7 +9,8 @@ import android.util.Log;
 
 public class TypeDummy extends Base {
 
-    public TypeDummy() {}
+    public TypeDummy() {
+    }
 
     public boolean procLogin() {
 

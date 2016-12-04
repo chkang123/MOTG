@@ -125,30 +125,33 @@ public class Screen extends Activity implements View.OnClickListener {
         return I;
 
     }
+
     private RelativeLayout makeLoginButton(Activity A, int background, int symbol, int color, int message) {
 
-        RelativeLayout.LayoutParams buttonParams = new RelativeLayout.LayoutParams((int) dp2px(A, 40), (int) dp2px(A,6));//ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        RelativeLayout.LayoutParams buttonParams = new RelativeLayout.LayoutParams((int) dp2px(A, 40), (int) dp2px(A, 6));//ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         buttonParams.setMargins(40, 5, 40, 5);
 
         return makeLoginButton(A, background, symbol, color, message, buttonParams);
 
     }
+
     private RelativeLayout makeLoginButton(Activity A, int background, int symbol, int color, int message, RelativeLayout below) {
 
-        RelativeLayout.LayoutParams buttonParams = new RelativeLayout.LayoutParams((int) dp2px(A, 40), (int) dp2px(A,6));//ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        RelativeLayout.LayoutParams buttonParams = new RelativeLayout.LayoutParams((int) dp2px(A, 40), (int) dp2px(A, 6));//ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         buttonParams.setMargins(40, 20, 40, 20);
         buttonParams.addRule(RelativeLayout.ABOVE, below.getId());
 
         return makeLoginButton(A, background, symbol, color, message, buttonParams);
 
     }
+
     private RelativeLayout makeLoginButton(Activity A, int background, int color, int message, RelativeLayout below) {
 
         Log.i(TAG, "A Login Button is created.");
 
         RelativeLayout I = new RelativeLayout(A);
 
-        RelativeLayout.LayoutParams buttonParams = new RelativeLayout.LayoutParams((int) dp2px(A, 40), (int) dp2px(A,6));//ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        RelativeLayout.LayoutParams buttonParams = new RelativeLayout.LayoutParams((int) dp2px(A, 40), (int) dp2px(A, 6));//ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         buttonParams.setMargins(40, 5, 40, 5);
         buttonParams.addRule(RelativeLayout.ABOVE, below.getId());
 
@@ -279,7 +282,7 @@ public class Screen extends Activity implements View.OnClickListener {
 
         Log.i(TAG, "Click detected.");
 
-        if(v.getId() == lBtID[0]) {
+        if (v.getId() == lBtID[0]) {
 
             Log.i(TAG, "Naver Button Clicked.");
 
@@ -290,7 +293,7 @@ public class Screen extends Activity implements View.OnClickListener {
 
             lsLgM = 1;
 
-        } else if(v.getId() == lBtID[1]) {
+        } else if (v.getId() == lBtID[1]) {
 
             Log.i(TAG, "Facebook Button Clicked.");
 
@@ -301,7 +304,7 @@ public class Screen extends Activity implements View.OnClickListener {
 
             lsLgM = 2;
 
-        } else if(v.getId() == lBtID[2]) {
+        } else if (v.getId() == lBtID[2]) {
 
             Log.i(TAG, "Dummy Login Button Clicked.");
 
@@ -317,7 +320,7 @@ public class Screen extends Activity implements View.OnClickListener {
 
         Log.i(TAG + "_btnLsr", isLogined() ? "Login Succeed" : "Login Failed");
 
-        if(isLogined()) {
+        if (isLogined()) {
 
             ACTIVITY.checkUTD();
 

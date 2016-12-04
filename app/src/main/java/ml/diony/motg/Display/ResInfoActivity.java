@@ -29,7 +29,7 @@ public class ResInfoActivity extends Activity {
         //rname과 이름같은 식당 찾기
 
         ArrayList<ml.diony.motg.Display.MenuGroup> DataList = new ArrayList<ml.diony.motg.Display.MenuGroup>();
-        ExpandableListView listView = (ExpandableListView)findViewById(R.id.mylist);
+        ExpandableListView listView = (ExpandableListView) findViewById(R.id.mylist);
         ml.diony.motg.Display.MenuGroup temp = new ml.diony.motg.Display.MenuGroup("된장찌개");
         temp.child.add("가격: 5000원");
         DataList.add(temp);
@@ -40,8 +40,8 @@ public class ResInfoActivity extends Activity {
         temp.child.add("가격: 5000원");
         DataList.add(temp);
 
-        ml.diony.motg.Display.ExpandAdapter adapter = new ml.diony.motg.Display.ExpandAdapter(getApplicationContext(),R.layout.menu_row,R.layout.detail_row,DataList);
-        listView.setIndicatorBounds(width-50, width); //이 코드를 지우면 화살표 위치가 바뀐다.
+        ml.diony.motg.Display.ExpandAdapter adapter = new ml.diony.motg.Display.ExpandAdapter(getApplicationContext(), R.layout.menu_row, R.layout.detail_row, DataList);
+        listView.setIndicatorBounds(width - 50, width); //이 코드를 지우면 화살표 위치가 바뀐다.
         listView.setAdapter(adapter);
 
         Button bt1 = (Button) findViewById(R.id.button);
@@ -51,13 +51,13 @@ public class ResInfoActivity extends Activity {
         bt1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent("android.intent.action.DIAL",Uri.parse("tel:010-4113-5492")));
+                startActivity(new Intent("android.intent.action.DIAL", Uri.parse("tel:010-4113-5492")));
             }
         });
         bt2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent(ResInfoActivity.this,MapActivity.class);
+                Intent intent = new Intent(ResInfoActivity.this, MapActivity.class);
                 startActivity(intent);
             }
         });

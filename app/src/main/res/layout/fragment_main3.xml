@@ -7,38 +7,38 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="ml.diony.motg.Display.MainActivity"
-    android:weightSum="1">
+    android:weightSum="1"
+    tools:context="ml.diony.motg.Display.MainActivity">
 
 
-        <Button
-            android:text="방문기록 보기"
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:id="@+id/View_history"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="18dp"
-            android:fontFamily="sans-serif-medium" />
+    <Button
+        android:id="@+id/View_history"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="18dp"
+        android:fontFamily="sans-serif-medium"
+        android:text="방문기록 보기" />
 
 
     <TextView
-            android:text="만든이: 최동준 강창훈 김대호 김지오 윤태웅 조명상"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/text_maker"
-            android:textAlignment="center"
-            android:textStyle="normal|bold"
-        android:textColor="@color/google_text"
+        android:id="@+id/text_maker"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="13dp" />
+        android:layout_marginBottom="13dp"
+        android:text="만든이: 최동준 강창훈 김대호 김지오 윤태웅 조명상"
+        android:textAlignment="center"
+        android:textColor="@color/google_text"
+        android:textStyle="normal|bold" />
 
     <Button
-        android:text="추천 우선순위 설정"
+        android:id="@+id/Setting_rank"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:id="@+id/Setting_rank"
+        android:layout_alignStart="@+id/View_history"
         android:layout_below="@+id/View_history"
-        android:layout_alignStart="@+id/View_history" />
+        android:text="추천 우선순위 설정" />
 
 </RelativeLayout>

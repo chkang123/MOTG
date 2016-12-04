@@ -8,9 +8,9 @@ import java.util.ArrayList;
 
 public class HistoryList {
     public ArrayList<String> child;
-    public int year,month,day;
-    public
-    HistoryList(int y, int m, int d) {
+    public int year, month, day;
+
+    public HistoryList(int y, int m, int d) {
         year = y;
         month = m;
         day = d;

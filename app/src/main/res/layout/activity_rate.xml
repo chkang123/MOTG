@@ -11,80 +11,80 @@
     tools:context="ml.diony.motg.Display.RateActivity">
 
     <TextView
-        android:text="메뉴를 평가해주세요!"
+        android:id="@+id/tv1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/tv1"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:text="메뉴를 평가해주세요!" />
 
     <RatingBar
+        android:id="@+id/ratingBar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/ratingBar"
         android:layout_below="@+id/tv2"
         android:layout_centerHorizontal="true" />
 
     <TextView
-        android:text="식사 날짜: "
+        android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/textView"
+        android:layout_alignStart="@+id/ratingBar"
         android:layout_alignTop="@+id/date_text"
-        android:layout_alignStart="@+id/ratingBar" />
+        android:text="식사 날짜: " />
 
     <EditText
-        android:layout_height="wrap_content"
-        android:inputType="numberDecimal"
-        android:ems="10"
         android:id="@+id/date_text"
-        android:background="@color/white"
-        android:textAlignment="center"
-        android:hint="YYYYMMDD"
+        android:layout_width="110dp"
+        android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="21dp"
-        android:layout_width="110dp" />
+        android:background="@color/white"
+        android:ems="10"
+        android:hint="YYYYMMDD"
+        android:inputType="numberDecimal"
+        android:textAlignment="center" />
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:id="@+id/tv2"
-        android:text="    "
-        android:layout_below="@+id/tv1"
-        android:layout_centerHorizontal="true" />
-
-    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/tv1"
+        android:layout_centerHorizontal="true"
+        android:text="    " />
+
+    <TextView
         android:id="@+id/tv4"
-        android:text="    "
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_above="@+id/ratingBar2"
-        android:layout_alignStart="@+id/tv2" />
+        android:layout_alignStart="@+id/tv2"
+        android:text="    " />
 
     <RatingBar
+        android:id="@+id/ratingBar2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/ratingBar2"
-        android:layout_marginBottom="17dp"
         android:layout_above="@+id/textView"
-        android:layout_alignStart="@+id/textView" />
+        android:layout_alignStart="@+id/textView"
+        android:layout_marginBottom="17dp" />
 
     <TextView
-        android:text="식당의 서비스를 평가해주세요!"
+        android:id="@+id/tv3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/tv3"
-        android:textAlignment="center"
         android:layout_above="@+id/tv4"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:text="식당의 서비스를 평가해주세요!"
+        android:textAlignment="center" />
 
     <Button
-        android:text="등록"
-        android:layout_width="wrap_content"
         android:id="@+id/button_confirm"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/date_text"
         android:layout_alignBottom="@+id/date_text"
-        android:layout_toEndOf="@+id/date_text" />
+        android:layout_toEndOf="@+id/date_text"
+        android:text="등록" />
 </RelativeLayout>

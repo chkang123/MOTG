@@ -90,7 +90,7 @@ public class TypeNaver extends Base {
 
         Log.i(TAG + "_nv", "Setting Information Completed.");
 
-        if(authInstance.getState(authContext).toString() == "OK") {
+        if (authInstance.getState(authContext).toString() == "OK") {
 
             Log.i(TAG + "_nv", "Login Confirmed.");
 
@@ -119,13 +119,13 @@ public class TypeNaver extends Base {
     private OAuthLoginHandler AuthHandler = new OAuthLoginHandler() {
         @Override
         public void run(boolean b) {
-            if(b) {
+            if (b) {
 
                 //Login Success
 
                 Log.i(TAG + "_nv_login", "Login succeeded!");
 
-                Toast.makeText (getApplicationContext(), authInstance.getAccessToken(authContext), Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), authInstance.getAccessToken(authContext), Toast.LENGTH_LONG).show();
 
                 NAVER_AC_TOKEN = authInstance.getAccessToken(authContext);
                 NAVER_RF_TOKEN = authInstance.getRefreshToken(authContext);
@@ -140,7 +140,7 @@ public class TypeNaver extends Base {
 
                 Log.i(TAG + "_nv_login", "Failed to login!");
 
-                Toast.makeText (getApplicationContext(), "로그인에 실패했습니다. 다시 로그인해주세요.", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "로그인에 실패했습니다. 다시 로그인해주세요.", Toast.LENGTH_LONG).show();
 
                 NAVER_ERROR_CODE = authInstance.getLastErrorCode(authContext).getCode();
                 NAVER_ERROR_DESCRIPTION = authInstance.getLastErrorDesc(authContext);

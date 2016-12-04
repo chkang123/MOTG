@@ -26,11 +26,11 @@ public class RateActivity extends AppCompatActivity {
         tv2 = (TextView) findViewById(R.id.tv2);
         tv4 = (TextView) findViewById(R.id.tv4);
 
-        rating.setStepSize((float)0.5);
-        rating.setRating((float)0.0);
+        rating.setStepSize((float) 0.5);
+        rating.setRating((float) 0.0);
         rating.setIsIndicator(false);
-        rating2.setStepSize((float)0.5);
-        rating2.setRating((float)0.0);
+        rating2.setStepSize((float) 0.5);
+        rating2.setRating((float) 0.0);
         rating2.setIsIndicator(false);
 
         rating.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {

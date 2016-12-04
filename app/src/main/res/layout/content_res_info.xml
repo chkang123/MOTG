@@ -5,70 +5,70 @@
     android:id="@+id/content_res_info"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_marginStart="0dp"
+    android:layout_marginTop="0dp"
+    android:background="@color/motg_back"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="ml.diony.motg.Display.ResInfoActivity"
-    tools:showIn="@layout/activity_res_info"
-    android:layout_marginStart="0dp"
-    android:layout_marginTop="0dp"
-    android:background="@color/motg_back"
->
+    tools:showIn="@layout/activity_res_info">
+
     <Button
-        android:text="전화하기"
-        android:layout_height="80dp"
         android:id="@+id/button"
         android:layout_width="80dp"
-        android:shadowColor="@color/black"
-        android:background="@color/white"
-        android:textColor="@color/black"
-        android:layout_marginStart="80dp"
+        android:layout_height="80dp"
+        android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true" />
+        android:layout_marginStart="80dp"
+        android:background="@color/white"
+        android:shadowColor="@color/black"
+        android:text="전화하기"
+        android:textColor="@color/black" />
 
     <Button
-        android:text="지도보기"
-        android:layout_height="80dp"
         android:id="@+id/button2"
         android:layout_width="80dp"
-        android:shadowColor="@color/black"
-        android:textColor="@color/black"
-        android:background="@color/white"
+        android:layout_height="80dp"
         android:layout_alignParentTop="true"
+        android:layout_marginStart="31dp"
         android:layout_toEndOf="@+id/button"
-        android:layout_marginStart="31dp" />
+        android:background="@color/white"
+        android:shadowColor="@color/black"
+        android:text="지도보기"
+        android:textColor="@color/black" />
 
     <TextView
-        android:text="  메뉴"
         android:id="@+id/tv1"
-        android:textSize="25sp"
-        android:background="@color/colorPrimary"
-        android:layout_marginTop="67dp"
         android:layout_width="match_parent"
-        android:textStyle="normal|bold"
         android:layout_height="40dp"
+        android:layout_alignParentStart="true"
         android:layout_below="@+id/button"
-        android:layout_alignParentStart="true" />
+        android:layout_marginTop="67dp"
+        android:background="@color/colorPrimary"
+        android:text="  메뉴"
+        android:textSize="25sp"
+        android:textStyle="normal|bold" />
 
     <ExpandableListView
+        android:id="@+id/mylist"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/tv1"
         android:layout_alignParentStart="true"
-        android:divider="@color/black"
-        android:dividerHeight="0.5dp"
+        android:layout_below="@+id/tv1"
         android:childDivider="@color/black"
-        android:id="@+id/mylist" />
+        android:divider="@color/black"
+        android:dividerHeight="0.5dp" />
 
     <TextView
-        android:text="포항시 남구 대이동에 위치한 한정식 맛집"
+        android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="22dp"
-        android:id="@+id/textView2"
         android:layout_below="@+id/button"
-        android:textColor="@color/black"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="22dp"
+        android:text="포항시 남구 대이동에 위치한 한정식 맛집"
+        android:textColor="@color/black" />
 </RelativeLayout>

@@ -40,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
             return context.getResources().getColor(id);
         }
     }
+
     private SectionsPagerAdapter mSectionsPagerAdapter;
     /**
      * The {@link ViewPager} that will host the section contents.
@@ -79,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
         MenuItem searchItem = menu.findItem(R.id.action_search);
         SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
         searchView.setQueryHint("식당명으로 검색..");
-        SearchView.SearchAutoComplete searchAutoComplete = (SearchView.SearchAutoComplete)searchView.findViewById(android.support.v7.appcompat.R.id.search_src_text);
+        SearchView.SearchAutoComplete searchAutoComplete = (SearchView.SearchAutoComplete) searchView.findViewById(android.support.v7.appcompat.R.id.search_src_text);
         searchAutoComplete.setHintTextColor(getColor(this, R.color.white));
         searchAutoComplete.setTextColor(getColor(this, R.color.white));
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
@@ -88,6 +89,7 @@ public class MainActivity extends AppCompatActivity {
 
                 return false;
             }
+
             @Override
             public boolean onQueryTextChange(String s) {
 
@@ -141,14 +143,14 @@ public class MainActivity extends AppCompatActivity {
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
 
-            if(getArguments().getInt(ARG_SECTION_NUMBER) == 1) {
+            if (getArguments().getInt(ARG_SECTION_NUMBER) == 1) {
                 View rootView = inflater.inflate(R.layout.fragment_main, container, false);
                 Button btn_kor = (Button) rootView.findViewById(R.id.kor_btn);
                 btn_kor.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Intent intent1=new Intent(getContext(), ml.diony.motg.Display.KorActivity.class);
-                        intent1.putExtra("rtype","한식");
+                        Intent intent1 = new Intent(getContext(), ml.diony.motg.Display.KorActivity.class);
+                        intent1.putExtra("rtype", "한식");
                         startActivity(intent1);
                     }
                 });
@@ -157,8 +159,8 @@ public class MainActivity extends AppCompatActivity {
                 btn_jap.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Intent intent1=new Intent(getContext(),ReslistActivity.class);
-                        intent1.putExtra("rtype","일식");
+                        Intent intent1 = new Intent(getContext(), ReslistActivity.class);
+                        intent1.putExtra("rtype", "일식");
                         startActivity(intent1);
                     }
                 });
@@ -167,8 +169,8 @@ public class MainActivity extends AppCompatActivity {
                 btn_chn.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Intent intent1=new Intent(getContext(),ReslistActivity.class);
-                        intent1.putExtra("rtype","중식");
+                        Intent intent1 = new Intent(getContext(), ReslistActivity.class);
+                        intent1.putExtra("rtype", "중식");
                         startActivity(intent1);
                     }
                 });
@@ -177,8 +179,8 @@ public class MainActivity extends AppCompatActivity {
                 btn_wes.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Intent intent1=new Intent(getContext(),ReslistActivity.class);
-                        intent1.putExtra("rtype","양식");
+                        Intent intent1 = new Intent(getContext(), ReslistActivity.class);
+                        intent1.putExtra("rtype", "양식");
                         startActivity(intent1);
                     }
                 });
@@ -190,8 +192,8 @@ public class MainActivity extends AppCompatActivity {
                 btn_yukang.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Intent intent=new Intent(getContext(),LocalRlistActivity.class);
-                        intent.putExtra("location","유강");
+                        Intent intent = new Intent(getContext(), LocalRlistActivity.class);
+                        intent.putExtra("location", "유강");
                         startActivity(intent);
                     }
                 });
@@ -200,8 +202,8 @@ public class MainActivity extends AppCompatActivity {
                 btn_hyoja.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Intent intent=new Intent(getContext(),LocalRlistActivity.class);
-                        intent.putExtra("location","효자");
+                        Intent intent = new Intent(getContext(), LocalRlistActivity.class);
+                        intent.putExtra("location", "효자");
                         startActivity(intent);
                     }
                 });
@@ -210,8 +212,8 @@ public class MainActivity extends AppCompatActivity {
                 btn_hyosung.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Intent intent=new Intent(getContext(),LocalRlistActivity.class);
-                        intent.putExtra("location","효성로");
+                        Intent intent = new Intent(getContext(), LocalRlistActivity.class);
+                        intent.putExtra("location", "효성로");
                         startActivity(intent);
                     }
                 });
@@ -220,8 +222,8 @@ public class MainActivity extends AppCompatActivity {
                 btn_edong.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Intent intent=new Intent(getContext(),LocalRlistActivity.class);
-                        intent.putExtra("location","이동");
+                        Intent intent = new Intent(getContext(), LocalRlistActivity.class);
+                        intent.putExtra("location", "이동");
                         startActivity(intent);
                     }
                 });
@@ -230,8 +232,8 @@ public class MainActivity extends AppCompatActivity {
                 btn_ssangsa.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Intent intent=new Intent(getContext(),LocalRlistActivity.class);
-                        intent.putExtra("location","쌍사");
+                        Intent intent = new Intent(getContext(), LocalRlistActivity.class);
+                        intent.putExtra("location", "쌍사");
                         startActivity(intent);
                     }
                 });
@@ -240,8 +242,8 @@ public class MainActivity extends AppCompatActivity {
                 btn_6st.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Intent intent=new Intent(getContext(),LocalRlistActivity.class);
-                        intent.putExtra("location","육거리");
+                        Intent intent = new Intent(getContext(), LocalRlistActivity.class);
+                        intent.putExtra("location", "육거리");
                         startActivity(intent);
                     }
                 });
@@ -250,25 +252,24 @@ public class MainActivity extends AppCompatActivity {
                 btn_yeongill.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Intent intent=new Intent(getContext(),LocalRlistActivity.class);
-                        intent.putExtra("location","영일대");
+                        Intent intent = new Intent(getContext(), LocalRlistActivity.class);
+                        intent.putExtra("location", "영일대");
                         startActivity(intent);
                     }
                 });
                 return rootView;
-            }
-            else {
+            } else {
                 View rootView = inflater.inflate(R.layout.fragment_main3, container, false);
                 Button btn_view_hs = (Button) rootView.findViewById(R.id.View_history);
                 Button btn_setting = (Button) rootView.findViewById(R.id.Setting_rank);
-                btn_view_hs.setOnClickListener(new View.OnClickListener(){
+                btn_view_hs.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         Intent intent1 = new Intent(getContext(), ml.diony.motg.Display.HistoryActivity.class);
                         startActivity(intent1);
                     }
                 });
-                btn_setting.setOnClickListener(new View.OnClickListener(){
+                btn_setting.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         Intent intent3 = new Intent(getContext(), SettingActivity.class);

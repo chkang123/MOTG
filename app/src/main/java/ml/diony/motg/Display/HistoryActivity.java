@@ -22,10 +22,10 @@ public class HistoryActivity extends AppCompatActivity {
         //history 받아옴
 
         ArrayList<HistoryList> DataList = new ArrayList<HistoryList>();
-        ExpandableListView listView = (ExpandableListView)findViewById(R.id.history_list);
+        ExpandableListView listView = (ExpandableListView) findViewById(R.id.history_list);
 
-        HistoryAdapter adapter = new HistoryAdapter(getApplicationContext(),R.layout.menu_row,R.layout.historychild_row,DataList);
-        listView.setIndicatorBounds(width-50, width); //이 코드를 지우면 화살표 위치가 바뀐다.
+        HistoryAdapter adapter = new HistoryAdapter(getApplicationContext(), R.layout.menu_row, R.layout.historychild_row, DataList);
+        listView.setIndicatorBounds(width - 50, width); //이 코드를 지우면 화살표 위치가 바뀐다.
         listView.setAdapter(adapter);
     }
 }

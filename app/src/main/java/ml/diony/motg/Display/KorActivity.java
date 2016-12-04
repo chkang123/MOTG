@@ -18,13 +18,13 @@ public class KorActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        Button btn_kor_res1 = (Button)findViewById(R.id.kor_res1);
+        Button btn_kor_res1 = (Button) findViewById(R.id.kor_res1);
         btn_kor_res1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 int rid = 1111;
-                Intent intent=new Intent(KorActivity.this,ResInfoActivity.class);
-                intent.putExtra("rid",rid);
+                Intent intent = new Intent(KorActivity.this, ResInfoActivity.class);
+                intent.putExtra("rid", rid);
                 startActivity(intent);
             }
         });

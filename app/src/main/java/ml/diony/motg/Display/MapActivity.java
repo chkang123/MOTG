@@ -30,12 +30,12 @@ public class MapActivity extends AppCompatActivity {
         @Override
         public void onMapViewInitialized(MapView mapView) {
             mapView.setZoomLevel(0, true);
-            mapView.setMapCenterPoint(MapPoint.mapPointWithGeoCoord(36.0275335,129.3398221), true);
+            mapView.setMapCenterPoint(MapPoint.mapPointWithGeoCoord(36.0275335, 129.3398221), true);
 
             MapPOIItem marker = new MapPOIItem();
             marker.setItemName("Default Marker");
             marker.setTag(0);
-            marker.setMapPoint(MapPoint.mapPointWithGeoCoord(36.0275335,129.3398221));
+            marker.setMapPoint(MapPoint.mapPointWithGeoCoord(36.0275335, 129.3398221));
             marker.setMarkerType(MapPOIItem.MarkerType.BluePin); // 기본으로 제공하는 BluePin 마커 모양.
             marker.setSelectedMarkerType(MapPOIItem.MarkerType.RedPin); // 마커를 클릭했을때, 기본으로 제공하는 RedPin 마커 모양.
 
@@ -46,26 +46,32 @@ public class MapActivity extends AppCompatActivity {
         public void onMapViewCenterPointMoved(MapView mapView, MapPoint mapPoint) {
 
         }
+
         @Override
         public void onMapViewZoomLevelChanged(MapView mapView, int i) {
 
         }
+
         @Override
         public void onMapViewSingleTapped(MapView mapView, MapPoint mapPoint) {
 
         }
+
         @Override
         public void onMapViewDoubleTapped(MapView mapView, MapPoint mapPoint) {
 
         }
+
         @Override
         public void onMapViewLongPressed(MapView mapView, MapPoint mapPoint) {
 
         }
+
         @Override
         public void onMapViewDragStarted(MapView mapView, MapPoint mapPoint) {
 
         }
+
         @Override
         public void onMapViewDragEnded(MapView mapView, MapPoint mapPoint) {
 

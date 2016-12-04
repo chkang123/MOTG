@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.TextView;
@@ -45,7 +44,7 @@ public class MyListAdapter extends BaseAdapter {
         return position;
     }
 
-// 각 항목의 뷰 생성
+    // 각 항목의 뷰 생성
     public View getView(final int position, View convertView, ViewGroup parent) {
         final int pos = position;
         if (convertView == null) {
@@ -59,7 +58,7 @@ public class MyListAdapter extends BaseAdapter {
         btn.setOnClickListener(new Button.OnClickListener() {
             public void onClick(View v) {
                 Intent intent = new Intent(maincon, ResInfoActivity.class);
-                intent.putExtra("name",arSrc.get(pos).ResName);
+                intent.putExtra("name", arSrc.get(pos).ResName);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 maincon.startActivity(intent);
             }
