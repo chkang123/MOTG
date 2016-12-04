@@ -3,10 +3,15 @@ package ml.diony.motg;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.Base64;
 import android.util.Log;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.loopj.android.http.BinaryHttpResponseHandler;
@@ -63,6 +68,12 @@ public class Communication extends Activity {
 
 	}
 
+	public Communication() {
+
+		this.FP = null;
+
+	}
+
 	private boolean isFile(File file){
 		boolean result;
 		if(file!=null&&file.exists()&&file.isFile()){
@@ -73,11 +84,35 @@ public class Communication extends Activity {
 		return result;
 	}
 
+	@Override
+	public void onCreate(Bundle s) {
+
+		super.onCreate(s);
+
+		this.setContentView(R.layout.loading);
+
+		// 에니메이션 : 프레임, 트윈 (알파, 회전, 크기, 위치)
+		// 트윈 (알파 - 투명도 변하는 에니메이션)
+
+		final RelativeLayout RL = (RelativeLayout) findViewById(R.id.ld);
+
+		Animation AN = AnimationUtils.loadAnimation(this, R.anim.fade_in);
+
+		RL.startAnimation(AN);
+
+		versionCheck();
+
+	}
+
 	public void versionCheck() {
 
 		final String SURL = SRVU + "VersionCheck";
 
 		Log.i(TAG, "Version Check Starts.");
+
+		final TextView TXV = (TextView) ACTIVITY.findViewById(R.id.ldT);
+
+		//TXV.setText("Checking version...");
 
 		new Thread() {
 

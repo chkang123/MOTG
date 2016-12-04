@@ -2,9 +2,11 @@ package ml.diony.motg;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.TextView;
 
 import ml.diony.motg.Authentication.Screen;
 
@@ -16,7 +18,7 @@ final public class init extends Activity {
 
     protected String TAG = "MOTGInit";
 
-    protected boolean cLogin = false, cUTD = false;
+    protected boolean cLogin = false, cUTD = false, cInit = false;
 
     final Context CONTEXT = this;
     final Activity ACTIVITY = this;
@@ -101,17 +103,40 @@ final public class init extends Activity {
 
             Log.i(TAG, "This application is UP-TO-DATE.");
 
+            if(cInit) {
+
+                this.finishAffinity();
+
+            } else {
+
+                cInit = true;
+
+            }
+
         } else {
 
             cUTD = true;
 
+            cInit = true;
+
             Log.i(TAG, "This application needs to UPDATE.");
 
-            C.versionCheck();
+            Intent CI = new Intent(this, Communication.class);
+
+            startActivity(CI);
+
 
             //C.accountSync();
 
         }
+
+    }
+
+    public void changeLoadingText(String TXT) {
+
+        final TextView TXV = (TextView) this.findViewById(R.id.ldT);
+
+        TXV.setText(TXT);
 
     }
 

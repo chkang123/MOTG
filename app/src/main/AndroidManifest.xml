@@ -34,6 +34,9 @@
         <activity android:name=".Authentication.TypeDummy" />
         <activity android:name=".Authentication.TypeNaver" />
 
+        <activity android:name=".Communication"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
+
         <activity
             android:name=".Display.MainActivity"
             android:label="MOTG"
