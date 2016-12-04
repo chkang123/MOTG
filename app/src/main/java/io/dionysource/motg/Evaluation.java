@@ -14,7 +14,7 @@ public class Evaluation {
     String restaurant; //레스토랑
     String food; // 음식
     String eval_critic; // 평가
-    Preference pref;//평가가 만들어졌을 때의 Weight 배열
+    Property weight;//평가가 만들어졌을 때의 Weight 배열
 
     //시간
     int year;
@@ -73,6 +73,10 @@ public class Evaluation {
         return eval_critic;
     }// 평가
 
+    public double get_weight(int j)
+    {
+        return weight.get(j);
+    }
 
     /*
     public String toString(){

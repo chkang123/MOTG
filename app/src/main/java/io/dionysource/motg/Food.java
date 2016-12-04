@@ -60,4 +60,18 @@ public class Food {
     public String get_rstrnt(){
         return restaurant;
     }
+
+    public String get_eval(int i) {
+        if (eval_list.size() > 0)
+        {
+            return eval_list.get(i);
+
+        }
+        else {
+            return "0";
+        }
+        }
+    public int get_eval_size(){
+        return eval_list.size();
+    }
 }

@@ -62,7 +62,7 @@ public class Users {
     Gson gson;
 
     //개인 취향 weight 저장 행렬
-   Preference pref;
+   Property pref;
     //방문기록
 /*
  *   ArrayList<Food> Foods_History;
@@ -192,9 +192,9 @@ public class Users {
         int size = eval_list.size();
         eval_list.add(size, eval);
     }
-    public Preference set_preference()
+    public Property set_preference()
     {
-        pref = new Preference();
+        pref = new Property();
         return pref;
     }
 /*
@@ -219,6 +219,10 @@ public class Users {
         return fav_foods_list.getlist();
     }
 
+    public double get_pref(int i)
+    {
+        return pref.get(i);
+    }
 
 
     public void favfoodtoJSON()

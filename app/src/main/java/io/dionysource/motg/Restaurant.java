@@ -16,7 +16,7 @@ public class Restaurant {
     String telephone;
     String introduce; // 가게 소개
     ArrayList<String> eval_list; // 평가 리스트
-    double eval_point; // 평점
+    float eval_point; // 평점
 
     public Restaurant()
     {
