@@ -33,6 +33,7 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 
 import ml.diony.motg.R;
+import ml.diony.motg.init;
 
 /**
  * Created by nayak on 2016-12-03.
@@ -52,14 +53,17 @@ public class Sync extends Activity {
 
     protected Activity ACTIVITY = this;
 
+    protected init INIT = null;
+
     final protected File FP;
 
-    public Sync(File FP, Context CONTEXT, Activity ACTIVITY) {
+    public Sync(File FP, Context CONTEXT, Activity ACTIVITY, init INIT) {
 
         this.FP = FP;
 
         this.CONTEXT = CONTEXT;
         this.ACTIVITY = ACTIVITY;
+        this.INIT = INIT;
 
         //Update Versions from Local Data!!
 
@@ -341,8 +345,8 @@ public class Sync extends Activity {
 
                 try {
 
-                    AX.put("ID", "somestuffs");
-                    AX.put("TYPE", "somestuffs");
+                    AX.put("ID", INIT.S.getId());
+                    AX.put("TYPE", INIT.S.getType());
 
                 } catch (JSONException E) {
                 }

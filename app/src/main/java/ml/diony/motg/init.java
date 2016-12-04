@@ -8,6 +8,9 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.TextView;
 
+import org.json.JSONObject;
+
+import ml.diony.motg.Authentication.Base;
 import ml.diony.motg.Authentication.Screen;
 import ml.diony.motg.Communication.Sync;
 
@@ -24,8 +27,9 @@ final public class init extends Activity {
     final Context CONTEXT = this;
     final Activity ACTIVITY = this;
 
-    static Screen S;
+    static public Screen S;
     static Sync C;
+    static public Base B;
 
     public static final int getColor(Context context, int id) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -50,7 +54,19 @@ final public class init extends Activity {
         super.onCreate(s);
 
         S = new ml.diony.motg.Authentication.Screen(this);
-        C = new ml.diony.motg.Communication.Sync(getFilesDir(), CONTEXT, ACTIVITY);
+        C = new ml.diony.motg.Communication.Sync(getFilesDir(), CONTEXT, ACTIVITY, this);
+        B = new Base();
+        JSONObject X = B.getLoginInformation();
+
+        if(X != null) {
+
+            try {
+
+                if(X.getString("TYPE") == "guest")
+                    S.setLSLGM((byte) 3);
+
+            } catch (Exception I) {}
+        }
 
     }
 
@@ -64,6 +80,8 @@ final public class init extends Activity {
         if (cLogin || S.isLogined()) {
 
             Log.i(TAG, "User Login Confirmed.");
+
+            B.saveLoginInformation(S.getId(), S.getType());
 
             //DATA LOADING SCREEN CALLED.
 
@@ -129,6 +147,8 @@ final public class init extends Activity {
             //C.accountSync();
 
         }
+
+
 
     }
 

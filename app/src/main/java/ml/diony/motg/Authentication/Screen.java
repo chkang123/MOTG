@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
+import android.provider.Settings;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
@@ -34,6 +35,31 @@ public class Screen extends Activity implements View.OnClickListener {
     protected boolean[] isLgn = {false, false, false}; //Naver, Facebook, Dummy
 
     private byte lsLgM = 0; //1: Naver, 2: Facebook, 3: Dummy
+
+    private String ID = Settings.Secure.ANDROID_ID;
+
+    public String getId() {
+
+        return ID;
+
+    }
+
+    public void setLSLGM(byte X) {
+        lsLgM = X;
+    }
+
+    public String getType() {
+
+        if(isLgn[0])
+            return "naver";
+        else if (isLgn[1])
+            return "facebook";
+        else if (isLgn[2])
+            return "guest";
+        else
+            return "";
+
+    }
 
     public Screen(Context CONTEXT) {
 

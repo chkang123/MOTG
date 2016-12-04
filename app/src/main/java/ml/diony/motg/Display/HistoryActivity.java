@@ -19,10 +19,13 @@ public class HistoryActivity extends AppCompatActivity {
         Display newDisplay = getWindowManager().getDefaultDisplay();
         int width = newDisplay.getWidth();
 
-        //history 받아옴
-
         ArrayList<HistoryList> DataList = new ArrayList<HistoryList>();
         ExpandableListView listView = (ExpandableListView) findViewById(R.id.history_list);
+
+        //history 받아옴
+        HistoryList hlist = new HistoryList(2016,10,12);
+        hlist.child.add("홍합짬뽕-미미짬뽕");
+        DataList.add(hlist);
 
         HistoryAdapter adapter = new HistoryAdapter(getApplicationContext(), R.layout.menu_row, R.layout.historychild_row, DataList);
         listView.setIndicatorBounds(width - 50, width); //이 코드를 지우면 화살표 위치가 바뀐다.

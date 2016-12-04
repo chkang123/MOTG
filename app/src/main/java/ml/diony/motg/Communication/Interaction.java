@@ -5,6 +5,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.RelativeLayout;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -46,6 +49,12 @@ public class Interaction extends Activity {
         super.onCreate(s);
 
         setContentView(R.layout.loading);
+
+        final RelativeLayout RL = (RelativeLayout) findViewById(R.id.ld);
+
+        Animation AN = AnimationUtils.loadAnimation(this, R.anim.fade_in_fast);
+
+        RL.startAnimation(AN);
 
     }
 
