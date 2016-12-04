@@ -49,22 +49,6 @@
             android:label="MOTG"
             android:theme="@style/Theme.AppCompat.NoActionBar"></activity>
         <activity
-            android:name=".Display.KorActivity"
-            android:label="@string/title_activity_kor"
-            android:theme="@style/Theme.AppCompat.NoActionBar" />
-        <activity
-            android:name=".Display.JapActivity"
-            android:label="@string/title_activity_jap"
-            android:theme="@style/Theme.AppCompat.NoActionBar" />
-        <activity
-            android:name=".Display.ChnActivity"
-            android:label="@string/title_activity_chn"
-            android:theme="@style/Theme.AppCompat.NoActionBar" />
-        <activity
-            android:name=".Display.WesActivity"
-            android:label="@string/title_activity_wes"
-            android:theme="@style/Theme.AppCompat.NoActionBar" />
-        <activity
             android:name=".Display.ResInfoActivity"
             android:label="식당정보"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
