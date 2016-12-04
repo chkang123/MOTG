@@ -1,5 +1,6 @@
 package ml.diony.motg.Display;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
@@ -21,6 +22,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import ml.diony.motg.Communication.Interaction;
 import ml.diony.motg.R;
 
 public class MainActivity extends AppCompatActivity {
@@ -32,6 +34,10 @@ public class MainActivity extends AppCompatActivity {
      * may be best to switch to a
      * {@link android.support.v4.app.FragmentStatePagerAdapter}.
      */
+
+
+    Interaction IA = new Interaction(this, this);
+    Context CONTEXT = this;
 
     public static final int getColor(Context context, int id) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -86,6 +92,9 @@ public class MainActivity extends AppCompatActivity {
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String s) {
+
+                Intent intent1 = new Intent(CONTEXT, ml.diony.motg.Display.SearchRlistActivity.class);
+                IA.getSpecified("ALL", "NAME", s, intent1);
 
                 return false;
             }
@@ -143,6 +152,8 @@ public class MainActivity extends AppCompatActivity {
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
 
+            final Interaction IA = new Interaction((Activity) getContext(), getContext());
+
             if (getArguments().getInt(ARG_SECTION_NUMBER) == 1) {
                 View rootView = inflater.inflate(R.layout.fragment_main, container, false);
                 Button btn_kor = (Button) rootView.findViewById(R.id.kor_btn);
@@ -151,7 +162,8 @@ public class MainActivity extends AppCompatActivity {
                     public void onClick(View view) {
                         Intent intent1 = new Intent(getContext(), ml.diony.motg.Display.ReslistActivity.class);
                         intent1.putExtra("rtype", "한식");
-                        startActivity(intent1);
+                        IA.getAll("KR", intent1);
+
                     }
                 });
 
@@ -161,7 +173,7 @@ public class MainActivity extends AppCompatActivity {
                     public void onClick(View view) {
                         Intent intent1 = new Intent(getContext(), ReslistActivity.class);
                         intent1.putExtra("rtype", "일식");
-                        startActivity(intent1);
+                        IA.getAll("JP", intent1);
                     }
                 });
 
@@ -171,7 +183,7 @@ public class MainActivity extends AppCompatActivity {
                     public void onClick(View view) {
                         Intent intent1 = new Intent(getContext(), ReslistActivity.class);
                         intent1.putExtra("rtype", "중식");
-                        startActivity(intent1);
+                        IA.getAll("CN", intent1);
                     }
                 });
 
@@ -181,7 +193,7 @@ public class MainActivity extends AppCompatActivity {
                     public void onClick(View view) {
                         Intent intent1 = new Intent(getContext(), ReslistActivity.class);
                         intent1.putExtra("rtype", "양식");
-                        startActivity(intent1);
+                        IA.getAll("WE", intent1);
                     }
                 });
                 return rootView;
@@ -194,7 +206,7 @@ public class MainActivity extends AppCompatActivity {
                     public void onClick(View view) {
                         Intent intent = new Intent(getContext(), LocalRlistActivity.class);
                         intent.putExtra("location", "유강");
-                        startActivity(intent);
+                        IA.getSpecified("ALL", "REGION", "6", intent);
                     }
                 });
 
@@ -204,7 +216,7 @@ public class MainActivity extends AppCompatActivity {
                     public void onClick(View view) {
                         Intent intent = new Intent(getContext(), LocalRlistActivity.class);
                         intent.putExtra("location", "효자");
-                        startActivity(intent);
+                        IA.getSpecified("ALL", "REGION", "1", intent);
                     }
                 });
 
@@ -214,7 +226,7 @@ public class MainActivity extends AppCompatActivity {
                     public void onClick(View view) {
                         Intent intent = new Intent(getContext(), LocalRlistActivity.class);
                         intent.putExtra("location", "효성로");
-                        startActivity(intent);
+                        IA.getSpecified("ALL", "REGION", "5", intent);
                     }
                 });
 
@@ -224,7 +236,7 @@ public class MainActivity extends AppCompatActivity {
                     public void onClick(View view) {
                         Intent intent = new Intent(getContext(), LocalRlistActivity.class);
                         intent.putExtra("location", "이동");
-                        startActivity(intent);
+                        IA.getSpecified("ALL", "REGION", "0", intent);
                     }
                 });
 
@@ -234,7 +246,7 @@ public class MainActivity extends AppCompatActivity {
                     public void onClick(View view) {
                         Intent intent = new Intent(getContext(), LocalRlistActivity.class);
                         intent.putExtra("location", "쌍사");
-                        startActivity(intent);
+                        IA.getSpecified("ALL", "REGION", "4", intent);
                     }
                 });
 
@@ -244,7 +256,7 @@ public class MainActivity extends AppCompatActivity {
                     public void onClick(View view) {
                         Intent intent = new Intent(getContext(), LocalRlistActivity.class);
                         intent.putExtra("location", "육거리");
-                        startActivity(intent);
+                        IA.getSpecified("ALL", "REGION", "2", intent);
                     }
                 });
 
@@ -254,7 +266,7 @@ public class MainActivity extends AppCompatActivity {
                     public void onClick(View view) {
                         Intent intent = new Intent(getContext(), LocalRlistActivity.class);
                         intent.putExtra("location", "영일대");
-                        startActivity(intent);
+                        IA.getSpecified("ALL", "REGION", "3", intent);
                     }
                 });
 

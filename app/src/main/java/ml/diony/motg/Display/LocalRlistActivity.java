@@ -3,7 +3,11 @@ package ml.diony.motg.Display;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.widget.ListView;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -19,29 +23,35 @@ public class LocalRlistActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         String location = intent.getExtras().getString("location");
+        String ALLX = intent.getExtras().getString("ALLX");
+
+        Log.i("RLA", ALLX);
+
+        JSONArray X = new JSONArray();
+        try {
+            X = new JSONArray(ALLX);
+        } catch(Exception E) {}
+
+        Log.i("ResListActivity", "와아아아아" + X.toString());
 
         Rlist = new ArrayList<ResList>();
 
-        ResList rlist1 = new ResList("asd");
-        rlist1.ResName = "화통삼이동점";
-        rlist1.code = "A001";
-        Rlist.add(rlist1);
-        ResList rlist2 = new ResList("asd");
-        rlist2.ResName = "등촌샤브칼국수";
-        rlist2.code = "A000";
-        Rlist.add(rlist2);
-        ResList rlist3 = new ResList("asd");
-        rlist3.ResName = "육풍";
-        rlist3.code = "A003";
-        Rlist.add(rlist3);
-        ResList rlist4 = new ResList("asd");
-        rlist4.ResName = "진갈매기";
-        rlist4.code = "A002";
-        Rlist.add(rlist4);
-        ResList rlist5 = new ResList("asd");
-        rlist5.ResName = "바보형제쭈꾸미";
-        rlist5.code = "A004";
-        Rlist.add(rlist5);
+
+        for(int i = 0; i < X.length(); i++) {
+
+            String NAME = "";
+
+            try {
+
+                NAME = ((JSONObject) X.get(i)).getString("NAME");
+
+            } catch(Exception E) {}
+
+            ResList rlist = new ResList(NAME);
+            Rlist.add(rlist);
+
+        }
+
 
 
 /*

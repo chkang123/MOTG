@@ -69,6 +69,6 @@
         android:layout_below="@+id/button"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="22dp"
-        android:text="포항시 남구 대이동에 위치한 한정식 맛집"
+        android:text="ㅗㅗㅗㅗㅗㅗㅗ"
         android:textColor="@color/black" />
 </RelativeLayout>

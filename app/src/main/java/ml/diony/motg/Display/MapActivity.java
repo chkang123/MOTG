@@ -1,7 +1,9 @@
 package ml.diony.motg.Display;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.ViewGroup;
 
 import net.daum.mf.map.api.MapPOIItem;
@@ -12,10 +14,16 @@ import ml.diony.motg.R;
 
 public class MapActivity extends AppCompatActivity {
 
+    float X, Y;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map);
+        Intent I = getIntent();
+        X = I.getExtras().getFloat("COORDX");
+        Y = I.getExtras().getFloat("COORDY");
+        Log.i("MAPMAPMAP", "COORDX = " + X + ", COORDY = " + Y); //36.0275335, 129.3398221
 
         MapView mapView = new MapView(this);
         mapView.setDaumMapApiKey("95196575995654fba45336d25f83249d");
@@ -30,12 +38,12 @@ public class MapActivity extends AppCompatActivity {
         @Override
         public void onMapViewInitialized(MapView mapView) {
             mapView.setZoomLevel(0, true);
-            mapView.setMapCenterPoint(MapPoint.mapPointWithGeoCoord(36.0275335, 129.3398221), true);
+            mapView.setMapCenterPoint(MapPoint.mapPointWithGeoCoord(X, Y), true);
 
             MapPOIItem marker = new MapPOIItem();
             marker.setItemName("Default Marker");
             marker.setTag(0);
-            marker.setMapPoint(MapPoint.mapPointWithGeoCoord(36.0275335, 129.3398221));
+            marker.setMapPoint(MapPoint.mapPointWithGeoCoord(X, Y));
             marker.setMarkerType(MapPOIItem.MarkerType.BluePin); // 기본으로 제공하는 BluePin 마커 모양.
             marker.setSelectedMarkerType(MapPOIItem.MarkerType.RedPin); // 마커를 클릭했을때, 기본으로 제공하는 RedPin 마커 모양.
 

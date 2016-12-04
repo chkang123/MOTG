@@ -9,6 +9,7 @@ import android.util.Log;
 import android.widget.TextView;
 
 import ml.diony.motg.Authentication.Screen;
+import ml.diony.motg.Communication.Sync;
 
 /**
  * Created by nayak on 2016-12-03.
@@ -24,7 +25,7 @@ final public class init extends Activity {
     final Activity ACTIVITY = this;
 
     static Screen S;
-    static Communication C;
+    static Sync C;
 
     public static final int getColor(Context context, int id) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -49,7 +50,7 @@ final public class init extends Activity {
         super.onCreate(s);
 
         S = new ml.diony.motg.Authentication.Screen(this);
-        C = new ml.diony.motg.Communication(getFilesDir(), CONTEXT, ACTIVITY);
+        C = new ml.diony.motg.Communication.Sync(getFilesDir(), CONTEXT, ACTIVITY);
 
     }
 
@@ -120,7 +121,7 @@ final public class init extends Activity {
 
             Log.i(TAG, "This application needs to UPDATE.");
 
-            Intent CI = new Intent(this, Communication.class);
+            Intent CI = new Intent(this, Sync.class);
 
             startActivity(CI);
 

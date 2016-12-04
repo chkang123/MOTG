@@ -45,7 +45,11 @@
         <activity android:name=".Authentication.TypeNaver" />
 
         <activity
-            android:name=".Communication"
+            android:name=".Communication.Sync"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+
+        <activity
+            android:name=".Communication.Interaction"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
 
         <activity

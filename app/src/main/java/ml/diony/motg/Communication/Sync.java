@@ -1,4 +1,4 @@
-package ml.diony.motg;
+package ml.diony.motg.Communication;
 
 import android.app.Activity;
 import android.content.Context;
@@ -14,9 +14,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.loopj.android.http.BinaryHttpResponseHandler;
-import com.loopj.android.http.SyncHttpClient;
-
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -26,24 +23,22 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.protocol.HTTP;
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
-import java.io.DataOutputStream;
 import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+
+import ml.diony.motg.R;
 
 /**
  * Created by nayak on 2016-12-03.
  */
 
-public class Communication extends Activity {
+public class Sync extends Activity {
 
     protected static String TAG = "MOTGComm";
 
@@ -59,7 +54,7 @@ public class Communication extends Activity {
 
     final protected File FP;
 
-    public Communication(File FP, Context CONTEXT, Activity ACTIVITY) {
+    public Sync(File FP, Context CONTEXT, Activity ACTIVITY) {
 
         this.FP = FP;
 
@@ -70,7 +65,7 @@ public class Communication extends Activity {
 
     }
 
-    public Communication() {
+    public Sync() {
 
         this.FP = null;
 
@@ -146,7 +141,7 @@ public class Communication extends Activity {
 
                 try {
 
-                    VX.put("APV", BuildConfig.VERSION_NAME);
+                    VX.put("APV", ml.diony.motg.BuildConfig.VERSION_NAME);
                     VX.put("INDXV", DB_VERSION);
 
                     INDX.put("KR", KR_VERSION);
@@ -203,7 +198,7 @@ public class Communication extends Activity {
 
                             //No error
 
-                            if (!RX.isNull("command")) {
+                            /*if (!RX.isNull("command")) {
 
                                 //There is some commands from server.
 
@@ -280,7 +275,7 @@ public class Communication extends Activity {
 
                                 }
 
-                            }
+                            }*/
 
                         } else {
 
@@ -354,7 +349,7 @@ public class Communication extends Activity {
 
                 ArrayList<NameValuePair> D = new ArrayList<NameValuePair>();
                 D.add(new BasicNameValuePair("AX", Base64.encodeToString(AX.toString().getBytes(), 0)));
-                D.add(new BasicNameValuePair("APV", BuildConfig.VERSION_NAME));
+                D.add(new BasicNameValuePair("APV", ml.diony.motg.BuildConfig.VERSION_NAME));
 
                 InputStream IS = null;
                 String RS = null;
@@ -499,7 +494,7 @@ public class Communication extends Activity {
 
                 ArrayList<NameValuePair> D = new ArrayList<NameValuePair>();
                 D.add(new BasicNameValuePair("AX", Base64.encodeToString(AX.toString().getBytes(), 0)));
-                D.add(new BasicNameValuePair("APV", BuildConfig.VERSION_NAME));
+                D.add(new BasicNameValuePair("APV", ml.diony.motg.BuildConfig.VERSION_NAME));
 
                 InputStream IS = null;
                 String RS = null;
