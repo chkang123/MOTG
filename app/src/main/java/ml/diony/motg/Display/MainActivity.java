@@ -255,6 +255,17 @@ public class MainActivity extends AppCompatActivity {
                         startActivity(intent);
                     }
                 });
+
+                Button btn_today = (Button) rootView.findViewById(R.id.button_todaymenu);
+                btn_today.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Intent intent=new Intent(getContext(),TodaymenuActivity.class);
+                        intent.putExtra("location","영일대");
+                        startActivity(intent);
+                    }
+                });
+
                 return rootView;
             }
             else {

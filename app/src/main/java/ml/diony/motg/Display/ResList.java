@@ -6,7 +6,7 @@ package ml.diony.motg.Display;
 
 public class ResList {
     public String ResName;
-    public int id;
+    public String code;
     ResList(String name) {
         ResName = name;
     }
