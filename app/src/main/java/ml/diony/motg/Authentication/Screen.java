@@ -251,7 +251,7 @@ public class Screen extends Activity implements View.OnClickListener {
         facebookButton.setOnClickListener(this);
 
         //Make Dummy Login Button
-        RelativeLayout dummyButton = makeLoginButton(A, R.drawable.lb_dummy, R.color.dummy_text, R.string.dummy_login, naverButton/*facebookButton*/);
+        RelativeLayout dummyButton = makeLoginButton(A, R.drawable.lb_dummy, R.color.dummy_text, R.string.dummy_login, facebookButton);
         dummyButton.setId(View.generateViewId());
         lBtID[2] = dummyButton.getId();
         dummyButton.setOnClickListener(this);
@@ -259,7 +259,7 @@ public class Screen extends Activity implements View.OnClickListener {
         //Add Buttons and Display
 
         authBox.addView(naverButton);
-        //authBox.addView(facebookButton);
+        authBox.addView(facebookButton);
         authBox.addView(dummyButton);
 
         logoBox.addView(logo);

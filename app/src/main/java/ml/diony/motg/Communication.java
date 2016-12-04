@@ -386,7 +386,7 @@ public class Communication extends Activity {
 
 					//GO TO REAL MAIN!!!!
 
-					Toast.makeText(CONTEXT, "Welcome to MOTG", Toast.LENGTH_SHORT).show();
+					Toast.makeText(CONTEXT, "Welcome to MOTG", Toast.LENGTH_LONG).show();
 
 					Intent I = new Intent(CONTEXT, ml.diony.motg.Display.MainActivity.class);
 
