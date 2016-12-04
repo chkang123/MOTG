@@ -149,7 +149,7 @@ public class MainActivity extends AppCompatActivity {
                 btn_kor.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Intent intent1 = new Intent(getContext(), ml.diony.motg.Display.KorActivity.class);
+                        Intent intent1 = new Intent(getContext(), ml.diony.motg.Display.ReslistActivity.class);
                         intent1.putExtra("rtype", "한식");
                         startActivity(intent1);
                     }
@@ -257,6 +257,18 @@ public class MainActivity extends AppCompatActivity {
                         startActivity(intent);
                     }
                 });
+
+                Button btn_today = (Button) rootView.findViewById(R.id.button_todaymenu);
+                btn_today.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+
+                        Log.i("으악", "여기까진 되는데.");
+                        Intent intent = new Intent(getContext(), TodaymenuActivity.class);
+                        startActivity(intent);
+                    }
+                });
+
                 return rootView;
             } else {
                 View rootView = inflater.inflate(R.layout.fragment_main3, container, false);

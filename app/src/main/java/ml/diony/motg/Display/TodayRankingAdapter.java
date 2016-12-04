@@ -17,13 +17,13 @@ import ml.diony.motg.R;
  * Created by KangChanghoon on 2016. 12. 3..
  */
 
-public class MyListAdapter extends BaseAdapter {
+public class TodayRankingAdapter extends BaseAdapter {
     Context maincon;
     LayoutInflater inflater;
     ArrayList<ResList> arSrc;
     int layout;
 
-    public MyListAdapter(Context context, int alayout, ArrayList<ResList> aarSrc) {
+    public TodayRankingAdapter(Context context, int alayout, ArrayList<ResList> aarSrc) {
         maincon = context;
         arSrc = aarSrc;
         layout = alayout;
@@ -51,10 +51,13 @@ public class MyListAdapter extends BaseAdapter {
             convertView = inflater.inflate(layout, parent, false);
         }
 
-        TextView txt = (TextView) convertView.findViewById(R.id.res_name);
+        TextView txt1 = (TextView) convertView.findViewById(R.id.todaymenu_ranking);
+        txt1.setText(pos + 1 + "위 ");
+
+        TextView txt = (TextView) convertView.findViewById(R.id.todaymenu_name);
         txt.setText(arSrc.get(pos).ResName);
 
-        Button btn = (Button) convertView.findViewById(R.id.open_resinfo);
+        Button btn = (Button) convertView.findViewById(R.id.open_todayresinfo);
         btn.setOnClickListener(new Button.OnClickListener() {
             public void onClick(View v) {
                 Intent intent = new Intent(maincon, ResInfoActivity.class);
@@ -66,19 +69,3 @@ public class MyListAdapter extends BaseAdapter {
         return convertView;
     }
 }
-/*
-public class MyListAdapter extends ArrayAdapter<String> {
-    private ArrayList<String> items;
-
-    public MyListAdapter(Context context, int textViewResourceId, ArrayList<String> objects) {
-        super(context, textViewResourceId, objects);
-        this.items = objects;
-    }
-
-    public View getView(int position, View convertView, ViewGroup parent) {
-        View v = convertView;
-        if(v == null) {
-            LayoutInflater vi = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        }
-    }
-}*/
