@@ -4,6 +4,9 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.util.Base64;
 import android.util.Log;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -25,6 +28,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 
+import ml.diony.motg.Authentication.Base;
 import ml.diony.motg.R;
 
 import static android.content.ContentValues.TAG;
@@ -111,7 +115,7 @@ public class Interaction extends Activity {
 
                 HttpClient C = new DefaultHttpClient();
 
-                HttpPost P = new HttpPost(URL);
+                HttpPost P = new HttpPost(URL + "Recommended");
 
                 P.addHeader("X-Dionysource", "MOTG_AP");
                 P.setHeader("Content-Type", "application/json");
@@ -254,6 +258,126 @@ public class Interaction extends Activity {
                 } finally {
 
                 }
+
+            }
+
+        }.start();
+
+        Log.i("XXX", O.toString());
+
+        return O;
+
+    }
+
+    public JSONArray getRecommended(final Intent I) {
+
+        Intent IN = new Intent(CONTEXT, Interaction.class);
+
+        CONTEXT.startActivity(IN);
+
+        O = new JSONArray();
+
+        new Thread() {
+
+            public void run() {
+
+                final HttpClient C = new DefaultHttpClient();
+
+                final HttpPost P = new HttpPost("http://dn-mt-svc.yuoa.ml/MOTGDataActionRecommended");
+
+                P.addHeader("X-Dionysource", "MOTG_AP");
+                P.setHeader("Content-Type", "application/json");
+
+                //final JSONObject AX = new JSONObject();
+
+                final ArrayList<NameValuePair> D = new ArrayList<NameValuePair>();
+
+                Handler mHandler = new Handler(Looper.getMainLooper());
+
+                mHandler.postDelayed(new Runnable() {
+
+                    @Override
+
+                    public void run() {
+
+
+                        //final JSONObject AX = ;
+                        D.add(new BasicNameValuePair("AX", Base64.encodeToString((new Base()).getLoginInformation().toString().getBytes(), 0)));
+
+
+
+                        (new Thread() {
+
+                            @Override
+                            public void run() {
+
+                                try {
+
+                                    UrlEncodedFormEntity EN = new UrlEncodedFormEntity(D, HTTP.UTF_8);
+
+                                    P.setEntity(EN);
+                                    Log.i("EMM??", "EMM?????");
+                                    HttpResponse PO = C.execute(P);
+
+                                    Log.i("EMM??", "EMM?????");
+                                    HttpEntity RE = PO.getEntity();
+
+                                    if (RE != null) {
+
+                                        //Log.i(TAG, EntityUtils.toString(RE));
+
+                                        InputStream IS = null;
+                                        String RS = null;
+
+                                        //DATA Received.
+
+                                        IS = RE.getContent();
+                                        BufferedReader RD = new BufferedReader(new InputStreamReader(IS, "UTF-8"));
+                                        StringBuilder SB = new StringBuilder();
+
+                                        String LN = null;
+
+                                        while ((LN = RD.readLine()) != null) {
+
+                                            SB.append(LN + "\n");
+
+                                        }
+
+                                         RS = SB.toString();
+
+                                        Log.i(TAG, RS);
+
+                                        setO(new JSONArray(RS));
+
+                                        //JSON parsing Completed!
+
+                                        Log.i("START", "STATRTTTT");
+                                        I.putExtra("ALLX", O.toString());
+                                        CONTEXT.startActivity(I);
+
+                                    }
+
+                                } catch (Exception E) {
+
+                                    E.printStackTrace();
+
+                                } finally {
+
+                                }
+
+                            }
+
+                        }).start();
+
+                        Log.i("HANDLEREND??", "ENDED!!");
+
+                    }
+
+                }, 0);
+
+                Log.i("HANDLEREND??", "ENDED!!");
+
+
 
             }
 

@@ -1,5 +1,6 @@
 package ml.diony.motg.Display;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import ml.diony.motg.Communication.Interaction;
 import ml.diony.motg.R;
 
 /**
@@ -61,9 +63,9 @@ public class TodayRankingAdapter extends BaseAdapter {
         btn.setOnClickListener(new Button.OnClickListener() {
             public void onClick(View v) {
                 Intent intent = new Intent(maincon, ResInfoActivity.class);
-                intent.putExtra("name", arSrc.get(pos).ResName);
+                intent.putExtra("name", arSrc.get(pos).code);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                maincon.startActivity(intent);
+                (new Interaction((Activity) maincon, maincon)).getSpecified("ALL", "NAME", arSrc.get(pos).code, intent);
             }
         });
         return convertView;

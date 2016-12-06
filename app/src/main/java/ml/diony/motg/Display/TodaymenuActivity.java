@@ -1,9 +1,12 @@
 package ml.diony.motg.Display;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.widget.ListView;
+
+import org.json.JSONArray;
 
 import java.util.ArrayList;
 
@@ -18,6 +21,16 @@ public class TodaymenuActivity extends AppCompatActivity {
         setContentView(R.layout.activity_todaymenu);
 
         Intent intent = getIntent();
+        String ALLX = intent.getExtras().getString("ALLX");
+
+        Log.i("RLA", ALLX);
+
+        JSONArray X = new JSONArray();
+        try {
+            X = new JSONArray(ALLX);
+        } catch(Exception E) {}
+
+        Log.i("ResListActivity", "와아아아아" + X.toString());
         //String rtype = intent.getExtras().getString("rtype");
 
         Rlist = new ArrayList<ResList>();
@@ -31,22 +44,23 @@ public class TodaymenuActivity extends AppCompatActivity {
             Rlist.add(rlist);
         }
 */
-        ResList rlist1 = new ResList("asd");
-        rlist1.ResName = "분짜-다낭";
-        rlist1.code = "A001";
-        Rlist.add(rlist1);
-        ResList rlist2 = new ResList("asd");
-        rlist2.ResName = "뉴욕스톤스테이크-애슐리";
-        rlist2.code = "A000";
-        Rlist.add(rlist2);
-        ResList rlist3 = new ResList("asd");
-        rlist3.ResName = "치킨필라프-서가앤쿡";
-        rlist3.code = "A003";
-        Rlist.add(rlist3);
-        ResList rlist4 = new ResList("asd");
-        rlist4.ResName = "베트남칼국수-라이스스토리";
-        rlist4.code = "A002";
-        Rlist.add(rlist4);
+        for(int i = 0; i < X.length(); i++) {
+
+            String NAME = "";
+            String MENU = "";
+
+            try {
+
+                NAME = (String) ((JSONArray) X.get(i)).get(0);
+                MENU = (String) ((JSONArray) X.get(i)).get(1);
+
+            } catch(Exception E) {}
+
+            ResList rlist = new ResList(MENU + "-" + NAME);
+            rlist.code = NAME;
+            Rlist.add(rlist);
+
+        }
 
 
         TodayRankingAdapter myAdapter = new TodayRankingAdapter(this, R.layout.todayres_row, Rlist);

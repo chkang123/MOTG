@@ -281,7 +281,7 @@ public class MainActivity extends AppCompatActivity {
 
                         Log.i("으악", "여기까진 되는데.");
                         Intent intent = new Intent(getContext(), TodaymenuActivity.class);
-                        startActivity(intent);
+                        IA.getRecommended(intent);
                     }
                 });
 
