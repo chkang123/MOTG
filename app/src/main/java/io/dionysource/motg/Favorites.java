@@ -5,6 +5,7 @@ package io.dionysource.motg.usrclss;
  */
 
 class Favorites {
+    // 저장 시간
     int year;
     int month;
     int day;
@@ -22,5 +23,3 @@ class Favorites {
         this.day = day;
     }
 }
-
-

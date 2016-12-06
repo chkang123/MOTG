@@ -7,11 +7,14 @@ import java.util.ArrayList;
  */
 
 public class Property {
-    double Taste;
-    double Distance;
-    double Cost;
-    double Valuation;
-    double Service;
+
+  // 사용자의 선호도, 사용자가 중요하게 여기는 정도를 속성별로 저장하기 위해 정의한 클래스
+    double Taste; //  맛
+    double Distance; //  거리
+    double Cost; //  비용
+    double Valuation; //  타인의 평가를 얼마나 중요하게 여기는가
+    double Service; // 맛집의 서비스
+
 
     public Property()
     {
@@ -20,7 +23,7 @@ public class Property {
         Cost = 0;
         Valuation = 0;
         Service = 0;
-
+        //0은 선호도로서는 선호도 상관 없음을 의미한다.
     }
 
     public void set_pref(double taste, double distance, double cost, double valuation, double service)

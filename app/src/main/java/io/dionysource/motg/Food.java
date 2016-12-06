@@ -27,6 +27,7 @@ public class Food {
         eval_list = null;
     }
     public String get_idcode() {return idcode;}
+    public String get_name() { return name;}
     public void set_food_type(Food_Type food_type){
         this.food_type = food_type;
     }

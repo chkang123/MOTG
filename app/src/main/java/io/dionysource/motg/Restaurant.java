@@ -8,15 +8,15 @@ import java.util.ArrayList;
 
 public class Restaurant {
     String idcode;
-    ArrayList<String> food_list;
-    Food_Type type;
+    ArrayList<String> food_list; // 음식의 ㅑㅇ
+    Food_Type type; //음식의 타입 (레스토랑에서 파는 음식의 종류(한식, 중식 등))
     int num_togo; // 적정 인원
     String address; // 가게의 주소
-    String region;
-    String telephone;
+    String region; //맛집이 속한 지역 (이동 효자 등등)
+    String telephone; // 전화번호
     String introduce; // 가게 소개
     ArrayList<String> eval_list; // 평가 리스트
-    float eval_point; // 평점
+    double eval_point; // 평점
 
     public Restaurant()
     {

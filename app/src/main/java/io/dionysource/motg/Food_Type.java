@@ -9,4 +9,4 @@ public enum Food_Type {
     JAP,
     CHN,
     WES
-}
+} //음식의 종류에 대한 enum 클래스

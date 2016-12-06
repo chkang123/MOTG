@@ -7,7 +7,7 @@ package io.dionysource.motg.usrclss;
  */
 
 public class Evaluation {
-    String idcode;
+    String idcode; // 평가의 id code
     double rstrnt_eval_point; // 레스토랑 평점
     double food_eval_point; // 음식 평점
     String id_usr; // 평가 작성한 유저
@@ -78,16 +78,4 @@ public class Evaluation {
         return weight.get(j);
     }
 
-    /*
-    public String toString(){
-        return "id: "+idcode
-                +"\trstrnt_eval_point: " +rstrnt_eval_point
-        +"\tfood_eval_point: " + food_eval_point
-        +"\tusr_id: "+id_usr
-        +"\trstrnt_id: "+restaurant
-        +"\tfood_id" + food
-        +"\teval_critic" + eval_critic;
-    }
-    */
 }
-

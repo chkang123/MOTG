@@ -20,15 +20,15 @@ public class Users {
 
     String id; // 고유 식별자
     String nickname; // 닉네임
-    boolean identified; // 식별되었는가
+    boolean identified; // 식별되었는가? 식별되지 않으면 Guest 계정이 된다.
 
     //개인 취향
 
         ArrayList<Food_Type> FavoriteFoodTypes;//음식 종류에 대한 취향
 
     public class EvaluationPacket {
-        int eval_version;
-        ArrayList<String> eval_list;
+        int eval_version; //평가 리스트의 버전
+        ArrayList<String> eval_list; //평가의 idcode를 저장하고 있는 리스트
         public EvaluationPacket()
         {
         }
@@ -56,18 +56,13 @@ public class Users {
         {
             return eval_list.get(i);
         }
-    }
+    }  // 평가의 리스트와 평가의 버전을 저장하는 내부 클래스, gson에서 관리하기 위해 정의했다.
 
-    EvaluationPacket eval_list;
-    Gson gson;
+    EvaluationPacket eval_list; //평가와 평가의 버전을 저장하는 패킷
+    Gson gson; // Gson을 다루기 위한 gson object
 
-    //개인 취향 weight 저장 행렬
-   Property pref;
-    //방문기록
-/*
- *   ArrayList<Food> Foods_History;
- *   ArrayList<Restaurant> Rstrnt_History;
- */
+    //개인 취향 weight 저장 클래스
+   Preference pref;
 
     //즐겨찾기
     public class FavoriteRstrntPacket {
@@ -105,7 +100,7 @@ public class Users {
         {
             return fav_rstrnts_list;
         }
-    }//즐겨찾기 클래스 구현할 것
+    }
     FavoriteRstrntPacket fav_rstrnts_list;
     public class FavoriteFoodPacket {
         int _version;
@@ -143,10 +138,9 @@ public class Users {
         {
             return fav_foods_list;
         }
-    }
-    FavoriteFoodPacket fav_foods_list; //
-    // ArrayList<Integer>  Achievement; // 업적의 id 를 저장하는 리스트
-
+    }//다형성을 활용했으면 좋았을 것이다.
+    FavoriteFoodPacket fav_foods_list;
+    //음식, 레스토랑의 즐겨찾기를 저장하는 패킷.
 
 
 
@@ -192,9 +186,9 @@ public class Users {
         int size = eval_list.size();
         eval_list.add(size, eval);
     }
-    public Property set_preference()
+    public Preference set_preference()
     {
-        pref = new Property();
+        pref = new Preference();
         return pref;
     }
 /*
@@ -213,16 +207,12 @@ public class Users {
     public ArrayList<Fav_Rstrnts> get_fav_rstrnts()
     {
         return fav_rstrnts_list.getlist();
-    }//즐겨찾기 클래스 구현할 것
+    }//즐겨찾기 (맛집)을 내보내는 함수
     public ArrayList<Fav_Foods> get_fav_foods()
     {
         return fav_foods_list.getlist();
-    }
+    }//즐겨찾기 (음식)을 내보내는 함수
 
-    public double get_pref(int i)
-    {
-        return pref.get(i);
-    }
 
 
     public void favfoodtoJSON()
@@ -276,7 +266,7 @@ public class Users {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
+    }//맛집 즐겨찾기를 Json에서 가져오는 함수
     public void evaltoJSON()
     {
         String json = gson.toJson(eval_list);
@@ -290,7 +280,7 @@ public class Users {
         {
             e.printStackTrace();
         }
-    }
+    }//평가를 Json으로 내보내는 함수
 
     public void Jsontoeval() {
         try {
@@ -301,6 +291,6 @@ public class Users {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
+    } //Json을 평가로 import하는 함수
 
 }

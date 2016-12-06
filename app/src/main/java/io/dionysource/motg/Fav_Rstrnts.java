@@ -6,7 +6,7 @@ package io.dionysource.motg.usrclss;
 
 public class Fav_Rstrnts extends Favorites {
 
-    String restaurant;
+    String restaurant; // 맛집의 id
 
     public Fav_Rstrnts(String restaurant, String note)
     {
