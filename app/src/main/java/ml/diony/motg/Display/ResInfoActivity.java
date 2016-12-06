@@ -37,6 +37,7 @@ public class ResInfoActivity extends Activity {
         try {
             X = new JSONArray(ALLX);
             XM = ((JSONObject) X.get(0)).getJSONArray("MENU");
+            XT = ((JSONObject) X.get(0)).getString("TEL");
             String XXX = ((JSONObject)X.get(0)).getJSONArray("POS").toString(), XRE = XXX.substring(XXX.indexOf(",") + 1, XXX.indexOf("]"));
             Log.i("WOWWOWOWWO", XRE);
             ACOORDX = Float.parseFloat(XRE.substring(0, XRE.indexOf(",")));
@@ -82,6 +83,8 @@ public class ResInfoActivity extends Activity {
         bt1.setText("전화걸기");
         Button bt2 = (Button) findViewById(R.id.button2);
         bt2.setText("지도보기");
+
+        Log.i("FFFFFFFF", "WHYYY" + FXT);
         bt1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

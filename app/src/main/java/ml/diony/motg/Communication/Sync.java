@@ -23,11 +23,15 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.protocol.HTTP;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
+import java.io.DataOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
@@ -53,6 +57,8 @@ public class Sync extends Activity {
 
     protected Activity ACTIVITY = this;
 
+    protected Intent LSTI;
+
     protected init INIT = null;
 
     final protected File FP;
@@ -66,6 +72,15 @@ public class Sync extends Activity {
         this.INIT = INIT;
 
         //Update Versions from Local Data!!
+
+    }
+
+    public Sync(Context CONTEXT, Activity ACTIVITY) {
+
+        this.CONTEXT = CONTEXT;
+        this.ACTIVITY = ACTIVITY;
+
+        FP = null;
 
     }
 
@@ -85,6 +100,8 @@ public class Sync extends Activity {
         return result;
     }
 
+    private boolean isVC = true;
+
     @Override
     public void onCreate(Bundle s) {
 
@@ -95,6 +112,8 @@ public class Sync extends Activity {
         final RelativeLayout RL = (RelativeLayout) findViewById(R.id.ld);
 
         Animation AN = AnimationUtils.loadAnimation(this, R.anim.fade_in);
+
+        //isVC = getIntent().getExtras().getBoolean("isVX");
 
         RL.startAnimation(AN);
 
@@ -345,7 +364,7 @@ public class Sync extends Activity {
 
                 try {
 
-                    AX.put("ID", INIT.S.getId());
+                    AX.put("ID", INIT.S.checkId().getId());
                     AX.put("TYPE", INIT.S.getType());
 
                 } catch (JSONException E) {
@@ -403,43 +422,43 @@ public class Sync extends Activity {
 
                             Log.i(TAG, new String(Base64.decode(RX.getString("chunk"), 0)));
 
-                            JSONObject CNK = new JSONObject(new String(Base64.decode(RX.getString("chunk"), 0)));
+                            final JSONObject CNK = new JSONObject(new String(Base64.decode(RX.getString("chunk"), 0)));
 
                             Log.i(TAG, CNK.toString());
 
-                            if (CNK.getInt("HISTORY_REV") != 1) {
+                            if (isInit) {
 
-                                //Sync is needed.
+                                Handler MH = new Handler(Looper.getMainLooper());
 
-                                dataSync(isInit);
+                                MH.postDelayed(new Runnable() {
+
+                                    @Override
+
+                                    public void run() {
+
+                                        //GO TO REAL MAIN!!!!
+
+                                        Log.i(TAG, "Go to main screen");
+
+                                        Toast.makeText(CONTEXT, "Welcome to MOTG", Toast.LENGTH_LONG).show();
+
+
+
+                                        try {
+
+                                            historySync(true, String.valueOf(CNK.getInt("HISTORY_REV")));
+
+                                        } catch (Exception E) {
+                                        }
+
+                                    }
+
+                                }, 0);
+
 
                             } else {
 
-                                if (isInit) {
-
-                                    Handler MH = new Handler(Looper.getMainLooper());
-
-                                    MH.postDelayed(new Runnable() {
-
-                                        @Override
-
-                                        public void run() {
-
-                                            //GO TO REAL MAIN!!!!
-
-                                            Log.i(TAG, "Go to main screen");
-
-                                            Toast.makeText(CONTEXT, "Welcome to MOTG", Toast.LENGTH_LONG).show();
-
-                                            Intent I = new Intent(CONTEXT, ml.diony.motg.Display.MainActivity.class);
-
-                                            CONTEXT.startActivity(I);
-
-                                        }
-
-                                    }, 0);
-
-                                }
+                                historySync(String.valueOf(CNK.getInt("HISTORY_REV")));
 
                             }
 
@@ -469,11 +488,37 @@ public class Sync extends Activity {
 
     }
 
-    public void dataSync(final boolean isInit) {
+    public void historySync(String REV) {
 
-        final String SURL = SRVU + "AccountCheck";
+        historySync(false, REV);
 
-        Log.i(TAG, "Account Check Starts.");
+    }
+
+    public void historySync() {
+
+        accountSync(false);
+
+    }
+
+    public void historySync(final boolean I, final String REV) {
+
+        final String SURL = SRVU + "HistorySync";
+
+        final int CLIE_REV = getREVINFO(), SERV_REV = Integer.parseInt(REV);
+
+        Log.i(TAG, "Synchronizing History Starts.");
+
+        isVC = false;
+
+        if (!I) {
+
+            Intent IN = new Intent(CONTEXT, Interaction.class);
+
+            LSTI = IN;
+            //IN.putExtra("isVX", (Boolean) false);
+            CONTEXT.startActivity(IN);
+
+        }
 
         new Thread() {
 
@@ -487,18 +532,71 @@ public class Sync extends Activity {
                 P.setHeader("Content-Type", "application/json");
 
                 JSONObject AX = new JSONObject();
+                JSONObject REX = new JSONObject();
 
                 try {
 
-                    AX.put("ID", "somestuffs");
-                    AX.put("TYPE", "somestuffs");
+                    AX.put("ID", INIT.S.checkId().getId());
+                    AX.put("TYPE", INIT.S.getType());
+
+                    if(SERV_REV > CLIE_REV) {
+
+                        //Server is latest;
+
+                        Log.i(TAG, "SHOULD DOWNLOAD!!");
+
+                        REX.put("COMMAND", "DOWNLOAD");
+
+                    } else if(SERV_REV < CLIE_REV) {
+
+                        //Client is more latest!!!!! SIVAL!!!! WOW!!!HOLLYPOP!!!
+
+                        Log.i(TAG, "SHOULD UPLOAD!!");
+
+                        REX.put("COMMAND", "UPLOAD");
+
+                        REX.put("REV", CLIE_REV);
+
+                        JSONArray JJX = new JSONArray();
+
+                        for(int i = 0; i < CLIE_REV; i++) {
+
+                            int x = i + 1;
+
+                            JJX.put(getHISTORY(x));
+
+                        }
+
+                        REX.put("ARRAY", JJX);
+
+                    } else {
+
+                        //Same Revision
+
+                        Log.i(TAG, "SHOLUD NOT DO ANYTHING!!!!GG");
+
+                        if(I) {
+
+                            Log.i(TAG, "SO, STARTS ACTIVITY!!!");
+
+                            Intent I = new Intent(ACTIVITY, ml.diony.motg.Display.MainActivity.class);
+
+                            ACTIVITY.startActivity(I);
+
+                        } else {
+
+                        }
+
+                        return;
+
+                    }
 
                 } catch (JSONException E) {
                 }
 
                 ArrayList<NameValuePair> D = new ArrayList<NameValuePair>();
                 D.add(new BasicNameValuePair("AX", Base64.encodeToString(AX.toString().getBytes(), 0)));
-                D.add(new BasicNameValuePair("APV", ml.diony.motg.BuildConfig.VERSION_NAME));
+                D.add(new BasicNameValuePair("REX", Base64.encodeToString(REX.toString().getBytes(), 0)));
 
                 InputStream IS = null;
                 String RS = null;
@@ -532,7 +630,7 @@ public class Sync extends Activity {
 
                         RS = SB.toString();
 
-                        Log.i(TAG, RS);
+                        Log.i(TAG+"_history_verify", RS);
 
                         JSONObject RX = new JSONObject(RS);
 
@@ -542,47 +640,32 @@ public class Sync extends Activity {
 
                             //No error
 
-                            Log.i(TAG, "There is some chunks!");
+                            try {
 
-                            Log.i(TAG, RX.getString("chunk"));
+                                if(SERV_REV > CLIE_REV) {
 
-                            Log.i(TAG, new String(Base64.decode(RX.getString("chunk"), 0)));
+                                    //DOWNLOAD????
 
-                            JSONObject CNK = new JSONObject(new String(Base64.decode(RX.getString("chunk"), 0)));
+                                    JSONArray RRX = RX.getJSONArray("ARRAY");
 
-                            Log.i(TAG, CNK.toString());
+                                    for(int i= 1; i <= RRX.length(); i++) {
 
-                            if (CNK.getInt("HISTORY_REV") != 1) {
+                                        saveHISTORY(i, (JSONObject) RRX.get(i - 1));
+                                        Log.i(TAG, "SAVE(REV=" + i + "): " + ((JSONObject) RRX.get(i-1)).toString());
 
-                                //Sync is needed.
+                                    }
 
-                                dataSync(isInit);
+                                    saveREVINFO(RX.getInt("REV"));
 
-                            } else {
+                                }
 
-                                if (isInit) {
+                            } finally {
 
-                                    Handler MH = new Handler(Looper.getMainLooper());
+                                if(I) {
 
-                                    MH.postDelayed(new Runnable() {
+                                    Intent IX = new Intent(CONTEXT, ml.diony.motg.Display.MainActivity.class);
 
-                                        @Override
-
-                                        public void run() {
-
-                                            //GO TO REAL MAIN!!!!
-
-                                            Log.i(TAG, "Go to main screen");
-
-                                            Toast.makeText(CONTEXT, "Welcome to MOTG", Toast.LENGTH_LONG).show();
-
-                                            Intent I = new Intent(CONTEXT, ml.diony.motg.Display.MainActivity.class);
-
-                                            CONTEXT.startActivity(I);
-
-                                        }
-
-                                    }, 0);
+                                    startActivity(IX);
 
                                 }
 
@@ -612,29 +695,130 @@ public class Sync extends Activity {
 
         }.start();
 
-        if (isInit) {
+    }
 
-            Handler MH = new Handler(Looper.getMainLooper());
+    final public void saveREVINFO(final int REV) {
 
-            MH.postDelayed(new Runnable() {
+        FileOutputStream FOS;
+        DataOutputStream DOS;
 
-                @Override
+        try {
 
-                public void run() {
+            File FI = new File("/data/data/ml.diony.motg/cache/HR.json");
 
-                    //GO TO REAL MAIN!!!!
+            //Log.i("fifififi", getCacheDir().getCanonicalPath() + "/LI.json");
 
-                    Toast.makeText(CONTEXT, "Welcome to MOTG", Toast.LENGTH_LONG).show();
+            FI.createNewFile();
 
-                    Intent I = new Intent(CONTEXT, ml.diony.motg.Display.MainActivity.class);
+            FOS = new FileOutputStream(FI);
+            DOS = new DataOutputStream(FOS);
 
-                    CONTEXT.startActivity(I);
+            JSONObject X = new JSONObject();
+            X.put("REV", REV);
 
-                }
+            DOS.write(X.toString().getBytes("UTF-8"));
 
-            }, 0);
+            DOS.close();
+            FOS.close();
+
+        } catch (Exception I) {
+        }
+
+    }
+
+    final public void saveHISTORY(final int REV, final JSONObject JSON) {
+
+        FileOutputStream FOS;
+        DataOutputStream DOS;
+
+        try {
+
+            File FI = new File("/data/data/ml.diony.motg/cache/HS_" + REV + ".json");
+
+            //Log.i("fifififi", getCacheDir().getCanonicalPath() + "/LI.json");
+
+            FI.createNewFile();
+
+            FOS = new FileOutputStream(FI);
+            DOS = new DataOutputStream(FOS);
+
+            DOS.write(JSON.toString().getBytes("UTF-8"));
+
+            DOS.close();
+            FOS.close();
+
+        } catch (Exception I) {
+        }
+
+    }
+
+    public static String convertStreamToString(InputStream is) throws Exception {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(is));
+        StringBuilder sb = new StringBuilder();
+        String line = null;
+        while ((line = reader.readLine()) != null) {
+            sb.append(line).append("\n");
+        }
+        reader.close();
+        return sb.toString();
+    }
+
+    public static String getStringFromFile(String filePath) throws Exception {
+        File fl = new File(filePath);
+        FileInputStream fin = new FileInputStream(fl);
+        String ret = convertStreamToString(fin);
+        //Make sure you close all streams.
+        fin.close();
+        return ret;
+    }
+
+    public int getREVINFO() {
+
+        String O = null;
+
+        JSONObject RT = null;
+
+        int REV = 0;
+
+        int i = 0;
+
+        try {
+
+            Log.i("Check", "STEP " + i++);
+
+            Log.i("Check2", "It is /data/data/ml.diony.motg/cache/HR.json");
+
+            Log.i("Check3", getStringFromFile("/data/data/ml.diony.motg/cache/HR.json"));
+
+            RT = new JSONObject(getStringFromFile("/data/data/ml.diony.motg/cache/HR.json"));
+
+            REV = RT.getInt("REV");
+
+        } catch (Exception I) {
+
+            //return DX;
 
         }
+
+        return REV;
+
+    }
+
+    public JSONObject getHISTORY(final int REV) {
+
+        JSONObject RT = null;
+
+        try {
+
+            RT = new JSONObject(getStringFromFile("/data/data/ml.diony.motg/cache/HS_" + REV + ".json"));
+
+        } catch (Exception I) {
+
+            //return DX;
+
+        }
+
+        return RT;
 
     }
 

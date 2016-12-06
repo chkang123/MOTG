@@ -5,7 +5,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
-import android.provider.Settings;
+import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
@@ -14,6 +15,9 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import java.math.BigInteger;
+import java.security.SecureRandom;
 
 import ml.diony.motg.BuildConfig;
 import ml.diony.motg.R;
@@ -36,11 +40,56 @@ public class Screen extends Activity implements View.OnClickListener {
 
     private byte lsLgM = 0; //1: Naver, 2: Facebook, 3: Dummy
 
-    private String ID = Settings.Secure.ANDROID_ID;
+    private String ID = "";
 
     public String getId() {
 
         return ID;
+
+    }
+
+    public void setId(String ID) {
+
+        this.ID = ID;
+
+    }
+
+    public Screen checkId() {
+
+        if (isLgn[2]) {
+
+            if(ID == "") {
+
+                Log.i(TAG, "is RANDOM!");
+
+                SecureRandom RND = new SecureRandom();
+                ID = (new BigInteger(130, RND)).toString();
+
+            }
+
+        } else if (isLgn[1])
+            Log.i(TAG, "FACEBOOK?");
+        else if (isLgn[0]) {
+
+            Handler mHandler = new Handler(Looper.getMainLooper());
+
+            mHandler.postDelayed(new Runnable() {
+
+                @Override
+
+                public void run() {
+
+                    ID = (new TypeNaver(CONTEXT)).getID();
+
+                }
+
+            }, 0);
+
+            Log.i(TAG, "GOOD!!");
+
+        }
+
+        return this;
 
     }
 
@@ -50,7 +99,7 @@ public class Screen extends Activity implements View.OnClickListener {
 
     public String getType() {
 
-        if(isLgn[0])
+        if (isLgn[0])
             return "naver";
         else if (isLgn[1])
             return "facebook";
@@ -69,11 +118,35 @@ public class Screen extends Activity implements View.OnClickListener {
 
         //Load Is Logined
 
+
         //lsLgM = ~;
 
         isLgn[0] = (new TypeNaver(CONTEXT)).isLogined();
         isLgn[1] = false;
         isLgn[2] = (lsLgM == 3) && (new TypeDummy()).isLogined();
+
+        if (this.isLogined()) {
+
+            if (isLgn[2] == true) {
+
+                try {
+
+                    ID = (new Base()).getLoginInformation().getString("ID");
+
+                } catch (Exception E) {
+                }
+
+            } else if (isLgn[0] == true) {
+
+                ID = (new TypeNaver(CONTEXT)).getID();
+
+            } else if (isLgn[1] == true) {
+
+                //FACEBOOK
+
+            }
+
+        }
 
     }
 
@@ -348,9 +421,25 @@ public class Screen extends Activity implements View.OnClickListener {
 
         if (isLogined()) {
 
+            this.checkId();
+
+            (new Base()).saveLoginInforamtion(ID, getLoginMethod());
+
             ACTIVITY.checkUTD();
 
         }
+
+    }
+
+    public int getLoginMethod() {
+
+        if (isLgn[0])
+            return 0;
+        else if (isLgn[1])
+            return 1;
+        else if (isLgn[2])
+            return 2;
+        else return -1;
 
     }
 

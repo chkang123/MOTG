@@ -44,6 +44,7 @@ final public class init extends Activity {
         //Plz process cLogin, cUTD
 
 
+
     }
 
     @Override
@@ -60,10 +61,23 @@ final public class init extends Activity {
 
         if(X != null) {
 
+            Log.i(TAG, "Check is " + X.toString());
+
             try {
 
-                if(X.getString("TYPE") == "guest")
+                Log.i(TAG, "TEST START");
+
+                Log.i(TAG + "c32", X.getString("TYPE"));
+
+                if(X.getString("TYPE").indexOf("guest") == 0) {
+
+                    Log.i(TAG, "SETTED TO GUEST");
+
                     S.setLSLGM((byte) 3);
+
+                    S.setId(X.getString("ID"));
+
+                }
 
             } catch (Exception I) {}
         }
@@ -81,7 +95,7 @@ final public class init extends Activity {
 
             Log.i(TAG, "User Login Confirmed.");
 
-            B.saveLoginInformation(S.getId(), S.getType());
+            B.saveLoginInformation(S.checkId().getId(), S.getType());
 
             //DATA LOADING SCREEN CALLED.
 

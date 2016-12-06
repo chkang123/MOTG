@@ -78,6 +78,8 @@ public class TypeNaver extends Base {
 
         Log.i(TAG + "_nv", "Get Auth Instance Succeeded.");
 
+        Log.i(TAG + "_nv", "Is authContext NULL? " + (authContext.getPackageName() == null));
+
         authInstance.init(authContext, OAUTH_CLIENT_ID, OAUTH_CLIENT_SECRET, OAUTH_CLIENT_NAME);
 
     }
@@ -116,6 +118,14 @@ public class TypeNaver extends Base {
 
     }
 
+    public String getID() {
+
+        setAuthInformation();
+
+        return authInstance.getAccessToken(authContext);
+
+    }
+
     private OAuthLoginHandler AuthHandler = new OAuthLoginHandler() {
         @Override
         public void run(boolean b) {
@@ -125,7 +135,7 @@ public class TypeNaver extends Base {
 
                 Log.i(TAG + "_nv_login", "Login succeeded!");
 
-                Toast.makeText(getApplicationContext(), authInstance.getAccessToken(authContext), Toast.LENGTH_LONG).show();
+                //Toast.makeText(getApplicationContext(), authInstance.getAccessToken(authContext), Toast.LENGTH_LONG).show();
 
                 NAVER_AC_TOKEN = authInstance.getAccessToken(authContext);
                 NAVER_RF_TOKEN = authInstance.getRefreshToken(authContext);

@@ -1,16 +1,20 @@
 package ml.diony.motg.Authentication;
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
+import android.telephony.TelephonyManager;
 import android.util.Log;
 
 import org.json.JSONObject;
 
+import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 
 /**
  * Created by nayak on 2016-12-03.
@@ -19,6 +23,12 @@ import java.io.InputStream;
 public class Base extends Activity {
 
     protected static String TAG = "MOTGAuth";
+
+    public String getIMEI() {
+
+        return ((TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE)).getDeviceId();
+
+    }
 
     @Override
     public void onCreate(Bundle s) {
@@ -38,14 +48,36 @@ public class Base extends Activity {
 
     }
 
-    public void saveLoginInformation(final String ID, final String TYPE) {
+    final public void saveLoginInforamtion(String ID, int TYPE) {
+
+        if(TYPE == 0) {
+
+            saveLoginInformation(ID, "naver");
+
+        } else if (TYPE == 1) {
+
+            saveLoginInformation(ID, "facebook");
+
+        } else if (TYPE == 2) {
+
+            saveLoginInformation(ID, "guest");
+
+        }
+
+    }
+
+    final public void saveLoginInformation(final String ID, final String TYPE) {
+
+        Log.i(TAG + "_sLI", "ID : " + ID + ", TYPE : " + TYPE);
 
         FileOutputStream FOS;
         DataOutputStream DOS;
 
         try {
 
-            File FI = new File(getCacheDir().getCanonicalPath() + "/LI.json");
+            File FI = new File("/data/data/ml.diony.motg/cache/LI.json");
+
+            //Log.i("fifififi", getCacheDir().getCanonicalPath() + "/LI.json");
 
             FI.createNewFile();
 
@@ -66,29 +98,51 @@ public class Base extends Activity {
 
     }
 
+    public static String convertStreamToString(InputStream is) throws Exception {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(is));
+        StringBuilder sb = new StringBuilder();
+        String line = null;
+        while ((line = reader.readLine()) != null) {
+            sb.append(line).append("\n");
+        }
+        reader.close();
+        return sb.toString();
+    }
+
+    public static String getStringFromFile (String filePath) throws Exception {
+        File fl = new File(filePath);
+        FileInputStream fin = new FileInputStream(fl);
+        String ret = convertStreamToString(fin);
+        //Make sure you close all streams.
+        fin.close();
+        return ret;
+    }
+
     public JSONObject getLoginInformation() {
 
         String O = null;
 
-        JSONObject RT = null;
+        JSONObject RT = null, DX = null;
+
+        int i = 0;
 
         try {
 
-            InputStream IS = new FileInputStream(new File(getCacheDir().getCanonicalPath() + "/LI.json"));
+            Log.i("Check", "STEP " + i++);
 
-            int size = IS.available();
+            Log.i("Check2", "It is /data/data/ml.diony.motg/cache/LI.json");
 
-            byte[] buffer = new byte[size];
+            Log.i("Check3", getStringFromFile("/data/data/ml.diony.motg/cache/LI.json"));
 
-            IS.read(buffer);
+            DX = new JSONObject("{\"error\": \"DIED\"}");
 
-            IS.close();
+            RT = new JSONObject(getStringFromFile("/data/data/ml.diony.motg/cache/LI.json"));
 
-            O = new String(buffer);
+        } catch (Exception I) {
 
-            RT = new JSONObject(O);
+            //return DX;
 
-        } catch (Exception I) {}
+        }
 
         return RT;
 

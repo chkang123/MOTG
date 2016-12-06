@@ -22,6 +22,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import ml.diony.motg.Authentication.Base;
 import ml.diony.motg.Communication.Interaction;
 import ml.diony.motg.R;
 
@@ -56,6 +57,9 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        Log.i("LoginCheck", (new Base()).getLoginInformation().toString());
+
         setContentView(R.layout.activity_main);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
