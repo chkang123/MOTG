@@ -428,6 +428,8 @@ public class Sync extends Activity {
 
                             if (isInit) {
 
+                                downloadUS();
+
                                 Handler MH = new Handler(Looper.getMainLooper());
 
                                 MH.postDelayed(new Runnable() {
@@ -441,7 +443,6 @@ public class Sync extends Activity {
                                         Log.i(TAG, "Go to main screen");
 
                                         Toast.makeText(CONTEXT, "Welcome to MOTG", Toast.LENGTH_LONG).show();
-
 
 
                                         try {
@@ -516,7 +517,7 @@ public class Sync extends Activity {
 
             LSTI = IN;
             //IN.putExtra("isVX", (Boolean) false);
-            CONTEXT.startActivity(IN);
+            //CONTEXT.startActivity(IN);
 
         }
 
@@ -539,7 +540,7 @@ public class Sync extends Activity {
                     AX.put("ID", INIT.S.checkId().getId());
                     AX.put("TYPE", INIT.S.getType());
 
-                    if(SERV_REV > CLIE_REV) {
+                    if (SERV_REV > CLIE_REV) {
 
                         //Server is latest;
 
@@ -547,7 +548,7 @@ public class Sync extends Activity {
 
                         REX.put("COMMAND", "DOWNLOAD");
 
-                    } else if(SERV_REV < CLIE_REV) {
+                    } else if (SERV_REV < CLIE_REV) {
 
                         //Client is more latest!!!!! SIVAL!!!! WOW!!!HOLLYPOP!!!
 
@@ -559,11 +560,13 @@ public class Sync extends Activity {
 
                         JSONArray JJX = new JSONArray();
 
-                        for(int i = 0; i < CLIE_REV; i++) {
+                        for (int i = 0; i < CLIE_REV; i++) {
 
                             int x = i + 1;
 
                             JJX.put(getHISTORY(x));
+
+                            Log.i("SYNCSYNCHISTORYUP_" + x, getHISTORY(x).toString());
 
                         }
 
@@ -575,7 +578,7 @@ public class Sync extends Activity {
 
                         Log.i(TAG, "SHOLUD NOT DO ANYTHING!!!!GG");
 
-                        if(I) {
+                        if (I) {
 
                             Log.i(TAG, "SO, STARTS ACTIVITY!!!");
 
@@ -630,7 +633,7 @@ public class Sync extends Activity {
 
                         RS = SB.toString();
 
-                        Log.i(TAG+"_history_verify", RS);
+                        Log.i(TAG + "_history_verify", RS);
 
                         JSONObject RX = new JSONObject(RS);
 
@@ -642,16 +645,16 @@ public class Sync extends Activity {
 
                             try {
 
-                                if(SERV_REV > CLIE_REV) {
+                                if (SERV_REV > CLIE_REV) {
 
                                     //DOWNLOAD????
 
                                     JSONArray RRX = RX.getJSONArray("ARRAY");
 
-                                    for(int i= 1; i <= RRX.length(); i++) {
+                                    for (int i = 1; i <= RRX.length(); i++) {
 
                                         saveHISTORY(i, (JSONObject) RRX.get(i - 1));
-                                        Log.i(TAG, "SAVE(REV=" + i + "): " + ((JSONObject) RRX.get(i-1)).toString());
+                                        Log.i(TAG, "SAVE(REV=" + i + "): " + ((JSONObject) RRX.get(i - 1)).toString());
 
                                     }
 
@@ -661,7 +664,7 @@ public class Sync extends Activity {
 
                             } finally {
 
-                                if(I) {
+                                if (I) {
 
                                     Intent IX = new Intent(CONTEXT, ml.diony.motg.Display.MainActivity.class);
 
@@ -682,6 +685,171 @@ public class Sync extends Activity {
                             Log.i(TAG, "ERROR: " + ERS);
 
                         }
+
+                    }
+
+                } catch (Exception E) {
+
+                    E.printStackTrace();
+
+                }
+
+            }
+
+        }.start();
+
+    }
+
+    public void downloadUS() {
+
+        final String SURL = SRVU + "USSync";
+
+        Log.i(TAG, "Synchronizing UserSetting Starts.");
+
+        new Thread() {
+
+            public void run() {
+
+                HttpClient C = new DefaultHttpClient();
+
+                HttpPost P = new HttpPost(SURL);
+
+                P.addHeader("X-Dionysource", "MOTG_AP");
+                P.setHeader("Content-Type", "application/json");
+
+                JSONObject AX = new JSONObject();
+                JSONObject REX = new JSONObject();
+
+                try {
+
+                    AX.put("ID", INIT.S.checkId().getId());
+                    AX.put("TYPE", INIT.S.getType());
+
+                    //Server is latest;
+
+                    Log.i(TAG, "SHOULD DOWNLOAD!!");
+
+                    REX.put("COMMAND", "DOWNLOAD");
+
+
+                } catch (JSONException E) {
+                }
+
+                ArrayList<NameValuePair> D = new ArrayList<NameValuePair>();
+                D.add(new BasicNameValuePair("AX", Base64.encodeToString(AX.toString().getBytes(), 0)));
+                D.add(new BasicNameValuePair("REX", Base64.encodeToString(REX.toString().getBytes(), 0)));
+
+                InputStream IS = null;
+                String RS = null;
+
+                try {
+
+                    UrlEncodedFormEntity EN = new UrlEncodedFormEntity(D, HTTP.UTF_8);
+
+                    P.setEntity(EN);
+                    HttpResponse PO = C.execute(P);
+
+                    HttpEntity RE = PO.getEntity();
+
+                    if (RE != null) {
+
+                        //Log.i(TAG, EntityUtils.toString(RE));
+
+                        //DATA Received.
+
+                        IS = RE.getContent();
+                        BufferedReader RD = new BufferedReader(new InputStreamReader(IS, "UTF-8"));
+                        StringBuilder SB = new StringBuilder();
+
+                        String LN = null;
+
+                        while ((LN = RD.readLine()) != null) {
+
+                            SB.append(LN + "\n");
+
+                        }
+
+                        RS = SB.toString();
+
+                        Log.i(TAG + "_history_verify", RS);
+
+                        JSONArray RX = new JSONArray(RS);
+
+                        //JSON parsing Completed!
+
+                            //No error
+
+                        saveU_S(RX);
+
+                    }
+
+                } catch (Exception E) {
+
+                    E.printStackTrace();
+
+                }
+
+            }
+
+        }.start();
+
+    }
+
+    public void uploadUS(final JSONArray JA) {
+
+        final String SURL = SRVU + "USSync";
+
+        Log.i(TAG, "Synchronizing UserSetting Starts.");
+
+        new Thread() {
+
+            public void run() {
+
+                HttpClient C = new DefaultHttpClient();
+
+                HttpPost P = new HttpPost(SURL);
+
+                P.addHeader("X-Dionysource", "MOTG_AP");
+                P.setHeader("Content-Type", "application/json");
+
+                JSONObject AX = new JSONObject();
+                JSONObject REX = new JSONObject();
+
+                try {
+
+                    AX.put("ID", INIT.S.checkId().getId());
+                    AX.put("TYPE", INIT.S.getType());
+
+                    //Server is latest;
+
+                    Log.i(TAG, "SHOULD UPLOAD!!");
+
+                    REX.put("COMMAND", "UPLOAD");
+                    REX.put("ARRAY", JA);
+
+
+                } catch (JSONException E) {
+                }
+
+                ArrayList<NameValuePair> D = new ArrayList<NameValuePair>();
+                D.add(new BasicNameValuePair("AX", Base64.encodeToString(AX.toString().getBytes(), 0)));
+                D.add(new BasicNameValuePair("REX", Base64.encodeToString(REX.toString().getBytes(), 0)));
+
+                InputStream IS = null;
+                String RS = null;
+
+                try {
+
+                    UrlEncodedFormEntity EN = new UrlEncodedFormEntity(D, HTTP.UTF_8);
+
+                    P.setEntity(EN);
+                    HttpResponse PO = C.execute(P);
+
+                    HttpEntity RE = PO.getEntity();
+
+                    if (RE != null) {
+
+                        Log.i(TAG, RE.toString());
 
                     }
 
@@ -744,11 +912,46 @@ public class Sync extends Activity {
 
             DOS.write(JSON.toString().getBytes("UTF-8"));
 
+            Log.i("SaveHISTORY", JSON.toString());
+
             DOS.close();
             FOS.close();
 
         } catch (Exception I) {
         }
+
+    }
+
+    final public void saveU_S(final JSONArray JA) {
+
+        FileOutputStream FOS;
+        DataOutputStream DOS;
+
+        try {
+
+            File FI = new File("/data/data/ml.diony.motg/cache/USet.json");
+
+            //Log.i("fifififi", getCacheDir().getCanonicalPath() + "/LI.json");
+
+            FI.createNewFile();
+
+            FOS = new FileOutputStream(FI);
+            DOS = new DataOutputStream(FOS);
+
+            DOS.write(JA.toString().getBytes("UTF-8"));
+
+            Log.i("SaveHISTORY", JA.toString());
+
+            DOS.close();
+            FOS.close();
+
+        } catch (Exception I) {
+        }
+
+        if (JA != null)
+            Log.i("SETUS", JA.toString());
+        else
+            Log.i("SETUS", "NULL");
 
     }
 
@@ -817,6 +1020,29 @@ public class Sync extends Activity {
             //return DX;
 
         }
+
+        return RT;
+
+    }
+
+    public JSONArray getU_S() {
+
+        JSONArray RT = null;
+
+        try {
+
+            RT = new JSONArray(getStringFromFile("/data/data/ml.diony.motg/cache/USet.json"));
+
+        } catch (Exception I) {
+
+            //return DX;
+
+        }
+
+        if (RT != null)
+            Log.i("GETUS", RT.toString());
+        else
+            Log.i("GETUS", "NULL");
 
         return RT;
 

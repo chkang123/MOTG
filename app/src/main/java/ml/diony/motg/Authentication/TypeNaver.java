@@ -9,6 +9,13 @@ import android.widget.Toast;
 import com.nhn.android.naverlogin.OAuthLogin;
 import com.nhn.android.naverlogin.OAuthLoginHandler;
 
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+
 /**
  * Created by nayak on 2016-12-03.
  */
@@ -27,6 +34,8 @@ public class TypeNaver extends Base {
     protected static String NAVER_AC_TOKEN, NAVER_RF_TOKEN, NAVER_TOKEN_TYPE;
 
     protected static long NAVER_EXP;
+
+    protected String ID = "";
 
     public TypeNaver(Context CONTEXT) {
 
@@ -122,7 +131,57 @@ public class TypeNaver extends Base {
 
         setAuthInformation();
 
-        return authInstance.getAccessToken(authContext);
+        Log.i("WHATISNAMVE", "NMVVE");
+
+        try {(new Thread() {
+
+            @Override
+            public void run() {
+
+                String token = authInstance.getAccessToken(authContext);// 네이버 로그인 접근 토큰;
+                String header = "Bearer " + token; // Bearer 다음에 공백 추가
+                try {
+                    String apiURL = "https://openapi.naver.com/v1/nid/me";
+                    URL url = new URL(apiURL);
+                    HttpURLConnection con = (HttpURLConnection)url.openConnection();
+                    con.setRequestMethod("GET");
+                    con.setRequestProperty("Authorization", header);
+                    Log.i("NAVERLOGIN", "리스폰 요청?");
+                    int responseCode = con.getResponseCode();
+                    Log.i("NAVERLOGIN", "리스폰 요청!");
+                    BufferedReader br;
+                    if(responseCode==200) { // 정상 호출
+                        Log.i("NAVERLOGIN", "정상 호출!");
+                        br = new BufferedReader(new InputStreamReader(con.getInputStream()));
+                    } else {  // 에러 발생
+                        Log.i("NAVERLOGIN", "에러발생!");
+                        br = new BufferedReader(new InputStreamReader(con.getErrorStream()));
+                    }
+                    String inputLine;
+                    StringBuffer response = new StringBuffer();
+                    while ((inputLine = br.readLine()) != null) {
+                        response.append(inputLine);
+                    }
+                    br.close();
+                    Log.i("USERDATA_NV", response.toString());
+                    JSONObject X = new JSONObject(response.toString());
+                    Log.i("USERDATA_TEST", X.getJSONObject("response").getString("id"));
+
+                    ID = X.getJSONObject("response").getString("id");
+                } catch (Exception e) {
+
+                    Log.i("에러라니..", e.toString());
+                }
+
+            }
+
+        }).start();}
+        finally {
+
+
+            return authInstance.getAccessToken(authContext);
+
+        }
 
     }
 
@@ -149,18 +208,19 @@ public class TypeNaver extends Base {
             } else {
 
                 Log.i(TAG + "_nv_login", "Failed to login!");
+                Log.i(TAG + "_nv_login", "Failed to login!");
 
-                Toast.makeText(getApplicationContext(), "로그인에 실패했습니다. 다시 로그인해주세요.", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "로그인에 실패했습니다. 다시 로그인해주세요.", Toast.LENGTH_LONG).show();
 
-                NAVER_ERROR_CODE = authInstance.getLastErrorCode(authContext).getCode();
-                NAVER_ERROR_DESCRIPTION = authInstance.getLastErrorDesc(authContext);
+            NAVER_ERROR_CODE = authInstance.getLastErrorCode(authContext).getCode();
+            NAVER_ERROR_DESCRIPTION = authInstance.getLastErrorDesc(authContext);
 
-                Log.i(TAG + "_nv_login", "CODE: " + NAVER_ERROR_CODE);
-                Log.i(TAG + "_nv_login", "DESC: " + NAVER_ERROR_DESCRIPTION);
+            Log.i(TAG + "_nv_login", "CODE: " + NAVER_ERROR_CODE);
+            Log.i(TAG + "_nv_login", "DESC: " + NAVER_ERROR_DESCRIPTION);
 
-                finish();
+            finish();
 
-            }
+        }
         }
     };
 

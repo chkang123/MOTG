@@ -16,4 +16,12 @@ public class HistoryList {
         day = d;
         child = new ArrayList<String>();
     }
+    public HistoryList(String X) {
+
+        year = Integer.parseInt(X.substring(0,4));
+        month = Integer.parseInt(X.substring(4,6));
+        day = Integer.parseInt(X.substring(6,8));
+        child = new ArrayList<String>();
+
+    }
 }

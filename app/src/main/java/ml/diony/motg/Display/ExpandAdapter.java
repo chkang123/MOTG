@@ -16,15 +16,17 @@ import ml.diony.motg.R;
  * Created by KangChanghoon on 2016. 11. 26..
  */
 
-public class ExpandAdapter extends BaseExpandableListAdapter implements View.OnClickListener {
+public class ExpandAdapter extends BaseExpandableListAdapter {
     private Context context;
     private int groupLayout = 0;
     private int chlidLayout = 0;
     private ArrayList<MenuGroup> DataList;
     private LayoutInflater myinf = null;
+    private String rname = "";
 
-    public ExpandAdapter(Context context, int groupLay, int chlidLay, ArrayList<MenuGroup> DataList) {
+    public ExpandAdapter(Context context, int groupLay, int chlidLay, ArrayList<MenuGroup> DataList, String rname) {
         this.DataList = DataList;
+        this.rname = rname;
         this.groupLayout = groupLay;
         this.chlidLayout = chlidLay;
         this.context = context;
@@ -43,7 +45,7 @@ public class ExpandAdapter extends BaseExpandableListAdapter implements View.OnC
     }
 
     @Override
-    public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
+    public View getChildView(final int groupPosition, final int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
         // TODO Auto-generated method stub
         if (convertView == null) {
             convertView = myinf.inflate(this.chlidLayout, parent, false);
@@ -52,16 +54,18 @@ public class ExpandAdapter extends BaseExpandableListAdapter implements View.OnC
         childName.setText(DataList.get(groupPosition).child.get(childPosition));
 
         Button button = (Button) convertView.findViewById(R.id.button_rating);
-        button.setOnClickListener((View.OnClickListener) this);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, RateActivity.class);
+                intent.putExtra("RES-NAME", rname);
+                intent.putExtra("MENU-NAME", DataList.get(groupPosition).groupName);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                context.startActivity(intent);
+            }
+        });
 
         return convertView;
-    }
-
-    @Override
-    public void onClick(View view) {
-        Intent intent = new Intent(context, RateActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        context.startActivity(intent);
     }
 
 
