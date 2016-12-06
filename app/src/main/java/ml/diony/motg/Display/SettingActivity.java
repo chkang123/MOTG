@@ -12,6 +12,8 @@ import org.json.JSONArray;
 import ml.diony.motg.Communication.Sync;
 import ml.diony.motg.R;
 
+//사용자가 식단을 추천 받는데에 있어서 메뉴의 추천 기준들의 우선순위를
+//설정할 수 있는 화면을 출력하는 Class
 public class SettingActivity extends AppCompatActivity {
 
     @Override
@@ -45,6 +47,7 @@ public class SettingActivity extends AppCompatActivity {
 
         }
 
+        //사용자로부터 입력받은 데이터값들을 저장한다.
         X.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

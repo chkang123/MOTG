@@ -15,6 +15,7 @@ import ml.diony.motg.R;
  * Created by KangChanghoon on 2016. 12. 3..
  */
 
+//방문해 먹었던 메뉴와 식당의 정보를 알맞은 형태로 ExpandableListView에 배치해주는 Class
 public class HistoryAdapter extends BaseExpandableListAdapter {
     private Context context;
     private int groupLayout = 0;
@@ -22,6 +23,7 @@ public class HistoryAdapter extends BaseExpandableListAdapter {
     private ArrayList<HistoryList> DataList;
     private LayoutInflater myinf = null;
 
+    //Class의 constructor
     public HistoryAdapter(Context context, int groupLay, int chlidLay, ArrayList<HistoryList> DataList) {
         this.DataList = DataList;
         this.groupLayout = groupLay;
@@ -30,6 +32,8 @@ public class HistoryAdapter extends BaseExpandableListAdapter {
         this.myinf = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
+    //ExpandableListView에서 Parent-row에 해당하는 부분을 설정해주는 메소드
+    //날짜 데이터가 YYYY.MM.DD 형태로 출력되게 한다.
     @Override
     public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
         // TODO Auto-generated method stub
@@ -42,6 +46,8 @@ public class HistoryAdapter extends BaseExpandableListAdapter {
         return convertView;
     }
 
+    //ExpandableListView에서 Child-row에 해당하는 부분을 설정해주는 메소드
+    //해당 날짜에 방문한 가게와 먹은 메뉴가 같이 나온다.
     @Override
     public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
         // TODO Auto-generated method stub

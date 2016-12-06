@@ -18,6 +18,8 @@ import java.util.ArrayList;
 
 import ml.diony.motg.R;
 
+//선택된 식당의 정보를 출력하는 화면이다.
+//식당의 전화번호로 바로연결, 지도보기, 식당의 메뉴 및 각각의 가격을 나타내주는 기능이 있다.
 public class ResInfoActivity extends Activity {
 
     @Override
@@ -31,7 +33,7 @@ public class ResInfoActivity extends Activity {
         float ACOORDX = 0, ACOORDY = 0;
 
         Log.i("RLA", ALLX);
-
+        //서버로부터 필요한 식당의 데이터들을 불러온다.
         JSONArray X = new JSONArray(), XM = new JSONArray();
         String XT = "", XTI = "";
         try {
@@ -52,8 +54,7 @@ public class ResInfoActivity extends Activity {
         Display newDisplay = getWindowManager().getDefaultDisplay();
         int width = newDisplay.getWidth();
 
-        //rname과 이름같은 식당 찾기
-
+        //메뉴와 가격들을 가지는 ExpandableListView에 출력할 데이터들을 불러와 저장한다.
         ArrayList<ml.diony.motg.Display.MenuGroup> DataList = new ArrayList<ml.diony.motg.Display.MenuGroup>();
         ExpandableListView listView = (ExpandableListView) findViewById(R.id.mylist);
         for (int i = 0; i < XM.length(); i++) {
@@ -85,6 +86,8 @@ public class ResInfoActivity extends Activity {
         bt2.setText("지도보기");
 
         Log.i("FFFFFFFF", "WHYYY" + FXT);
+
+        //식당의 전화번호로 전화를 걸 준비를 해준다.
         bt1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -95,6 +98,7 @@ public class ResInfoActivity extends Activity {
         Log.i("ABEFOREMAPMAPMAP", "COORDX = " + ACOORDX + ", COORDY = " + ACOORDY);
         Log.i("BEFOREMAPMAPMAP", "COORDX = " + COORDX + ", COORDY = " + COORDY);
 
+        //식당의 위치를 Daum지도 상에 나타내기 위해 MapActivity를 실행하며 식당의 위도, 경도 정보를 넘겨준다.
         bt2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -108,19 +112,6 @@ public class ResInfoActivity extends Activity {
         TextView tv1 = (TextView) findViewById(R.id.textView2);
 
         tv1.setText("영업 시간 : " + XTI);
-
-/*
-        Button bt3 = (Button) findViewById(R.id.button3);
-        bt3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                EditText date = (EditText) findViewById(R.id.date_text);
-                int intdate = Integer.parseInt(date.getText().toString());
-                //history로 넘긴다...
-                }
-            }
-        });
-        */
 
     }
 

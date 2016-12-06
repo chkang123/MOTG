@@ -13,7 +13,7 @@ import java.util.ArrayList;
 
 import ml.diony.motg.R;
 
-//업종별 식당 화면 출력
+//선택된 업종에 해당하는 식당들의 목록을 보여주는 화면을 출력하는 Class
 public class ReslistActivity extends AppCompatActivity {
     ArrayList<ResList> Rlist;
 
@@ -36,17 +36,8 @@ public class ReslistActivity extends AppCompatActivity {
         Log.i("ResListActivity", "와아아아아" + X.toString());
 
         Rlist = new ArrayList<ResList>();
-/*
-        ResList rlist;
-        //반복문으로 rtype과 같은 업종인 식당 불러옴
-        while() { //확인안한 식당 있는경우
-            //업종이 rtype과 같으면 rlist 정보받아오고 Rlist에 추가
-            rlist.ResName = ;//받아온 이름
-            rlist.code = ;//받아온 아이디
-            Rlist.add(rlist);
-        }
-*/
 
+        //해당하는 식당들을 찾고 선택된 식당들의 이름을 모두 저장한다.
         for(int i = 0; i < X.length(); i++) {
 
             String NAME = "";

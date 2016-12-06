@@ -13,6 +13,7 @@ import java.util.ArrayList;
 
 import ml.diony.motg.R;
 
+//검색기능을 통해 검색된 결과를 식당들의 리스트 형태로 출력해주는 Class이다.
 public class SearchRlistActivity extends AppCompatActivity {
     ArrayList<ml.diony.motg.Display.ResList> Rlist;
 
@@ -22,7 +23,6 @@ public class SearchRlistActivity extends AppCompatActivity {
         setContentView(R.layout.activity_search_rlist);
 
         Intent intent = getIntent();
-        String keyword = intent.getExtras().getString("//////");
         String ALLX = intent.getExtras().getString("ALLX");
 
         Log.i("RLA", ALLX);
@@ -35,16 +35,8 @@ public class SearchRlistActivity extends AppCompatActivity {
         Log.i("ResListActivity", "와아아아아" + X.toString());
 
         Rlist = new ArrayList<ml.diony.motg.Display.ResList>();
-/*
-        ResList rlist;
-        //반복문으로 keyword와 유사한 이름 식당 불러옴
-        while() { //확인안한 식당 있는경우
-            //비교후 rlist 정보받아오고 Rlist에 추가
-            rlist.ResName = ;//받아온 이름
-            rlist.id = ;//받아온 아이디
-            Rlist.add(rlist);
-        }
-*/
+
+        //검색 결과로 출력되어야할 음식점들을 모두 찾고 그 식당들의 이름을 모두 저장한다.
         for(int i = 0; i < X.length(); i++) {
 
             String NAME = "";
