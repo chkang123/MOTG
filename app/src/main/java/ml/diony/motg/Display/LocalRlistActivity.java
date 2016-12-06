@@ -13,6 +13,8 @@ import java.util.ArrayList;
 
 import ml.diony.motg.R;
 
+//어떤 지역에 해당하는 버튼을 클릭했을때 실행되고, 그 지역에 위치한 식당들을 모두
+//출력해주는 Class이다.
 public class LocalRlistActivity extends AppCompatActivity {
     ArrayList<ResList> Rlist;
 
@@ -37,6 +39,7 @@ public class LocalRlistActivity extends AppCompatActivity {
         Rlist = new ArrayList<ResList>();
 
 
+        //찾고자하는 지역과 같은 위치정보를 가진 식당들을 하나씩 비교하며 찾아낸다.
         for(int i = 0; i < X.length(); i++) {
 
             String NAME = "";
@@ -52,18 +55,7 @@ public class LocalRlistActivity extends AppCompatActivity {
 
         }
 
-
-
-/*
-        ResList rlist;
-        //반복문으로 keyword와 유사한 이름 식당 불러옴
-        while() { //확인안한 식당 있는경우
-            //비교후 rlist 정보받아오고 Rlist에 추가
-            rlist.ResName = ;//받아온 이름
-            rlist.id = ;//받아온 아이디
-            Rlist.add(rlist);
-        }
-*/
+        //선택된 식당들의 리스트를 출력하기 위해 MyListAdapter를 통하여 정리해준다.
         MyListAdapter myAdapter = new MyListAdapter(this, R.layout.res_row, Rlist);
 
         ListView myList;

@@ -17,6 +17,8 @@ import org.json.JSONObject;
 import ml.diony.motg.Communication.Sync;
 import ml.diony.motg.R;
 
+//사용자가 방문기록을 메뉴에 대한 평점, 식당 서비스에 대한 평점,
+//방문날짜와 함께 기록할 수 있는 화면을 제공하는 Class
 public class RateActivity extends AppCompatActivity {
 
     RatingBar rating;
@@ -33,6 +35,7 @@ public class RateActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rate);
 
+        //어떤 식당의 어느 메뉴에 대한 평가인지 알기 위해 식당이름과 메뉴이름을 받아온다.
         rname = getIntent().getExtras().getString("RES-NAME");
         mname = getIntent().getExtras().getString("MENU-NAME");
 
@@ -42,13 +45,17 @@ public class RateActivity extends AppCompatActivity {
         tv4 = (TextView) findViewById(R.id.tv4);
         tvx = (EditText) findViewById(R.id.date_text);
 
+        //별점의 기본 단위가 0.5칸이 되도록 설정한다.
         rating.setStepSize((float) 0.5);
+        //초기 화면에 출력되는 별점이 0이도록 설정한다.
         rating.setRating((float) 0.0);
+        //사용자가 별점을 수정할 수 있도록 설정한다.
         rating.setIsIndicator(false);
         rating2.setStepSize((float) 0.5);
         rating2.setRating((float) 0.0);
         rating2.setIsIndicator(false);
 
+        //별점 칸의 수가 바뀔때마다 현재 칸 수에 해당하는 평점은 얼마인지 보여준다.
         rating.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
             @Override
             public void onRatingChanged(RatingBar ratingBar, float v, boolean b) {
@@ -63,12 +70,12 @@ public class RateActivity extends AppCompatActivity {
             }
         });
 
+        //모든 정보를 입력하고 등록하기 버튼을 누른 경우 입력받은 데이터를 저장하면서
+        //간단한 성공 혹은 에러 메시지를 띄워준다.
         Button button = (Button) findViewById(R.id.button_confirm);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //데이터 저장
-                //Toast 띄워서 저장 또는 오류 출력
 
                 if(tvx.getText().length() != 8) {
 
