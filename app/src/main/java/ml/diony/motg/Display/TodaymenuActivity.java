@@ -12,6 +12,7 @@ import java.util.ArrayList;
 
 import ml.diony.motg.R;
 
+//알고리즘을 통해 생성된 오늘의 추천메뉴 순위 상위 4개의 식당목록을 출력하는 Class이다.
 public class TodaymenuActivity extends AppCompatActivity {
     ArrayList<ResList> Rlist;
 
@@ -31,19 +32,10 @@ public class TodaymenuActivity extends AppCompatActivity {
         } catch(Exception E) {}
 
         Log.i("ResListActivity", "와아아아아" + X.toString());
-        //String rtype = intent.getExtras().getString("rtype");
 
         Rlist = new ArrayList<ResList>();
-/*
-        ResList rlist;
-        //반복문으로 rtype과 같은 업종인 식당 불러옴
-        while() { //확인안한 식당 있는경우
-            //업종이 rtype과 같으면 rlist 정보받아오고 Rlist에 추가
-            rlist.ResName = ;//받아온 이름
-            rlist.code = ;//받아온 아이디
-            Rlist.add(rlist);
-        }
-*/
+
+        //추천된 식당과 메뉴들에 대한 정보를 받아와 저장하고 출력한다.
         for(int i = 0; i < X.length(); i++) {
 
             String NAME = "";
@@ -62,7 +54,7 @@ public class TodaymenuActivity extends AppCompatActivity {
 
         }
 
-
+        //TodayRankingAdapter를 이용해 원하는 형식으로 식당들의 리스트를 출력할 수 있도록 한다.
         TodayRankingAdapter myAdapter = new TodayRankingAdapter(this, R.layout.todayres_row, Rlist);
 
         ListView myList;
