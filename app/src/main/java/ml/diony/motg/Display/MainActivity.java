@@ -26,6 +26,12 @@ import ml.diony.motg.Authentication.Base;
 import ml.diony.motg.Communication.Interaction;
 import ml.diony.motg.R;
 
+//세 가지의 홈화면을 출력해주는 Class이다.
+//TabLayout을 이용해 swipe 또는 탭 클릭을 통해 다른 탭으로 이동할 수 있다
+//첫번째 홈화면은 업종별로 분류된 버튼이 있어 버튼을 누르면 각 업종에 해당하는 식당 목록을 볼 수 있다.
+//두번째 홈화면은 지도 위에 지역별로 분류된 버튼이 있고 각 버튼은 해당 지역에 위치한 식당 목록을 보여준다.
+//세번째 홈화면은 과거 방문기록을 보거나 평가기준의 우선순위를 설정할 수 있는 기능으로 연결되는 버튼들이 있다.
+//어플리케이션이 처음 실행되면 두번째 홈화면이 가장 먼저 표시된다.
 public class MainActivity extends AppCompatActivity {
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -76,6 +82,7 @@ public class MainActivity extends AppCompatActivity {
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mViewPager);
 
+        //두번째 홈화면이 처음에 출력되도록 설정한다.
         tabLayout.getTabAt(1).select();
 
     }
@@ -87,6 +94,8 @@ public class MainActivity extends AppCompatActivity {
 
         Log.i("TEST", "작동하나?");
         getMenuInflater().inflate(R.menu.menu_main, menu);
+
+        //검색기능을 제공한다.
         MenuItem searchItem = menu.findItem(R.id.action_search);
         SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
         searchView.setQueryHint("식당명으로 검색..");
@@ -94,9 +103,12 @@ public class MainActivity extends AppCompatActivity {
         searchAutoComplete.setHintTextColor(getColor(this, R.color.white));
         searchAutoComplete.setTextColor(getColor(this, R.color.white));
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+
+            //검색창에서 입력이 완료되어 사용자가 검색 버튼을 누른 경우 아래의 코드가 실행된다.
             @Override
             public boolean onQueryTextSubmit(String s) {
 
+                //검색 결과에 해당하는 식당들의 리스트를 출력하기 위해 SearchRlistActivity로 넘어간다.
                 Intent intent1 = new Intent(CONTEXT, ml.diony.motg.Display.SearchRlistActivity.class);
                 IA.getSpecified("ALL", "NAME", s, intent1);
 
@@ -158,6 +170,7 @@ public class MainActivity extends AppCompatActivity {
 
             final Interaction IA = new Interaction((Activity) getContext(), getContext());
 
+            //첫번째 홈화면에 존재하는 버튼들의 다음 행동을 설정해준다.
             if (getArguments().getInt(ARG_SECTION_NUMBER) == 1) {
                 View rootView = inflater.inflate(R.layout.fragment_main, container, false);
                 Button btn_kor = (Button) rootView.findViewById(R.id.kor_btn);
@@ -201,7 +214,10 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
                 return rootView;
-            } else if (getArguments().getInt(ARG_SECTION_NUMBER) == 2) {
+            }
+
+            //두번째 홈화면에 존재하는 버튼들의 다음 행동을 설정해준다.
+            else if (getArguments().getInt(ARG_SECTION_NUMBER) == 2) {
                 View rootView = inflater.inflate(R.layout.fragment_main2, container, false);
 
                 Button btn_yukang = (Button) rootView.findViewById(R.id.button_yukang);
@@ -286,7 +302,10 @@ public class MainActivity extends AppCompatActivity {
                 });
 
                 return rootView;
-            } else {
+            }
+
+            //세번째 홈화면에 존재하는 버튼들의 다음 행동을 설정해준다.
+            else {
                 View rootView = inflater.inflate(R.layout.fragment_main3, container, false);
                 Button btn_view_hs = (Button) rootView.findViewById(R.id.View_history);
                 Button btn_setting = (Button) rootView.findViewById(R.id.Setting_rank);
@@ -327,12 +346,13 @@ public class MainActivity extends AppCompatActivity {
             return PlaceholderFragment.newInstance(position + 1);
         }
 
+        //전체 페이지 수를 설정해준다.
         @Override
         public int getCount() {
-            // Show 3 total pages.
             return 3;
         }
 
+        //탭 부분에 나타낼 문자들을 설정해준다.
         @Override
         public CharSequence getPageTitle(int position) {
             switch (position) {
