@@ -14,14 +14,13 @@ import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
-/**
- * Created by nayak on 2016-12-03.
- */
+//Copyright 2017 YUOA.
 
 public class Base extends Activity {
 
     protected static String TAG = "MOTGAuth";
 
+    //File Stream을 String으로 바꾸는 함수이다.
     public static String convertStreamToString(InputStream is) throws Exception {
         BufferedReader reader = new BufferedReader(new InputStreamReader(is));
         StringBuilder sb = new StringBuilder();
@@ -33,6 +32,7 @@ public class Base extends Activity {
         return sb.toString();
     }
 
+    //파일을 읽어들이는 함수이다.
     public static String getStringFromFile(String filePath) throws Exception {
         File fl = new File(filePath);
         FileInputStream fin = new FileInputStream(fl);
@@ -41,7 +41,7 @@ public class Base extends Activity {
         fin.close();
         return ret;
     }
-    
+
     @Override
     public void onCreate(Bundle s) {
 
@@ -53,13 +53,7 @@ public class Base extends Activity {
 
     }
 
-    @Override
-    public void onDestroy() {
-
-        super.onDestroy();
-
-    }
-
+    //로그인 정보를 저장하는 함수이다.
     final public void saveLoginInforamtion(String ID, int TYPE) {
 
         if (TYPE == 0) {
@@ -110,6 +104,7 @@ public class Base extends Activity {
 
     }
 
+    //cache 폴더에서 로그인 정보를 불러오는 함수이다.
     public JSONObject getLoginInformation() {
 
         String O = null;

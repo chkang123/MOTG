@@ -22,9 +22,7 @@ import java.security.SecureRandom;
 import ml.diony.motg.BuildConfig;
 import ml.diony.motg.R;
 
-/**
- * Created by nayak on 2016-12-03.
- */
+//Copyright 2017 YUOA.
 
 public class Screen extends Activity implements View.OnClickListener {
 
@@ -37,16 +35,12 @@ public class Screen extends Activity implements View.OnClickListener {
 
     private String ID = "";
 
+    //Constructor에서는 기본적인 로그인 정보를 불러온다.
     public Screen(Context CONTEXT) {
 
         Log.i(TAG, "Auth Screen Constructed with Context.");
 
         this.CONTEXT = CONTEXT;
-
-        //Load Is Logined
-
-
-        //lsLgM = ~;
 
         isLgn[0] = (new TypeNaver(CONTEXT)).isLogined();
         isLgn[1] = false;
@@ -77,22 +71,7 @@ public class Screen extends Activity implements View.OnClickListener {
 
     }
 
-    public Screen() {
-
-        Log.i(TAG, "Auth Screen Constructed.");
-
-        this.CONTEXT = this;
-
-        //Load Is Logined
-
-        //lsLgM = ~;
-
-        isLgn[0] = (new TypeNaver(CONTEXT)).isLogined();
-        isLgn[1] = false;
-        isLgn[2] = (lsLgM == 3) && (new TypeDummy()).isLogined();
-
-    }
-
+    //color를 불러오는 함수이다.
     public static final int getColor(Context context, int id) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             return android.support.v4.content.ContextCompat.getColor(context, id);
@@ -101,6 +80,7 @@ public class Screen extends Activity implements View.OnClickListener {
         }
     }
 
+    //drawable을 불러오는 함수이다.
     public static final Drawable getDrawable(Context context, int id) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             return android.support.v4.content.ContextCompat.getDrawable(context, id);
@@ -109,22 +89,26 @@ public class Screen extends Activity implements View.OnClickListener {
         }
     }
 
+    //dp를 px로 바꾸는 함수이다. 코드 상에서는 dip 단위를 쓸 수 없기에 필요하다.
     public static final float dp2px(Context context, int dp) {
         return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 10 * dp, context.getResources().getDisplayMetrics());
     }
 
+    //ID를 불러오는 함수이다.
     public String getId() {
 
         return ID;
 
     }
 
+    //Thread에서 ID를 쓸 때 사용하는 함수이다.
     public void setId(String ID) {
 
         this.ID = ID;
 
     }
 
+    //각 최근 로그인 METHOD에 맞게 ID를 불러오는 함수이다.
     public Screen checkId() {
 
         if (isLgn[2]) {
@@ -164,6 +148,7 @@ public class Screen extends Activity implements View.OnClickListener {
 
     }
 
+    //최근 로그인 METHOD를 저장하는 함수이다.
     public void setLSLGM(byte X) {
         lsLgM = X;
     }
@@ -181,6 +166,7 @@ public class Screen extends Activity implements View.OnClickListener {
 
     }
 
+    //로그인 버튼을 만드는 함수이다.
     private RelativeLayout makeLoginButton(Activity A, int background, int symbol, int color, int message, RelativeLayout.LayoutParams buttonParams) {
 
         Log.i(TAG, "A Login Button is created.");
@@ -273,6 +259,7 @@ public class Screen extends Activity implements View.OnClickListener {
 
     }
 
+    //로그인 화면을 보여주는 함수이다.
     public void authScreenView(ml.diony.motg.init A, Context C) {
 
         Log.i(TAG, "Auth Screen Started.");
@@ -371,6 +358,7 @@ public class Screen extends Activity implements View.OnClickListener {
 
     }
 
+    //버튼을 누를 시 실행되는 함수이다.
     @Override
     public void onClick(View v) {
 
@@ -426,6 +414,7 @@ public class Screen extends Activity implements View.OnClickListener {
 
     }
 
+    //최근 로그인 METHOD를 얻을 때 사용된 함수이다.
     public int getLoginMethod() {
 
         if (isLgn[0])
@@ -438,6 +427,7 @@ public class Screen extends Activity implements View.OnClickListener {
 
     }
 
+    //로그인 여부를 체크하는 함수이다.
     public boolean isLogined() {
 
         isLgn[0] = (new TypeNaver(CONTEXT)).isLogined();

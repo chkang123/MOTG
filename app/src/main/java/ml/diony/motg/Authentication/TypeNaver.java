@@ -16,9 +16,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-/**
- * Created by nayak on 2016-12-03.
- */
+//Copyright 2017 YUOA.
 
 public class TypeNaver extends Base {
 
@@ -31,6 +29,8 @@ public class TypeNaver extends Base {
     private static String OAUTH_CLIENT_NAME = "MOTG - 맛지";
     private static String NAVER_ERROR_CODE, NAVER_ERROR_DESCRIPTION;
     protected String ID = "";
+
+    //로그인을 핸들링하는 HANDLER이다. 로그인 이후 실행되는 코드들이다.
     private OAuthLoginHandler AuthHandler = new OAuthLoginHandler() {
         @Override
         public void run(boolean b) {
@@ -86,6 +86,7 @@ public class TypeNaver extends Base {
 
     }
 
+    //로그인 시도에 필요한 기본적인 데이터를 설정하는 함수이다.
     protected static void setAuthInformation() {
 
         Log.i(TAG + "_nv", "Setting Auth Informations.");
@@ -100,6 +101,7 @@ public class TypeNaver extends Base {
 
     }
 
+    //네이버 로그인 여부를 확인하는 함수이다.
     public static boolean isLogined() {
 
         Log.i(TAG + "_nv", "Starts to check if it is logined.");
@@ -124,6 +126,7 @@ public class TypeNaver extends Base {
 
     }
 
+    //TypeNaver Activity는 실행되자마자 login을 시도한다.
     @Override
     public void onCreate(Bundle savedBundleInstance) {
 
@@ -150,6 +153,7 @@ public class TypeNaver extends Base {
 
     }
 
+    //로그인을 시도하는 함수이다.
     public void procLogin() {
 
         setAuthInformation();
@@ -160,6 +164,7 @@ public class TypeNaver extends Base {
 
     }
 
+    //NAVER LOGIN의 ID를 얻어오는 함수이다.
     public String getID() {
 
         setAuthInformation();
