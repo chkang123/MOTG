@@ -49,6 +49,8 @@ public class Interaction extends Activity {
 
     }
 
+    public Interaction() {}
+
     //Interaction은 Activity로서의 기능이 로딩 바를 보여주는 것 밖에 없다.
     @Override
     public void onCreate(Bundle s) {
