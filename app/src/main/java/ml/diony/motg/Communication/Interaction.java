@@ -283,7 +283,7 @@ public class Interaction extends Activity {
 
                 final HttpClient C = new DefaultHttpClient();
 
-                final HttpPost P = new HttpPost("http://dn-mt-svc.yuoa.ml/MOTGDataActionRecommended");
+                final HttpPost P = new HttpPost("http://dn-mt-svc.yuoa.ml/MOTGRecommended");
 
                 P.addHeader("X-Dionysource", "MOTG_AP");
                 P.setHeader("Content-Type", "application/json");
