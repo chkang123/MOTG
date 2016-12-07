@@ -39,9 +39,7 @@ import java.util.ArrayList;
 import ml.diony.motg.R;
 import ml.diony.motg.init;
 
-/**
- * Created by nayak on 2016-12-03.
- */
+//Copyright 2017 YUOA.
 
 public class Sync extends Activity {
 
@@ -104,12 +102,7 @@ public class Sync extends Activity {
         return ret;
     }
 
-    private boolean isFile(File file) {
-        boolean result;
-        result = file != null && file.exists() && file.isFile();
-        return result;
-    }
-
+    //Sync는 액티비티가 만들어지면 loading 바를 띄우고, versionCheck부터 순차적으로 실행시킨다.
     @Override
     public void onCreate(Bundle s) {
 
@@ -146,6 +139,7 @@ public class Sync extends Activity {
 
     }
 
+    //Application의 version을 Check한다.
     public void versionCheck() {
 
         final String SURL = SRVU + "VersionCheck";
@@ -351,6 +345,7 @@ public class Sync extends Activity {
 
     }
 
+    //account 정보를 Sync한다.
     public void accountSync(final boolean isInit) {
 
         final String SURL = SRVU + "AccountCheck";
@@ -497,6 +492,7 @@ public class Sync extends Activity {
 
     }
 
+    //hisroty 정보를 Sync한다.
     public void historySync(String REV) {
 
         historySync(false, REV);
@@ -708,6 +704,7 @@ public class Sync extends Activity {
 
     }
 
+    //User Setting(선호도 정보)를 다운로드한다.
     public void downloadUS() {
 
         final String SURL = SRVU + "USSync";
@@ -803,6 +800,7 @@ public class Sync extends Activity {
 
     }
 
+    //User Setting(선호도 정보)를 업로드한다.
     public void uploadUS(final JSONArray JA) {
 
         final String SURL = SRVU + "USSync";
@@ -873,6 +871,7 @@ public class Sync extends Activity {
 
     }
 
+    //cache 폴더에 history revision 정보를 저장한다.
     final public void saveREVINFO(final int REV) {
 
         FileOutputStream FOS;
@@ -930,6 +929,7 @@ public class Sync extends Activity {
 
     }
 
+    //cache 폴더에 선호도 정보를 저장한다.
     final public void saveU_S(final JSONArray JA) {
 
         FileOutputStream FOS;
@@ -963,6 +963,7 @@ public class Sync extends Activity {
 
     }
 
+    //cache 폴더에서 history revision 정보를 불러온다.
     public int getREVINFO() {
 
         String O = null;
@@ -995,6 +996,7 @@ public class Sync extends Activity {
 
     }
 
+    //cache 폴더에서 특정 revision에 해당하는 history 정보를 불러온다.
     public JSONObject getHISTORY(final int REV) {
 
         JSONObject RT = null;
@@ -1013,6 +1015,7 @@ public class Sync extends Activity {
 
     }
 
+    //cache 폴더에서 선호도 정보를 불러온다.
     public JSONArray getU_S() {
 
         JSONArray RT = null;

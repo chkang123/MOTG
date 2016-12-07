@@ -33,9 +33,7 @@ import ml.diony.motg.R;
 
 import static android.content.ContentValues.TAG;
 
-/**
- * Created by nayak on 2016-12-05.
- */
+//Copyright 2017 YUOA.
 
 public class Interaction extends Activity {
 

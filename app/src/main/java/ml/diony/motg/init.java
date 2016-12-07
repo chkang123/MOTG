@@ -12,9 +12,7 @@ import ml.diony.motg.Authentication.Base;
 import ml.diony.motg.Authentication.Screen;
 import ml.diony.motg.Communication.Sync;
 
-/**
- * Created by nayak on 2016-12-03.
- */
+//Copyright 2017 YUOA.
 
 final public class init extends Activity {
 
