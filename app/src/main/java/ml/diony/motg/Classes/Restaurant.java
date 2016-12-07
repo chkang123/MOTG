@@ -47,24 +47,20 @@ public class Restaurant {
         food_list.add(food);
     }
 
-    public void set_num_togo(int num_togo) {
-        this.num_togo = num_togo;
-    }
-
     public int get_num_togo() {
         return num_togo;
     }
 
-    public void set_address(String address) {
-        this.address = address;
+    public void set_num_togo(int num_togo) {
+        this.num_togo = num_togo;
     }
 
     public String get_address() {
         return address;
     }
 
-    public void set_telephone(String telephone) {
-        this.telephone = telephone;
+    public void set_address(String address) {
+        this.address = address;
     }
 
     public String get_telephone() {
@@ -72,12 +68,16 @@ public class Restaurant {
         return telephone;
     }
 
-    public void set_introduce(String introduce) {
-        this.introduce = introduce;
+    public void set_telephone(String telephone) {
+        this.telephone = telephone;
     }
 
     public String get_introduce() {
         return introduce;
+    }
+
+    public void set_introduce(String introduce) {
+        this.introduce = introduce;
     }
 
     public void add_eval(Evaluation eval) {

@@ -45,6 +45,11 @@ public class MainActivity extends AppCompatActivity {
 
     Interaction IA = new Interaction(this, this);
     Context CONTEXT = this;
+    private SectionsPagerAdapter mSectionsPagerAdapter;
+    /**
+     * The {@link ViewPager} that will host the section contents.
+     */
+    private ViewPager mViewPager;
 
     public static final int getColor(Context context, int id) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -53,12 +58,6 @@ public class MainActivity extends AppCompatActivity {
             return context.getResources().getColor(id);
         }
     }
-
-    private SectionsPagerAdapter mSectionsPagerAdapter;
-    /**
-     * The {@link ViewPager} that will host the section contents.
-     */
-    private ViewPager mViewPager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

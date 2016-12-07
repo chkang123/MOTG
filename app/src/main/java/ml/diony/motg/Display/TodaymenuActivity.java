@@ -29,14 +29,15 @@ public class TodaymenuActivity extends AppCompatActivity {
         JSONArray X = new JSONArray();
         try {
             X = new JSONArray(ALLX);
-        } catch(Exception E) {}
+        } catch (Exception E) {
+        }
 
         Log.i("ResListActivity", "와아아아아" + X.toString());
 
         Rlist = new ArrayList<ResList>();
 
         //추천된 식당과 메뉴들에 대한 정보를 받아와 저장하고 출력한다.
-        for(int i = 0; i < X.length(); i++) {
+        for (int i = 0; i < X.length(); i++) {
 
             String NAME = "";
             String MENU = "";
@@ -46,7 +47,8 @@ public class TodaymenuActivity extends AppCompatActivity {
                 NAME = (String) ((JSONArray) X.get(i)).get(0);
                 MENU = (String) ((JSONArray) X.get(i)).get(1);
 
-            } catch(Exception E) {}
+            } catch (Exception E) {
+            }
 
             ResList rlist = new ResList(MENU + "-" + NAME);
             rlist.code = NAME;

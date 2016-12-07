@@ -39,14 +39,19 @@ import static android.content.ContentValues.TAG;
 
 public class Interaction extends Activity {
 
-    private Activity ACTIVITY;
-    private Context CONTEXT;
     final static private String URL = "http://dn-mt-svc.yuoa.ml/MOTGDataAction";
-
+    private Context CONTEXT;
     private JSONArray O;
 
     private boolean BOOO = false;
 
+    public Interaction(Activity A, Context C) {
+
+        CONTEXT = C;
+
+    }
+
+    //Interaction은 Activity로서의 기능이 로딩 바를 보여주는 것 밖에 없다.
     @Override
     public void onCreate(Bundle s) {
 
@@ -62,12 +67,13 @@ public class Interaction extends Activity {
 
     }
 
+    //뒤로가기 버튼을 눌러 이 액티비티에 resume하면 액티비티를 종료시킨다.
     @Override
     public void onResume() {
 
         super.onResume();
 
-        if(BOOO) {
+        if (BOOO) {
 
             finish();
 
@@ -79,28 +85,7 @@ public class Interaction extends Activity {
 
     }
 
-    public Interaction(Activity A, Context C) {
-
-        ACTIVITY = A;
-        CONTEXT= C;
-
-    }
-
-    public Interaction() {
-
-        ACTIVITY = null;
-        CONTEXT = null;
-
-    }
-
-    private void setO(JSONArray O) { this.O = O; }
-
-    public JSONArray getAll(Intent I) {
-
-        return getAll("ALL", I);
-
-    }
-
+    //음식점 TYPE(ALL, KR, CN, JP, WE)을 지정하여 해당 타입의 모든 음식점 정보를 받아온 이후에 Intent에 받아온 정보를 주어 activity를 시작한다.
     public JSONArray getAll(final String TYPE, final Intent I) {
 
         Intent IN = new Intent(CONTEXT, Interaction.class);
@@ -184,6 +169,7 @@ public class Interaction extends Activity {
 
     }
 
+    //특정한 KIND(NAME이나 REGION 지정)의 음식점(들)을 받아온 이후에 Intent에 받아온 정보를 주어 activity를 시작한다.
     public JSONArray getSpecified(final String TYPE, final String STL, final String STLD, final Intent I) {
 
         O = new JSONArray();
@@ -269,6 +255,7 @@ public class Interaction extends Activity {
 
     }
 
+    //추천 메뉴를 받아온 이후 추천 메뉴 리스트 intent를 시작한다.
     public JSONArray getRecommended(final Intent I) {
 
         Intent IN = new Intent(CONTEXT, Interaction.class);
@@ -303,7 +290,6 @@ public class Interaction extends Activity {
 
                         //final JSONObject AX = ;
                         D.add(new BasicNameValuePair("AX", Base64.encodeToString((new Base()).getLoginInformation().toString().getBytes(), 0)));
-
 
 
                         (new Thread() {
@@ -343,7 +329,7 @@ public class Interaction extends Activity {
 
                                         }
 
-                                         RS = SB.toString();
+                                        RS = SB.toString();
 
                                         Log.i(TAG, RS);
 
@@ -378,7 +364,6 @@ public class Interaction extends Activity {
                 Log.i("HANDLEREND??", "ENDED!!");
 
 
-
             }
 
         }.start();
@@ -389,6 +374,9 @@ public class Interaction extends Activity {
 
     }
 
-    public JSONArray getO() {return O;}
+    //Thread 안에서 현재 Activity의 JSONArray에 값을 넣기 위한 함수이다.
+    private void setO(JSONArray O) {
+        this.O = O;
+    }
 
 }

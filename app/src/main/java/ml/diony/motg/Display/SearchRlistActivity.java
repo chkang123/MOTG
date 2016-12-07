@@ -30,14 +30,15 @@ public class SearchRlistActivity extends AppCompatActivity {
         JSONArray X = new JSONArray();
         try {
             X = new JSONArray(ALLX);
-        } catch(Exception E) {}
+        } catch (Exception E) {
+        }
 
         Log.i("ResListActivity", "와아아아아" + X.toString());
 
         Rlist = new ArrayList<ml.diony.motg.Display.ResList>();
 
         //검색 결과로 출력되어야할 음식점들을 모두 찾고 그 식당들의 이름을 모두 저장한다.
-        for(int i = 0; i < X.length(); i++) {
+        for (int i = 0; i < X.length(); i++) {
 
             String NAME = "";
 
@@ -45,7 +46,8 @@ public class SearchRlistActivity extends AppCompatActivity {
 
                 NAME = ((JSONObject) X.get(i)).getString("NAME");
 
-            } catch(Exception E) {}
+            } catch (Exception E) {
+            }
 
             ResList rlist = new ResList(NAME);
             Rlist.add(rlist);

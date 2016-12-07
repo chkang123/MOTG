@@ -12,40 +12,11 @@ import java.util.ArrayList;
 
 public class SuperManager {
 
-    public class EvaluationPacket {
-        int eval_version;
-        ArrayList<Evaluation> eval_list;
-
-        public EvaluationPacket() {
-        }
-
-        public void add_version() {
-            eval_version++;
-        }
-
-        public void set_version(int version) {
-            eval_version = version;
-        }
-
-        public int size() {
-            return eval_list.size();
-        }
-
-        public void add(Evaluation evaluation) {
-            eval_list.add(evaluation);
-        }
-
-        public Evaluation get(int i) {
-            return eval_list.get(i);
-        }
-    }
-
     EvaluationPacket eval_list;
     ArrayList<Restaurant> rstrnt_list;
     ArrayList<Food> food_list;
     ml.diony.motg.Classes.Users usr;
     Gson gson;
-
     public SuperManager() {
         eval_list = new EvaluationPacket();
         rstrnt_list = null;
@@ -169,5 +140,33 @@ public class SuperManager {
         usr.Jsontoeval();
         usr.Jsontofavfood();
         usr.Jsontofavrstrnt();
+    }
+
+    public class EvaluationPacket {
+        int eval_version;
+        ArrayList<Evaluation> eval_list;
+
+        public EvaluationPacket() {
+        }
+
+        public void add_version() {
+            eval_version++;
+        }
+
+        public void set_version(int version) {
+            eval_version = version;
+        }
+
+        public int size() {
+            return eval_list.size();
+        }
+
+        public void add(Evaluation evaluation) {
+            eval_list.add(evaluation);
+        }
+
+        public Evaluation get(int i) {
+            return eval_list.get(i);
+        }
     }
 }

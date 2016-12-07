@@ -33,7 +33,7 @@ public class HistoryActivity extends AppCompatActivity {
 
         int RE = X.getREVINFO();
 
-        for(int i = (RE > 30) ? RE - 30 : 1; i <= RE; i++) {
+        for (int i = (RE > 30) ? RE - 30 : 1; i <= RE; i++) {
 
             JSONObject XX = X.getHISTORY(i);
 
@@ -41,10 +41,11 @@ public class HistoryActivity extends AppCompatActivity {
 
                 HistoryList hlist = new HistoryList(XX.getString("DATE"));
 
-                hlist.child.add(XX.getString("MENU") + "-"+ XX.getString("RES"));
+                hlist.child.add(XX.getString("MENU") + "-" + XX.getString("RES"));
                 DataList.add(hlist);
 
-            } catch (Exception E) {}
+            } catch (Exception E) {
+            }
 
         }
 

@@ -30,7 +30,7 @@ public class SettingActivity extends AppCompatActivity {
 
         JSONArray A = (new Sync()).getU_S();
 
-        if(A != null) {
+        if (A != null) {
 
             Log.i("SETTING", "RECORD EXISTS!");
 
@@ -43,7 +43,8 @@ public class SettingActivity extends AppCompatActivity {
                 ET5.setText((String) A.get(4));
 
 
-            } catch(Exception E) {}
+            } catch (Exception E) {
+            }
 
         }
 

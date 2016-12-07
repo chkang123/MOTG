@@ -32,7 +32,8 @@ public class LocalRlistActivity extends AppCompatActivity {
         JSONArray X = new JSONArray();
         try {
             X = new JSONArray(ALLX);
-        } catch(Exception E) {}
+        } catch (Exception E) {
+        }
 
         Log.i("ResListActivity", "와아아아아" + X.toString());
 
@@ -40,7 +41,7 @@ public class LocalRlistActivity extends AppCompatActivity {
 
 
         //찾고자하는 지역과 같은 위치정보를 가진 식당들을 하나씩 비교하며 찾아낸다.
-        for(int i = 0; i < X.length(); i++) {
+        for (int i = 0; i < X.length(); i++) {
 
             String NAME = "";
 
@@ -48,7 +49,8 @@ public class LocalRlistActivity extends AppCompatActivity {
 
                 NAME = ((JSONObject) X.get(i)).getString("NAME");
 
-            } catch(Exception E) {}
+            } catch (Exception E) {
+            }
 
             ResList rlist = new ResList(NAME);
             Rlist.add(rlist);

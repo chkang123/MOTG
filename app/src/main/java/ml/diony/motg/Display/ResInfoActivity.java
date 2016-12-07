@@ -40,11 +40,11 @@ public class ResInfoActivity extends Activity {
             X = new JSONArray(ALLX);
             XM = ((JSONObject) X.get(0)).getJSONArray("MENU");
             XT = ((JSONObject) X.get(0)).getString("TEL");
-            String XXX = ((JSONObject)X.get(0)).getJSONArray("POS").toString(), XRE = XXX.substring(XXX.indexOf(",") + 1, XXX.indexOf("]"));
+            String XXX = ((JSONObject) X.get(0)).getJSONArray("POS").toString(), XRE = XXX.substring(XXX.indexOf(",") + 1, XXX.indexOf("]"));
             Log.i("WOWWOWOWWO", XRE);
             ACOORDX = Float.parseFloat(XRE.substring(0, XRE.indexOf(",")));
             ACOORDY = Float.parseFloat(XRE.substring(XRE.indexOf(",") + 1));
-            XTI = (String) ((JSONObject) X.get(0)).getString("TIME");
+            XTI = ((JSONObject) X.get(0)).getString("TIME");
         } catch (Exception E) {
         }
 

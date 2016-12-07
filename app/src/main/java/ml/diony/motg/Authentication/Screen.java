@@ -29,86 +29,13 @@ import ml.diony.motg.R;
 public class Screen extends Activity implements View.OnClickListener {
 
     protected String TAG = "MOTGAuth_Scr";
-
-    private Context CONTEXT;
-
-    private ml.diony.motg.init ACTIVITY;
-
-    private int[] lBtID = {0, 0, 0}; //Naver, Facebook, Dummy
-
     protected boolean[] isLgn = {false, false, false}; //Naver, Facebook, Dummy
-
+    private Context CONTEXT;
+    private ml.diony.motg.init ACTIVITY;
+    private int[] lBtID = {0, 0, 0}; //Naver, Facebook, Dummy
     private byte lsLgM = 0; //1: Naver, 2: Facebook, 3: Dummy
 
     private String ID = "";
-
-    public String getId() {
-
-        return ID;
-
-    }
-
-    public void setId(String ID) {
-
-        this.ID = ID;
-
-    }
-
-    public Screen checkId() {
-
-        if (isLgn[2]) {
-
-            if(ID == "") {
-
-                Log.i(TAG, "is RANDOM!");
-
-                SecureRandom RND = new SecureRandom();
-                ID = (new BigInteger(130, RND)).toString();
-
-            }
-
-        } else if (isLgn[1])
-            Log.i(TAG, "FACEBOOK?");
-        else if (isLgn[0]) {
-
-            Handler mHandler = new Handler(Looper.getMainLooper());
-
-            mHandler.postDelayed(new Runnable() {
-
-                @Override
-
-                public void run() {
-
-                    ID = (new TypeNaver(CONTEXT)).getID();
-
-                }
-
-            }, 0);
-
-            Log.i(TAG, "GOOD!!");
-
-        }
-
-        return this;
-
-    }
-
-    public void setLSLGM(byte X) {
-        lsLgM = X;
-    }
-
-    public String getType() {
-
-        if (isLgn[0])
-            return "naver";
-        else if (isLgn[1])
-            return "facebook";
-        else if (isLgn[2])
-            return "guest";
-        else
-            return "";
-
-    }
 
     public Screen(Context CONTEXT) {
 
@@ -180,6 +107,78 @@ public class Screen extends Activity implements View.OnClickListener {
         } else {
             return context.getResources().getDrawable(id);
         }
+    }
+
+    public static final float dp2px(Context context, int dp) {
+        return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 10 * dp, context.getResources().getDisplayMetrics());
+    }
+
+    public String getId() {
+
+        return ID;
+
+    }
+
+    public void setId(String ID) {
+
+        this.ID = ID;
+
+    }
+
+    public Screen checkId() {
+
+        if (isLgn[2]) {
+
+            if (ID == "") {
+
+                Log.i(TAG, "is RANDOM!");
+
+                SecureRandom RND = new SecureRandom();
+                ID = (new BigInteger(130, RND)).toString();
+
+            }
+
+        } else if (isLgn[1])
+            Log.i(TAG, "FACEBOOK?");
+        else if (isLgn[0]) {
+
+            Handler mHandler = new Handler(Looper.getMainLooper());
+
+            mHandler.postDelayed(new Runnable() {
+
+                @Override
+
+                public void run() {
+
+                    ID = (new TypeNaver(CONTEXT)).getID();
+
+                }
+
+            }, 0);
+
+            Log.i(TAG, "GOOD!!");
+
+        }
+
+        return this;
+
+    }
+
+    public void setLSLGM(byte X) {
+        lsLgM = X;
+    }
+
+    public String getType() {
+
+        if (isLgn[0])
+            return "naver";
+        else if (isLgn[1])
+            return "facebook";
+        else if (isLgn[2])
+            return "guest";
+        else
+            return "";
+
     }
 
     private RelativeLayout makeLoginButton(Activity A, int background, int symbol, int color, int message, RelativeLayout.LayoutParams buttonParams) {
@@ -272,10 +271,6 @@ public class Screen extends Activity implements View.OnClickListener {
 
         return I;
 
-    }
-
-    public static final float dp2px(Context context, int dp) {
-        return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 10 * dp, context.getResources().getDisplayMetrics());
     }
 
     public void authScreenView(ml.diony.motg.init A, Context C) {

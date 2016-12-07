@@ -77,7 +77,7 @@ public class RateActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                if(tvx.getText().length() != 8) {
+                if (tvx.getText().length() != 8) {
 
 
                     Toast.makeText(CONTEXT, "날짜를 제대로 입력해주세요.", Toast.LENGTH_SHORT).show();
@@ -108,7 +108,8 @@ public class RateActivity extends AppCompatActivity {
 
                     Log.i("TETTT", "으음..: " + JS.toString());
 
-                } catch (Exception E) {}
+                } catch (Exception E) {
+                }
                 SY.saveHISTORY(SY.getREVINFO() + 1, JS);
                 SY.saveREVINFO(SY.getREVINFO() + 1);
 

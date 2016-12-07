@@ -41,20 +41,20 @@ public class Evaluation {
         return idcode;
     }
 
-    public void set_rstrnt_eval_point(double eval_point) {
-        rstrnt_eval_point = eval_point;
-    }
-
     public double get_rstrnt_eval_point() {
         return rstrnt_eval_point;
     }
 
-    public void set_food_eval_point(double eval_point) {
-        food_eval_point = eval_point;
+    public void set_rstrnt_eval_point(double eval_point) {
+        rstrnt_eval_point = eval_point;
     }
 
     public double get_food_eval_point() {
         return food_eval_point;
+    }
+
+    public void set_food_eval_point(double eval_point) {
+        food_eval_point = eval_point;
     }
 
     public String get_id_usr() {

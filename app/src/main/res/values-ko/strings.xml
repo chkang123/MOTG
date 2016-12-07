@@ -3,12 +3,6 @@
     <string name="app_name">맛지</string>
     <string name="naver_login">네이버로 로그인</string>
     <string name="facebook_login">페이스북으로 로그인</string>
-    <string name="google_login">구글로 로그인</string>
-    <string name="kakao_login">카카오톡으로 로그인</string>
     <string name="dummy_login">로그인 없이 계속</string>
-    <string name="title_activity_kor">한식</string>
-    <string name="title_activity_jap">일식</string>
-    <string name="title_activity_chn">중식</string>
-    <string name="title_activity_wes">양식</string>
     <string name="search_hint">식당명으로 검색..</string>
 </resources>

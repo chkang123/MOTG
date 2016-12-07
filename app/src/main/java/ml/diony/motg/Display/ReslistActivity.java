@@ -31,14 +31,15 @@ public class ReslistActivity extends AppCompatActivity {
         JSONArray X = new JSONArray();
         try {
             X = new JSONArray(ALLX);
-        } catch(Exception E) {}
+        } catch (Exception E) {
+        }
 
         Log.i("ResListActivity", "와아아아아" + X.toString());
 
         Rlist = new ArrayList<ResList>();
 
         //해당하는 식당들을 찾고 선택된 식당들의 이름을 모두 저장한다.
-        for(int i = 0; i < X.length(); i++) {
+        for (int i = 0; i < X.length(); i++) {
 
             String NAME = "";
 
@@ -46,7 +47,8 @@ public class ReslistActivity extends AppCompatActivity {
 
                 NAME = ((JSONObject) X.get(i)).getString("NAME");
 
-            } catch(Exception E) {}
+            } catch (Exception E) {
+            }
 
             ResList rlist = new ResList(NAME);
             Rlist.add(rlist);

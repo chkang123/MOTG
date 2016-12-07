@@ -30,27 +30,22 @@ public class Food {
         return idcode;
     }
 
-    public void set_food_type(ml.diony.motg.Classes.Food_Type food_type) {
-        this.food_type = food_type;
-    }
-
     public ml.diony.motg.Classes.Food_Type get_food_type() {
 
         return food_type;
 
     }
 
-    public void set_sale_cost(int sale_cost) {
-        this.sale_cost = sale_cost;
+    public void set_food_type(ml.diony.motg.Classes.Food_Type food_type) {
+        this.food_type = food_type;
     }
 
     public int get_sale_cost() {
         return sale_cost;
     }
 
-    public void set_eval_points(double eval_point) {
-
-        this.eval_point = eval_point;
+    public void set_sale_cost(int sale_cost) {
+        this.sale_cost = sale_cost;
     }
 
     public void add_eval(Evaluation eval) {
@@ -63,11 +58,16 @@ public class Food {
         return eval_point;
     }
 
-    public void set_rstrnt(String rstrnt) {
-        restaurant = rstrnt;
+    public void set_eval_points(double eval_point) {
+
+        this.eval_point = eval_point;
     }
 
     public String get_rstrnt() {
         return restaurant;
+    }
+
+    public void set_rstrnt(String rstrnt) {
+        restaurant = rstrnt;
     }
 }

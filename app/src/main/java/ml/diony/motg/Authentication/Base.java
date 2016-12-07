@@ -1,9 +1,7 @@
 package ml.diony.motg.Authentication;
 
 import android.app.Activity;
-import android.content.Context;
 import android.os.Bundle;
-import android.telephony.TelephonyManager;
 import android.util.Log;
 
 import org.json.JSONObject;
@@ -24,12 +22,26 @@ public class Base extends Activity {
 
     protected static String TAG = "MOTGAuth";
 
-    public String getIMEI() {
-
-        return ((TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE)).getDeviceId();
-
+    public static String convertStreamToString(InputStream is) throws Exception {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(is));
+        StringBuilder sb = new StringBuilder();
+        String line = null;
+        while ((line = reader.readLine()) != null) {
+            sb.append(line).append("\n");
+        }
+        reader.close();
+        return sb.toString();
     }
 
+    public static String getStringFromFile(String filePath) throws Exception {
+        File fl = new File(filePath);
+        FileInputStream fin = new FileInputStream(fl);
+        String ret = convertStreamToString(fin);
+        //Make sure you close all streams.
+        fin.close();
+        return ret;
+    }
+    
     @Override
     public void onCreate(Bundle s) {
 
@@ -50,7 +62,7 @@ public class Base extends Activity {
 
     final public void saveLoginInforamtion(String ID, int TYPE) {
 
-        if(TYPE == 0) {
+        if (TYPE == 0) {
 
             saveLoginInformation(ID, "naver");
 
@@ -96,26 +108,6 @@ public class Base extends Activity {
         } catch (Exception I) {
         }
 
-    }
-
-    public static String convertStreamToString(InputStream is) throws Exception {
-        BufferedReader reader = new BufferedReader(new InputStreamReader(is));
-        StringBuilder sb = new StringBuilder();
-        String line = null;
-        while ((line = reader.readLine()) != null) {
-            sb.append(line).append("\n");
-        }
-        reader.close();
-        return sb.toString();
-    }
-
-    public static String getStringFromFile (String filePath) throws Exception {
-        File fl = new File(filePath);
-        FileInputStream fin = new FileInputStream(fl);
-        String ret = convertStreamToString(fin);
-        //Make sure you close all streams.
-        fin.close();
-        return ret;
     }
 
     public JSONObject getLoginInformation() {

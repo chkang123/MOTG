@@ -3,10 +3,8 @@ package ml.diony.motg;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.TextView;
 
 import org.json.JSONObject;
 
@@ -20,33 +18,17 @@ import ml.diony.motg.Communication.Sync;
 
 final public class init extends Activity {
 
-    protected String TAG = "MOTGInit";
-
-    protected boolean cLogin = false, cUTD = false, cInit = false;
-
+    static public Screen S;
+    static public Base B;
+    static Sync C;
     final Context CONTEXT = this;
     final Activity ACTIVITY = this;
+    protected String TAG = "MOTGInit";
+    protected boolean cLogin = false, cUTD = false, cInit = false;
 
-    static public Screen S;
-    static Sync C;
-    static public Base B;
+    public init() {}
 
-    public static final int getColor(Context context, int id) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            return android.support.v4.content.ContextCompat.getColor(context, id);
-        } else {
-            return context.getResources().getColor(id);
-        }
-    }
-
-    public init() {
-
-        //Plz process cLogin, cUTD
-
-
-
-    }
-
+    //init Activity가 생성될 때, 로그인 처리와 서버 통신에 필요한 데이터들을 초기화한다.
     @Override
     public void onCreate(Bundle s) {
 
@@ -59,7 +41,7 @@ final public class init extends Activity {
         B = new Base();
         JSONObject X = B.getLoginInformation();
 
-        if(X != null) {
+        if (X != null) {
 
             Log.i(TAG, "Check is " + X.toString());
 
@@ -69,7 +51,7 @@ final public class init extends Activity {
 
                 Log.i(TAG + "c32", X.getString("TYPE"));
 
-                if(X.getString("TYPE").indexOf("guest") == 0) {
+                if (X.getString("TYPE").indexOf("guest") == 0) {
 
                     Log.i(TAG, "SETTED TO GUEST");
 
@@ -79,11 +61,13 @@ final public class init extends Activity {
 
                 }
 
-            } catch (Exception I) {}
+            } catch (Exception I) {
+            }
         }
 
     }
 
+    //onResume에서는 로그인 여부를 체크한다. 로그인이 되어 있지 않으면 로그인 화면을 띄우고, 아니면 Update를 시도한다.
     @Override
     public void onResume() {
 
@@ -125,6 +109,7 @@ final public class init extends Activity {
 
     }
 
+    //checkUTD에서는 Application의 모든 데이터가 Up-To-Date인지 확인한다.
     public void checkUTD() {
 
         Log.i(TAG, "Starts to check is this application UP-TO-DATE.");
@@ -162,15 +147,6 @@ final public class init extends Activity {
 
         }
 
-
-
-    }
-
-    public void changeLoadingText(String TXT) {
-
-        final TextView TXV = (TextView) this.findViewById(R.id.ldT);
-
-        TXV.setText(TXT);
 
     }
 

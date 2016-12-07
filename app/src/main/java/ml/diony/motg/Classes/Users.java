@@ -1,7 +1,7 @@
 package ml.diony.motg.Classes;
 
 
-import com.google.gson.*;
+import com.google.gson.Gson;
 import com.google.gson.stream.JsonReader;
 
 import java.io.FileNotFoundException;
@@ -25,128 +25,17 @@ public class Users {
     //개인 취향
 
     ArrayList<Food_Type> FavoriteFoodTypes;//음식 종류에 대한 취향
-
-    public class EvaluationPacket {
-        int eval_version;
-        ArrayList<String> eval_list;
-
-        public EvaluationPacket() {
-        }
-
-        public void add_version() {
-            eval_version++;
-        }
-
-        public void set_version(int version) {
-            eval_version = version;
-        }
-
-        public int size() {
-            return eval_list.size();
-        }
-
-        public void add(Evaluation evaluation) {
-            eval_list.add(evaluation.get_idcode());
-        }
-
-        public void add(int size, Evaluation evaluation) {
-            eval_list.add(size, evaluation.get_idcode());
-        }
-
-        public String get(int i) {
-            return eval_list.get(i);
-        }
-    }
-
     EvaluationPacket eval_list;
     Gson gson;
-
     //개인 취향 weight 저장 행렬
     Preference pref;
+    FavoriteRstrntPacket fav_rstrnts_list;
     //방문기록
 /*
  *   ArrayList<Food> Foods_History;
  *   ArrayList<Restaurant> Rstrnt_History;
  */
-
-    //즐겨찾기
-    public class FavoriteRstrntPacket {
-        int _version;
-        ArrayList<Fav_Rstrnts> fav_rstrnts_list;
-
-        public FavoriteRstrntPacket() {
-        }
-
-        public void add_version() {
-            _version++;
-        }
-
-        public void set_version(int version) {
-            _version = version;
-        }
-
-        public int size() {
-            return fav_rstrnts_list.size();
-        }
-
-        public void add(Fav_Rstrnts fav_rstrnts) {
-            fav_rstrnts_list.add(fav_rstrnts);
-        }
-
-        public void add(int size, Fav_Rstrnts fav_rstrnts) {
-            fav_rstrnts_list.add(size, fav_rstrnts);
-        }
-
-        public Fav_Rstrnts get(int i) {
-            return fav_rstrnts_list.get(i);
-        }
-
-        public ArrayList<Fav_Rstrnts> getlist() {
-            return fav_rstrnts_list;
-        }
-    }//즐겨찾기 클래스 구현할 것
-
-    FavoriteRstrntPacket fav_rstrnts_list;
-
-    public class FavoriteFoodPacket {
-        int _version;
-        ArrayList<Fav_Foods> fav_foods_list;
-
-        public FavoriteFoodPacket() {
-        }
-
-        public void add_version() {
-            _version++;
-        }
-
-        public void set_version(int version) {
-            _version = version;
-        }
-
-        public int size() {
-            return fav_foods_list.size();
-        }
-
-        public void add(Fav_Foods fav_food) {
-            fav_foods_list.add(fav_food);
-        }
-
-        public void add(int size, Fav_Foods fav_food) {
-            fav_foods_list.add(size, fav_food);
-        }
-
-        public Fav_Foods get(int i) {
-            return fav_foods_list.get(i);
-        }
-
-        public ArrayList<Fav_Foods> getlist() {
-            return fav_foods_list;
-        }
-    }
-
     FavoriteFoodPacket fav_foods_list; //
-    // ArrayList<Integer>  Achievement; // 업적의 id 를 저장하는 리스트
-
 
     public Users(String id, String nickname) {
 
@@ -163,7 +52,7 @@ public class Users {
     public String get_idcode() {
         return id;
     }
-
+    // ArrayList<Integer>  Achievement; // 업적의 id 를 저장하는 리스트
 
     public void add_food_type(Food_Type food_type) {
         int size = FavoriteFoodTypes.size();
@@ -218,7 +107,6 @@ public class Users {
         return fav_foods_list.getlist();
     }
 
-
     public void favfoodtoJSON() {
         String json = gson.toJson(fav_foods_list);
         try {
@@ -242,7 +130,6 @@ public class Users {
             e.printStackTrace();
         }
     }
-
 
     public void favrstrnttoJSON() {
         String json = gson.toJson(fav_rstrnts_list);
@@ -289,6 +176,111 @@ public class Users {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    public class EvaluationPacket {
+        int eval_version;
+        ArrayList<String> eval_list;
+
+        public EvaluationPacket() {
+        }
+
+        public void add_version() {
+            eval_version++;
+        }
+
+        public void set_version(int version) {
+            eval_version = version;
+        }
+
+        public int size() {
+            return eval_list.size();
+        }
+
+        public void add(Evaluation evaluation) {
+            eval_list.add(evaluation.get_idcode());
+        }
+
+        public void add(int size, Evaluation evaluation) {
+            eval_list.add(size, evaluation.get_idcode());
+        }
+
+        public String get(int i) {
+            return eval_list.get(i);
+        }
+    }
+
+    //즐겨찾기
+    public class FavoriteRstrntPacket {
+        int _version;
+        ArrayList<Fav_Rstrnts> fav_rstrnts_list;
+
+        public FavoriteRstrntPacket() {
+        }
+
+        public void add_version() {
+            _version++;
+        }
+
+        public void set_version(int version) {
+            _version = version;
+        }
+
+        public int size() {
+            return fav_rstrnts_list.size();
+        }
+
+        public void add(Fav_Rstrnts fav_rstrnts) {
+            fav_rstrnts_list.add(fav_rstrnts);
+        }
+
+        public void add(int size, Fav_Rstrnts fav_rstrnts) {
+            fav_rstrnts_list.add(size, fav_rstrnts);
+        }
+
+        public Fav_Rstrnts get(int i) {
+            return fav_rstrnts_list.get(i);
+        }
+
+        public ArrayList<Fav_Rstrnts> getlist() {
+            return fav_rstrnts_list;
+        }
+    }//즐겨찾기 클래스 구현할 것
+
+    public class FavoriteFoodPacket {
+        int _version;
+        ArrayList<Fav_Foods> fav_foods_list;
+
+        public FavoriteFoodPacket() {
+        }
+
+        public void add_version() {
+            _version++;
+        }
+
+        public void set_version(int version) {
+            _version = version;
+        }
+
+        public int size() {
+            return fav_foods_list.size();
+        }
+
+        public void add(Fav_Foods fav_food) {
+            fav_foods_list.add(fav_food);
+        }
+
+        public void add(int size, Fav_Foods fav_food) {
+            fav_foods_list.add(size, fav_food);
+        }
+
+        public Fav_Foods get(int i) {
+            return fav_foods_list.get(i);
+        }
+
+        public ArrayList<Fav_Foods> getlist() {
+            return fav_foods_list;
         }
     }
 

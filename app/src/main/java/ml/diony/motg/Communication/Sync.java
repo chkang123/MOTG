@@ -48,20 +48,14 @@ public class Sync extends Activity {
     protected static String TAG = "MOTGComm";
 
     protected static String SRVU = "http://dn-mt-svc.yuoa.ml/MOTG";
-
-    protected String DB_VERSION = "0.0", KR_VERSION = "0.0", JP_VERSION = "0.0", WE_VERSION = "0.0", CN_VERSION = "0.0";
-
-    protected Context CONTEXT = this;
-
-    protected boolean cCK = false;
-
-    protected Activity ACTIVITY = this;
-
-    protected Intent LSTI;
-
-    protected init INIT = null;
-
     final protected File FP;
+    protected String DB_VERSION = "0.0", KR_VERSION = "0.0", JP_VERSION = "0.0", WE_VERSION = "0.0", CN_VERSION = "0.0";
+    protected Context CONTEXT = this;
+    protected boolean cCK = false;
+    protected Activity ACTIVITY = this;
+    protected Intent LSTI;
+    protected init INIT = null;
+    private boolean isVC = true;
 
     public Sync(File FP, Context CONTEXT, Activity ACTIVITY, init INIT) {
 
@@ -90,17 +84,31 @@ public class Sync extends Activity {
 
     }
 
-    private boolean isFile(File file) {
-        boolean result;
-        if (file != null && file.exists() && file.isFile()) {
-            result = true;
-        } else {
-            result = false;
+    public static String convertStreamToString(InputStream is) throws Exception {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(is));
+        StringBuilder sb = new StringBuilder();
+        String line = null;
+        while ((line = reader.readLine()) != null) {
+            sb.append(line).append("\n");
         }
-        return result;
+        reader.close();
+        return sb.toString();
     }
 
-    private boolean isVC = true;
+    public static String getStringFromFile(String filePath) throws Exception {
+        File fl = new File(filePath);
+        FileInputStream fin = new FileInputStream(fl);
+        String ret = convertStreamToString(fin);
+        //Make sure you close all streams.
+        fin.close();
+        return ret;
+    }
+
+    private boolean isFile(File file) {
+        boolean result;
+        result = file != null && file.exists() && file.isFile();
+        return result;
+    }
 
     @Override
     public void onCreate(Bundle s) {
@@ -364,8 +372,8 @@ public class Sync extends Activity {
 
                 try {
 
-                    AX.put("ID", INIT.S.checkId().getId());
-                    AX.put("TYPE", INIT.S.getType());
+                    AX.put("ID", init.S.checkId().getId());
+                    AX.put("TYPE", init.S.getType());
 
                 } catch (JSONException E) {
                 }
@@ -537,8 +545,8 @@ public class Sync extends Activity {
 
                 try {
 
-                    AX.put("ID", INIT.S.checkId().getId());
-                    AX.put("TYPE", INIT.S.getType());
+                    AX.put("ID", init.S.checkId().getId());
+                    AX.put("TYPE", init.S.getType());
 
                     if (SERV_REV > CLIE_REV) {
 
@@ -654,7 +662,7 @@ public class Sync extends Activity {
                                     for (int i = 1; i <= RRX.length(); i++) {
 
                                         saveHISTORY(i, (JSONObject) RRX.get(i - 1));
-                                        Log.i(TAG, "SAVE(REV=" + i + "): " + ((JSONObject) RRX.get(i - 1)).toString());
+                                        Log.i(TAG, "SAVE(REV=" + i + "): " + RRX.get(i - 1).toString());
 
                                     }
 
@@ -722,8 +730,8 @@ public class Sync extends Activity {
 
                 try {
 
-                    AX.put("ID", INIT.S.checkId().getId());
-                    AX.put("TYPE", INIT.S.getType());
+                    AX.put("ID", init.S.checkId().getId());
+                    AX.put("TYPE", init.S.getType());
 
                     //Server is latest;
 
@@ -777,7 +785,7 @@ public class Sync extends Activity {
 
                         //JSON parsing Completed!
 
-                            //No error
+                        //No error
 
                         saveU_S(RX);
 
@@ -817,8 +825,8 @@ public class Sync extends Activity {
 
                 try {
 
-                    AX.put("ID", INIT.S.checkId().getId());
-                    AX.put("TYPE", INIT.S.getType());
+                    AX.put("ID", init.S.checkId().getId());
+                    AX.put("TYPE", init.S.getType());
 
                     //Server is latest;
 
@@ -953,26 +961,6 @@ public class Sync extends Activity {
         else
             Log.i("SETUS", "NULL");
 
-    }
-
-    public static String convertStreamToString(InputStream is) throws Exception {
-        BufferedReader reader = new BufferedReader(new InputStreamReader(is));
-        StringBuilder sb = new StringBuilder();
-        String line = null;
-        while ((line = reader.readLine()) != null) {
-            sb.append(line).append("\n");
-        }
-        reader.close();
-        return sb.toString();
-    }
-
-    public static String getStringFromFile(String filePath) throws Exception {
-        File fl = new File(filePath);
-        FileInputStream fin = new FileInputStream(fl);
-        String ret = convertStreamToString(fin);
-        //Make sure you close all streams.
-        fin.close();
-        return ret;
     }
 
     public int getREVINFO() {

@@ -18,27 +18,6 @@ import ml.diony.motg.R;
 public class MapActivity extends AppCompatActivity {
 
     float X, Y;
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_map);
-        Intent I = getIntent();
-        //위도와 경도를 받아온다.
-        X = I.getExtras().getFloat("COORDX");
-        Y = I.getExtras().getFloat("COORDY");
-        Log.i("MAPMAPMAP", "COORDX = " + X + ", COORDY = " + Y);
-
-        //Daum지도를 띄운다.
-        MapView mapView = new MapView(this);
-        mapView.setDaumMapApiKey("95196575995654fba45336d25f83249d");
-        mapView.setMapViewEventListener(mapViewEventListener);
-
-        ViewGroup mapViewContainer = (ViewGroup) findViewById(R.id.map_view);
-        mapViewContainer.addView(mapView);
-
-    }
-
     //지도가 출력될때 아래의 코드들이 실행된다.
     MapView.MapViewEventListener mapViewEventListener = new MapView.MapViewEventListener() {
         @Override
@@ -99,5 +78,25 @@ public class MapActivity extends AppCompatActivity {
 
         }
     };
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_map);
+        Intent I = getIntent();
+        //위도와 경도를 받아온다.
+        X = I.getExtras().getFloat("COORDX");
+        Y = I.getExtras().getFloat("COORDY");
+        Log.i("MAPMAPMAP", "COORDX = " + X + ", COORDY = " + Y);
+
+        //Daum지도를 띄운다.
+        MapView mapView = new MapView(this);
+        mapView.setDaumMapApiKey("95196575995654fba45336d25f83249d");
+        mapView.setMapViewEventListener(mapViewEventListener);
+
+        ViewGroup mapViewContainer = (ViewGroup) findViewById(R.id.map_view);
+        mapViewContainer.addView(mapView);
+
+    }
 
 }
