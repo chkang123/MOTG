@@ -1,7 +1,0 @@
-<resources>
-    <string name="app_name">MOTG</string>
-    <string name="naver_login">Sign in with NAVER</string>
-    <string name="facebook_login">Sign in with Facebook</string>
-    <string name="google_login">Sign in with Google</string>
-    <string name="kakao_login">Sign in with Kakao</string>
-</resources>
